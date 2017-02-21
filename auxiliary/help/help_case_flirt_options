@@ -1,0 +1,17 @@
+    echo "    -m \"[options]\"       Give options to mcflirt, slicetimer, fslmaths, or realignfMRI12."
+    echo	 
+    echo "                         Be sure to specify complex params inside of quotes."
+    echo
+    echo "                         do \"mcflirt --help\" for help."
+    echo "                         do \"slicetimer --help\" for help."
+    echo "                         do \"fslmaths --help\" for help."
+    echo "                         default for realignfMRI is \"-cost normcorr -stats -plots\""
+    echo "                         default for sliceTime is \"\""
+    echo "                         default for erodeMask is \"-s 5 -sub 0.333\""
+    echo
+    echo "                         for realignfMRI12 use 1 or 2 for # of passes"
+    echo "                             1 will realign to first image in series"
+    echo "                             2 will do multiple pass and realign to mean"
+    echo "                                  e.g. -m 2"
+    echo
+    

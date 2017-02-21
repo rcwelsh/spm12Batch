@@ -1,0 +1,5 @@
+    echo "${helpComment} Sub-directory             : ${subPATH}"
+    echo "${helpComment} Volume Wildcard           : ${volumeWILD}"
+    echo "${helpComment} fMRI Reference Slice      : ${referenceSlice}"
+
+    . ${thisDir}/auxiliary/help/help_options_end

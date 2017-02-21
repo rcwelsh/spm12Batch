@@ -1,0 +1,43 @@
+echo " "                                                      >> ${FULLSCRIPTNAME}.m
+echo "% This part placed by '${thisCommand}' auto script"     >> ${FULLSCRIPTNAME}.m
+echo " "                                                      >> ${FULLSCRIPTNAME}.m
+echo "% "                                                     >> ${FULLSCRIPTNAME}.m
+echo "% "                                                     >> ${FULLSCRIPTNAME}.m
+echo "% This script is called :  "                            >> ${FULLSCRIPTNAME}.m
+echo "% "                                                     >> ${FULLSCRIPTNAME}.m
+echo "% ${FULLSCRIPTNAME}.m"                                  >> ${FULLSCRIPTNAME}.m
+echo "% "                                                     >> ${FULLSCRIPTNAME}.m
+echo "% and create on ${theDate}"                             >> ${FULLSCRIPTNAME}.m
+echo "% "                                                     >> ${FULLSCRIPTNAME}.m
+echo " "                                                      >> ${FULLSCRIPTNAME}.m
+echo "UMBatchMaster = '${UMBatchMaster}';"                    >> ${FULLSCRIPTNAME}.m
+echo " "                                                      >> ${FULLSCRIPTNAME}.m
+
+echo ""                                                       >> ${FULLSCRIPTNAME}.m
+echo "% If the abort file varialbe is set then we"            >> ${FULLSCRIPTNAME}.m
+echo "% can write status of the failure there."               >> ${FULLSCRIPTNAME}.m
+echo ""                                                       >> ${FULLSCRIPTNAME}.m
+
+echo "global UMBatchStatusFile"                               >> ${FULLSCRIPTNAME}.m
+echo "UMBatchStatusFile = '${UMSTREAM_STATUS_FILE}';"         >> ${FULLSCRIPTNAME}.m
+
+echo ""                                                       >> ${FULLSCRIPTNAME}.m
+
+if [ "$testFLAG" == "0" ]
+then
+    echo "UMTestFlag    = 0;"                                 >> ${FULLSCRIPTNAME}.m
+else
+    echo "UMTestFlag    = 1;"                                 >> ${FULLSCRIPTNAME}.m
+fi
+
+MC_SHA=`cat ${thisDir}/../.local/CurrentVersionSHA 2> /dev/null`
+
+if [ -z "${MC_SHA}" ]
+then
+	MC_SHA="MC SHA UNKNOWN"
+fi
+
+echo "global CommandLine MC_SHA FULLSCRIPTNAME"                >> ${FULLSCRIPTNAME}.m
+echo "CommandLine        = '${theFullCommand}';"               >> ${FULLSCRIPTNAME}.m
+echo "MC_SHA             = '"${MC_SHA}"';"                     >> ${FULLSCRIPTNAME}.m
+echo "FULLSCRIPTNAME     = '${FULLSCRIPTNAME}';"               >> ${FULLSCRIPTNAME}.m               

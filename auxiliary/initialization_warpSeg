@@ -1,0 +1,13 @@
+#
+# Inialization.
+#
+
+# Output name
+outputName=w
+
+# Set the default voxel size.
+voxelSize=3
+
+#
+# all done
+#

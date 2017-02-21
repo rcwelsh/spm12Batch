@@ -1,0 +1,21 @@
+    echo
+    echo "A command line interface to slice time (MB) correction procedures in SPM12."
+    echo "The slice acquisition time (in milliseconds) is a file that will be named "
+    echo "[run].sliceTiming, and found in the same directory as the run file."
+    echo
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo
+    echo " e.g."
+    echo 
+    echo "  To slice-time correct fmri volumes you would:"
+    echo 
+    echo "     sliceTimeMB -v prun -f func/MSIT 060402rw"
+    echo 
+    echo " Current command default configuration is:"
+    echo 
+    echo
+    
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options
+

@@ -1,0 +1,17 @@
+#
+# Inialization.
+#
+
+# Name of the volume to scan for.
+volumeWILD=prun
+
+# The ability to modify the name as needed on output.
+outputName=a12
+
+# other defaults
+referenceSlice="'middle'"
+sliceOrder="'ascending'"
+
+#
+# all done
+#

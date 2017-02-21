@@ -1,0 +1,33 @@
+		  #
+		  # Set the error code to bad parameter.
+		  #
+		  SPM12BATCH_ERROR_CODE=64
+		  #
+		  shift
+		  let argn++
+		  if (( $argn >= $args ))
+		  then
+		      echo
+		      echo "Missing mcflirt/fslmaths options, aborting"
+	              . ${thisDir}/auxiliary/exit_w_removal
+		  else
+		      mcOPT=$1
+		      #
+		      # If realignfMRI12 then the number of passes can
+		      # only be 1 (realign to 1st) or 2 (realign to the mean)
+		      #
+		      if [ "${thisCommand}" == "realignfMRI12" ]
+                      then
+			  if [ "${mcOPT}" != 1 ] && [ "${mcOPT}" != 2 ]
+			  then
+			       echo
+                               echo "Realignment number of passes must be 1 or 2"
+			       echo
+	                      . ${thisDir}/auxiliary/exit_w_removal	
+			  fi
+	              fi
+                  fi
+		  # 
+		  # Change back to success
+		  #
+		  SPM12BATCH_ERROR_CODE=0

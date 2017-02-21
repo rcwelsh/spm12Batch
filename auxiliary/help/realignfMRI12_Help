@@ -1,0 +1,20 @@
+    echo
+    echo "A command line interface to motion correction procedures in SPM12."
+    echo 
+    echo
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo
+    echo " e.g."
+    echo 
+    echo "  To motion correct fmri volumes you would:"
+    echo 
+    echo "     realignfMRI12 -v a12run -f func/MSIT 060402rw"
+    echo 
+    echo " Current command default configuration is:"
+    echo 
+    echo
+    
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options
+

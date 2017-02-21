@@ -1,0 +1,16 @@
+#
+# Inialization.
+#
+
+# Name of the volume to scan for.
+volumeWILD=a12run
+
+# The ability to modify the name as needed on output.
+outputName=r12
+
+# option for how many passes to make
+mcOPT=2
+
+#
+# all done
+#

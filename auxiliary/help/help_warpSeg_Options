@@ -1,0 +1,9 @@
+    echo "${helpComment} directory to coreg       : ${fmriPATH}/${coregPATH}"
+    echo "${helpComment} name of the high res     : $HIRESNAME"
+    echo "${helpComment} prepending name          : $outputName"
+    echo "${helpComment} Voxel dimension          : ${voxelSize}"
+    echo "${helpComment} volumeWILD               : $volumeWILD"
+    echo "${helpComment} functional sub-dir       : $subPATH"
+    echo
+
+    . ${thisDir}/auxiliary/help/help_options_end

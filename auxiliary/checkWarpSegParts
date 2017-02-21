@@ -1,0 +1,24 @@
+# validate that we have what we need.
+
+#
+# Set the error code to missing configuration.
+#
+SPM12BATCH_ERROR_CODE=78
+#
+
+for CRITICALMATLAB in warp_seg_part_1.m warp_seg_part_2.m 
+do
+    if [ ! -e "${SPM12B2}/parts/${CRITICALMATLAB}" ]
+    then
+	echo
+        echo "Validate that you have 'warp_seg_part_1.m' and 'warp_seg_part_2.m' "
+ 	echo "Missing a critical component '${CRITICALMATLAB}'"
+	echo     
+	. ${thisDir}/auxiliary/exit_w_removal
+    fi
+done
+
+# 
+# Change back to success
+#
+SPM12BATCH_ERROR_CODE=0
