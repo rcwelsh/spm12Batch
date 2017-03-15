@@ -152,7 +152,7 @@ echo "                };"                                 >> ${FULLSCRIPTNAME}.m
 
 echo "    4) finalizing matlab scripts"
 
-cat ${thisDir}/parts/warp_Seg_part_2.m                   >> ${FULLSCRIPTNAME}.m
+cat ${thisDir}/parts/warp_seg_part_2.m                   >> ${FULLSCRIPTNAME}.m
 
 echo "    5) building shell script"
 

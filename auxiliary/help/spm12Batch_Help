@@ -34,10 +34,12 @@ echo
 echo "physioCorr      DEPRECATED. Implements image based physiological correction (ala RETRICOR)"
 echo "                this command will work with both GE and Philips data. DEPRECATED."
 echo 
+echo "undistortEPI    NOT YET IMPLEMENTED A wrapper to FSL/topup/applytopup to correct EPI distortion."
+echo 
 echo "sliceTime12     A wrapper to the SPM12 slice time correction routine."
 echo 
 echo "sliceTimeMB     A wrapper to the SPM12 slice time correction routine."
-echo                  Use this command for multiband data."
+echo "                Use this command for multiband data."
 echo 
 echo "realignfMRI12   A wrapper to the SPM12 coregistration for time-series."
 echo 
@@ -47,13 +49,10 @@ echo "coregOverlay    A wrapper to the coregistration routine in SPM12."
 echo
 echo "coregHiRes      A wrapper to the coregistration routine in SPM12."
 echo
-echo "fslCheck        An auxiliary routine to do some check-registrations from"
-echo "                the command-line as long as images are in the same space."
-echo
-echo "cat12HiRes      A wrapper to do MNI warping of hi-resolution image"
+echo "cat12HiRes      NOT YET IMPLEMENTED A wrapper to do MNI warping of hi-resolution image"
 echo "                to MNI space using the cat12 toolbox add-on for SPM12."
 echo
-echo "cat12Check      An auxililary routine to use with vbm8HiRes to do some"
+echo "cat12Check      NOT YET IMPLEMENTED An auxililary routine to use with vbm8HiRes to do some"
 echo "                visual quality control. This is highly recommended!"
 echo 
 echo "newSeg          A wrapper to do MNI warping of hi-resolution image"
@@ -64,7 +63,7 @@ echo
 echo "erodeMask       A wrapper to FSL/fslmaths to erode masks."
 echo "                Usually auto-called by newSeg/cat12 commands"
 echo
-echo "warpfMRI        A wrapper to do MNI warping of functional images"
+echo "warpSeg         A wrapper to do MNI warping of functional images"
 echo "                to MNI space based on either output of newSeg or cat12HiRes."
 echo
 echo "smoothfMRI      A wrapper to smooth images using SPM12 routines."

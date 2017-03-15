@@ -1,5 +1,5 @@
     echo
-    echo " A command line command to erode segments p2 and p3 from vbm8HiRes"
+    echo " A command line command to erode segments p2 and p3 from warpSeg"
     echo " and turn into WM and CSF masks."
     echo
     echo " THIS COMMAND RUNS RIGHT AWAY AND DOES NOT BUILD ANY SCRIPTS"
@@ -9,7 +9,7 @@
     echo 
     echo " e.g. "
     echo
-    echo "   To process the image 'ht1spgr.nii' through VBM8 to create a skull-stripped"
+    echo "   To process the image 'ht1spgr.nii' through fslmaths to create a skull-stripped"
     echo "   image in the native space do:"
     echo 
     echo "     erodeMask 050126zz"

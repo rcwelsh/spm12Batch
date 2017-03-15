@@ -1,6 +1,6 @@
     echo
     echo " A command line command to drive batch processing to warp the fMRI time series"
-    echo " to the standard template using normalization derived during the 'warpHiRes/vbm8HiRes' phase."
+    echo " to the standard template using normalization derived during the 'warpHiRes/cat12HiRes' phase."
     echo
     . ${thisDir}/auxiliary/help/help_options_start
 
@@ -19,7 +19,7 @@
     echo "        that 'subdir' is a string contained in the list of directories returned for warping."
     echo "        If this DOES NOT make sense to you please contact Robert before proceeding."
     echo
-    echo "**NOTE: You can also use the VBM8 toolbox to process data, see vbm8HiRes"
+    echo "**NOTE: You can also use the CAT12 toolbox to process data, see cat12HiRes"
     echo
     echo " Current command default configuration is:"
     echo 
