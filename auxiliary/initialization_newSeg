@@ -26,6 +26,10 @@ mcOPT="-s 5 -sub 0.333"
 WMEROSION=2
 CSFEROSION=1
 
+# Default output resolution
+
+voxelSize=2
+
 #
 # all done
 #

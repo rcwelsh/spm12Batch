@@ -1,4 +1,4 @@
-    # Now lets find the source and move it into where we need it to be.
+  # Now lets find the source and move it into where we need it to be.
     
     cd ${fmriPATH}/${coregPATH}/
     anatPATH=`pwd`
@@ -9,7 +9,7 @@
   #
   # Set the error code to bad input data
   #
-  SPM12BATCH_ERROR_CODE=65
+    SPM12BATCH_ERROR_CODE=65
   #
 
   # 

@@ -8,7 +8,7 @@ SPM12BATCH_ERROR_CODE=74
     if [ ! -d "${fmriPATH}/${coregPATH}" ]
     then
 	echo
-	echo "Failed to create coregistation directory ${fmriPATH}/${coregPATH}"
+	echo "Failed to find coregistation directory ${fmriPATH}/${coregPATH}"
 	echo
 	echo " ABORTING "
 	echo

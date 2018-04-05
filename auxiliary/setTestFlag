@@ -1,1 +1,7 @@
 		  testFLAG=1
+                  # Iteration settings:
+
+                  antsCalc1="10x10x10"
+                  antsCalc2="10x10x10"
+                  antsCalc3="10x10x10"
+                  antsCalc4="10x10x10"

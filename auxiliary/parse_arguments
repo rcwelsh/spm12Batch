@@ -38,32 +38,38 @@ do
       # Check to see if option
 	if [ "${curParam:0:1}" == "-" ]
       	then 
-            if (( ${#curParam} < 2 ))
-	    then	
+            #
+	    # Modified 2017-09-15 -- Remove requirement that flag is 1 character only, as we 
+	    # need to expand to multi-character flags to accommodate BIDS2
+	    #
+            #if (( ${#curParam} < 2 ))
+	    #then	
 		ALLOWED=
-            else
-		ALLOWED=`echo ${allowedOptions} | grep ${curParam:1:1}`
-            fi
-	    if [ -z "${ALLOWED}" ]
-	    then 
-		echo 
-		echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
-		echo "     * * * *"
-		echo "     * * * * Option : $curParam : is not allowed for ${thisCommand}"
-		echo "     * * * *"
-		echo "     * * * *"
-		echo "     * * * * To learn more about this command, type"
-		echo "     * * * *"
-       		echo "     * * * *      ${thisCommand} <CR>"
-		echo "     * * * *"
-		echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
-		echo
-	        . ${thisDir}/auxiliary/exit_w_removal
-            fi
+            #else
+		#ALLOWED=`echo ${allowedOptions} | grep ${curParam:1:1}`
+            #fi
+	    #if [ -z "${ALLOWED}" ]
+	    #then 
+		#echo 
+		#echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+		#echo "     * * * *"
+		#echo "     * * * * Option : $curParam : is not allowed for ${thisCommand}"
+		#echo "     * * * *"
+		#echo "     * * * *"
+		#echo "     * * * * To learn more about this command, type"
+		#echo "     * * * *"
+       		#echo "     * * * *      ${thisCommand} <CR>"
+		#echo "     * * * *"
+		#echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+		#echo
+	        #. ${thisDir}/auxiliary/exit_w_removal
+            #fi
 	    
 	    debugout "Parsing command : ${curParam}" $SuperDebugFLAG
 	    
-	    case "${curParam:1:1}" in
+            # allow multi-character switches now -- RCWelsh 2017-09-15
+
+	    case "${curParam:1:${#curParam}}" in
 		
 
               # case_all_runs 
@@ -91,9 +97,20 @@ do
                     . ${thisDir}/auxiliary/setNoBackgroundJob
 		    ;;
 
+              # case_BIDS2
+              #
+              # this is to turn on BIDS2 compatibility
+	      # which also means finding a target "derivatives" directory
+	      # 
+              #
+                "B2")
+                    . ${thisDir}/auxiliary/setBIDS2Active
+		    ;;
+
               # case_bet_best_flag 
 	      #
-	      # look at the BET best flag
+	      # look at the BET best flag -- this will be deprecated for spm12Batch as we don't use BET
+	      # RCWelsh 2017-09-15
 	      #
 		"b")
 		    . ${thisDir}/auxiliary/setBETFLAG
@@ -155,6 +172,8 @@ do
               # case_set_BET_gradient
               #
               # Set the gradient scale for bestBET
+	      # This should be deprecated as bestBET is not
+	      # used any more. - RCWelsh 2017-09-15
               #
 		"g")
                     . ${thisDir}/auxiliary/setGradientValue
@@ -178,7 +197,8 @@ do
               # case_set_referenceImage
               #
               # reference image for warpfMRI with vbm8
-              #
+              # This used any more? RCWelsh 2017-09-15
+	      # 
 		"I")
                     . ${thisDir}/auxiliary/setReferenceImage
                     ;;
@@ -192,7 +212,7 @@ do
 		
 	      # case_do_erosion_last
               #
-              # a flag to tell vbm8HiRes to do erosion as last step
+              # a flag to tell vbm8HiRes/newSeg to do erosion as last step
               #
                 "L")
                    . ${thisDir}/auxiliary/setErosionLast
@@ -312,6 +332,15 @@ do
 	      #
 		"T")
 		    . ${thisDir}/auxiliary/setTemplateImageName
+		    ;;
+
+              # case_target_directory
+	      #
+	      # Target directory for derivative data for BIDS2
+	      # compliance
+	      #
+		"TD")
+		    . ${thisDir}/auxiliary/setTargetDirectory
 		    ;;
 
               # case_test_flag 

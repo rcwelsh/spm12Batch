@@ -9,3 +9,5 @@ pcafMRI
 erodeMask
 warpSeg
 smoothfMRI
+antsHiRes
+antsfMRI

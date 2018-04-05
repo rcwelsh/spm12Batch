@@ -6,7 +6,7 @@
 SPM12BATCH_ERROR_CODE=78
 #
 
-for ITEM in mcflirt fslsplit fslmerge slicetimer
+for ITEM in mcflirt fslsplit fslmerge slicetimer fslmaths
 do
     results=`which ${ITEM}`
     results=`echo ${results} | awk '{print $1}'`

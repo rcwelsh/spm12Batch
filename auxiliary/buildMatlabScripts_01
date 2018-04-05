@@ -9,7 +9,14 @@ echo
 if [ ! -d "${MATLABDIR}" ]
     then
     echo "    1) ${MATLABDIR} directory will be created "
-    mkdir -p $MATLABDIR
+    mkdir -p ${MATLABDIR}
+    if [ $? != 0 ]
+    then
+	echo
+	echo FATAL : Did not create command directory
+	echo
+	exit 1
+    fi
 fi
 
 cd $MATLABDIR

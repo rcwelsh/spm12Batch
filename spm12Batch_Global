@@ -20,6 +20,17 @@
 #  MAILRECPT
 #
 
+# Using standard error exit codes as shown in
+# https://www.freebsd.org/cgi/man.cgi?query=sysexits&apropos=0&sektion=0&manpath=FreeBSD%204.3-RELEASE&format=html
+#
+# 78  = misconfiguration
+# 77  = no permission
+# 74  = I/O error
+# 69  = command not supported yet
+# 66  = input file does not exist
+# 65  = input data was incorrect
+# 64  = command issued incorrectly
+
 # Added some proper error returns when failing due to error.
 
 COPYRIGHTENDYEAR=`date +%Y`
@@ -103,7 +114,7 @@ then
 #   Where to find the template image to normalize to.
 #   This is site DEPENDENT!!!!
     
-    TemplateImageDir=${SPM12B1}/templates/
+    TemplateImageDir=${SPM12B1}/Templates/
     TemplateImageFile=T1.nii
     
     TemplateImage=${TemplateImageDir}/${TemplateImageFile}
@@ -117,6 +128,7 @@ then
         # Use the latest MATLAB we can find, but this should be static for stability.
         # MATLAB VERSIONs :  MATLAB_R2011b.app MATLAB_R2014b.app MATLAB_R2015b.app
         MATLAB=/Applications/MATLAB_R2016b.app/bin/matlab
+        MATLAB=/Applications/MATLAB_R2017b.app/bin/matlab
     else
         MATLAB=`which matlab`
     fi

@@ -4,7 +4,14 @@
     echo "${helpComment} name of hisres image     : $HIRESNAME"
     echo "${helpComment} reslice option           : $resliceFLAG"
     echo "${helpComment} prepending name          : $outputName"
-    echo "${helpComment} Other images             : $iother"
+    echo "${helpComment} # Other images           : $iother"
+    echo -n "${helpComment} Other Images             : ( "
+    for (( io=0; io<$iother ; io++ ))
+    do
+       thisOther=${otherName[$io]}
+       echo -n "${thisOther} "
+    done
+    echo ")"
     echo 
 
     . ${thisDir}/auxiliary/help/help_options_end

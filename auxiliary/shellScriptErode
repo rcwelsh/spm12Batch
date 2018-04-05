@@ -31,7 +31,7 @@ echo "    # Make sure that warping job successfully finished"                   
 echo -n "    erodeMask"                                                               >> ${FULLSCRIPTNAME}.sh
 echo -n "     -E ${WMEROSION}"                                                        >> ${FULLSCRIPTNAME}.sh
 echo -n "     ${CSFEROSION}"                                                          >> ${FULLSCRIPTNAME}.sh
-echo -n "     -w ${coregPATH}"                                                        >> ${FULLSCRIPTNAME}.sh
+echo -n "     -w ${fmriPATH}/${coregPATH}"                                            >> ${FULLSCRIPTNAME}.sh
 echo -n "     ${EROSIONLASTOPT}"                                                      >> ${FULLSCRIPTNAME}.sh
 echo -n "     -v ${outputName}"                                                       >> ${FULLSCRIPTNAME}.sh
 echo -n "     -h ${HIRESNAME}"                                                        >> ${FULLSCRIPTNAME}.sh

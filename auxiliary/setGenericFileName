@@ -12,7 +12,8 @@
 		  else
 		      FILENAME=$1
 		  fi
-		  . ${thisDir}/fileExtensionDetermination
+		  # moved the codelet into auxiliary - RCWelsh 2018-02-11
+		  . ${thisDir}/auxiliary/fileExtensionDetermination
 		  if [ ${BAD} == "1" ] 
 		  then
 		      echo

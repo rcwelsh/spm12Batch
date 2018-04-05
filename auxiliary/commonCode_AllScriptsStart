@@ -14,7 +14,8 @@ then
     echo
     echo "We appreciate your patience during construction."
     echo
-    exit 1
+    SPM12BATCH_ERROR_CODE=69	
+    exit ${SPM12BATCH_ERROR_CODE}	
 fi
 	
 # Verify that the user has examined the help aspect of the command.

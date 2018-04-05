@@ -6,7 +6,7 @@
 outputName=w
 
 # Set the default voxel size.
-voxelSize=3
+voxelSize=2
 
 #
 # all done

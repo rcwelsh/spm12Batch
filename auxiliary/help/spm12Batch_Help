@@ -6,7 +6,7 @@ echo and it is in further development.
 echo
 echo The driving force behind these scripts is to implement a level of error
 echo checking on data structures, parameter specification, logging of commands, 
-echo ability to process batchs of subjects, and to run in the background.
+echo ability to process batches of subjects, and to run in the background.
 echo 
 echo In general people have found their productivity to increase greatly 
 echo through the use of these scripts.
@@ -19,7 +19,10 @@ echo The listing of commands is in the rough order that one would do for
 echo processing of data from k-space data to final smoothed, MNI-based 
 echo T2* images.
 echo
-echo February-2017
+echo Developed with support from R01NS052514
+echo "                            R01NS082304"
+echo
+echo Updated February-July-2017
 echo
 echo --------------------------------------------------------------------------
 echo 
@@ -29,7 +32,7 @@ echo
 echo "whitePixel      DEPRECATED. Filtering of GE raw pfiles to remove white pixel artifact. DEPRECATED."
 echo 
 echo "reconSpiral     DEPRECATED. To process pfiles and do spiral reconstruction (ala Doug Noll)"
-echo "                and return NIFTI files (radiological convention. DEPRECATED."
+echo "                and return NIFTI files (radiological convention. DEPRECATED.)"
 echo
 echo "physioCorr      DEPRECATED. Implements image based physiological correction (ala RETRICOR)"
 echo "                this command will work with both GE and Philips data. DEPRECATED."

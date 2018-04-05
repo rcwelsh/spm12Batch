@@ -37,6 +37,6 @@ case $FILENAME in
 	;;
     *)
 	echo 
-	echo "Will assume .nii (1st) or .nii.gz (2nd) extension for FILE image type."
+	echo "    Will assume .nii (1st) or .nii.gz (2nd) extension for FILE image type for file \"${FILENAME}\""
 	echo
 esac
