@@ -41,6 +41,6 @@ then
 fi
 
 echo "global CommandLine MC_SHA FULLSCRIPTNAME"                >> ${FULLSCRIPTNAME}.m
-echo "CommandLine        = '${theFullCommand4mATLAB}';"        >> ${FULLSCRIPTNAME}.m
+echo "CommandLine        = '${theFullCommand4MATLAB}';"        >> ${FULLSCRIPTNAME}.m
 echo "MC_SHA             = '"${MC_SHA}"';"                     >> ${FULLSCRIPTNAME}.m
 echo "FULLSCRIPTNAME     = '${FULLSCRIPTNAME}';"               >> ${FULLSCRIPTNAME}.m               
