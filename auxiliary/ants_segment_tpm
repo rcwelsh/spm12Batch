@@ -1,0 +1,194 @@
+
+    #
+    # codelet to build segments
+    #
+    # based on Vincent Koppelmans
+    #
+    
+    # check to see if the number of cores has been specified.
+
+    if [ -z "${ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS}" ]
+    then
+       export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
+    fi
+
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} antsBrainExtraction * * * * * * * * * * * * * * "
+    echo 
+    echo "antsBrainExtraction.sh \\ "
+    echo "       -d 3 \\ "
+    echo "	  -a \"${antsM}\" \\ "
+    echo "	  -e \"${ANTSTPM}/T_template0.nii.gz\" \\ "
+    echo "	  -m \"${ANTSTPM}/T_template0_BrainCerebellumProbabilityMask.nii.gz\" \\ "
+    echo "	  -f \"${ANTSTPM}/T_template0_BrainCerebellumRegistrationMask.nii.gz\" \\ "
+    echo "	  -o \"ss_${HIRESNAME}_\" \\ "
+    echo "	  -k 0"
+    echo
+ 
+    antsBrainExtraction.sh \
+          -d 3 \
+	  -a "${antsM}" \
+	  -e "${ANTSTPM}/T_template0.nii.gz" \
+	  -m "${ANTSTPM}/T_template0_BrainCerebellumProbabilityMask.nii.gz" \
+	  -f "${ANTSTPM}/T_template0_BrainCerebellumRegistrationMask.nii.gz" \
+	  -o "ss_${HIRESNAME}_" \
+	  -k 0 
+
+
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} N4BiasFieldCorrection * * * * * * * * * * * * * *"
+    echo 
+    echo "    N4BiasFieldCorrection \\ "
+    echo "        -d 3 \\ "
+    echo "        -i \"ss_${HIRESNAME}_BrainExtractionBrain.nii.gz\" \\ "
+    echo "        -o [N4_${antsM},BF_${antsM}] \\ "
+    echo "        -v 1 "
+    echo
+
+    N4BiasFieldCorrection \
+        -d 3 \
+        -i "ss_${HIRESNAME}_BrainExtractionBrain.nii.gz" \
+        -o [N4_${antsM},BF_${antsM}] \
+        -v 1 
+
+
+    # Apply registration
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} antsApplyTransforms * * * * * * * * * * * * * *"
+    echo 
+    echo "    for i in {1..6}
+    echo "    do
+    echo "       antsApplyTransforms \\ "
+    echo "         -d 3 \\ "
+    echo "         -i ${ANTSPRIOR}/p${i}.nii.gz \\ "
+    echo "         -r ${antsM} \\ "
+    echo "         -o wp${i}.nii.gz \\ "
+    echo "         -t ${antsP}_1InverseWarp.nii.gz \\ "
+    echo "         -t [${antsP}_0GenericAffine.mat,1] \\ "
+    echo "         --float \\ "
+    echo "         -v 1 "
+    echo "    done"
+    echo
+
+    for i in {1..6}
+    do
+       antsApplyTransforms \
+         -d 3 \
+         -i ${ANTSPRIOR}/p${i}.nii.gz \
+         -r ${antsM} \
+         -o wp${i}.nii.gz \
+         -t ${antsP}1InverseWarp.nii.gz \
+         -t [${antsP}0GenericAffine.mat,1] \
+         --float \
+         -v 1 
+    done
+
+
+    # Create mask, very liberal mask
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} fslmaths * * * * * * * * * * * * * *"
+    echo 
+    echo "    fslmaths \\ "
+    echo "       ${antsM} \\ "
+    echo "       -bin \\ "
+    echo "       liberalMask.nii.gz "
+    echo
+
+    export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
+    export FSLOUTPUTTYPE=NIFTI_GZ
+    fslmaths \
+       ${antsM} \
+       -bin \
+       liberalMask.nii.gz
+    export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
+    
+    # Run atropos
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} antsAtroposN4 * * * * * * * * * * * * * *"
+    echo 
+    echo "    antsAtroposN4.sh \\ "
+    echo "          -d 3 \\ "
+    echo "          -a \"${antsM}\" \\ "
+    echo "          -x \"liberalMask.nii.gz\" \\ "
+    echo "          -c 6 \\ "
+    echo "          -p wp%d.nii.gz \\ "
+    echo "          -o `pwd`/  "
+    echo
+
+    antsAtroposN4.sh \
+          -d 3 \
+          -a "${antsM}" \
+          -x "liberalMask.nii.gz" \
+          -c 6 \
+          -p wp%d.nii.gz \
+          -o `pwd`/
+
+    # Restrict segmentations to brain mask
+    # Mask out
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} antsBrainExtraction * * * * * * * * * * * * * *"
+    echo 
+    echo "    for i in {1..6} "
+    echo "    do "
+    echo "       fslmaths \\ "
+    echo "         SegmentationPosteriors${i}.nii.gz \\ "
+    echo "         -mas \"ss_${HIRESNAME}_BrainExtractionMask.nii.gz\" \\ "
+    echo "         native_p${i}.nii.gz "
+    echo "    done"
+    echo
+
+    export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
+    export FSLOUTPUTTYPE=NIFTI_GZ
+    for i in {1..6}
+    do
+       # Mask out
+       fslmaths \
+         SegmentationPosteriors${i}.nii.gz \
+         -mas "ss_${HIRESNAME}_BrainExtractionMask.nii.gz" \
+         native_p${i}.nii.gz
+    done
+    export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
+
+    # need to warp the native_p* to get into MNI space and specify a space-defining template (e.g. 2mm)
+
+    # Restrict labeled image to brain mask
+    DATE=`date`
+    STEPNO=$(( ${STEPNO} + 1))
+    STEPNOF=`printf "%02d" ${STEPNO}`
+    echo
+    echo "${DATE} step ${STEPNOF} fslmaths * * * * * * * * * * * * * *"
+    echo 
+    echo "    fslmaths \\ "
+    echo "      Segmentation.nii.gz \\ "
+    echo "      -mas \"ss_${HIRESNAME}_BrainExtractionMask.nii.gz\" \\ "
+    echo "      labels.nii.gz"
+
+    export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
+    export FSLOUTPUTTYPE=NIFTI_GZ
+    fslmaths \
+      Segmentation.nii.gz \
+      -mas "ss_${HIRESNAME}_BrainExtractionMask.nii.gz" \
+      labels.nii.gz          
+    export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
+
+    #
+    # all done with codelet
+    # 

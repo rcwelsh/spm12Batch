@@ -1,0 +1,91 @@
+    #
+    # ants_calculate_warp
+    # Code to be copied into the main script
+    #
+    # should be done with a cat ... >> ${FULLSCRIPTNAME}.sh 
+    #
+    # built by antsHiRes spm12Batch
+    #
+    # 2018-02-08
+    # Core codelet by Vincent Koppelmans
+    # modified by Robert Welsh
+    # Salt Lake City, UT
+    #
+    #
+    # Must supply the following things
+    #
+    # This codelet assumes that it's going to be operating
+    # in the directory of the object to be warped.
+    #
+    # antsM = input file
+    #         outputfile name is determined by the prepend
+    #         option "outputName"
+    #
+    # antsP = ants_prepend name for output transformation
+    #
+    # antsS = source directory, where to find the normalization
+    #         rules (ants_1Warp.nii.gz and (ants_0GenericAffine.mat)
+    #
+    # antsT = template file to base sampling on, this should
+    #         match was was used in the antsHiRes command
+    #
+    # antsN = ants output normalized image
+    #
+    # antsI = inverse ants warped image
+    #
+    # many assumed ANTS parameters being used.
+    #
+
+    # This will inherit outputName from spm12Batch environment
+
+    # 2018-02-08
+
+
+    DATE=`date`
+
+    echo
+    echo "${DATE} Starting up ANTS for ${antsS}, warping ${antsM} to template ${antsT}"
+    echo
+    # Calculate warp using ANTs with SyN
+
+    antsRegistration \
+      -d 3 \
+      -r [ "${antsT}" , "${antsM}" , 1] \
+      -m mattes[ "${antsT}", "${antsM}" , 1, 32, regular, 0.3] \
+          -t translation[ 0.1 ] \
+          -c [${antsCalc1},1.e-8,20]  \
+          -s 4x2x1vox  \
+          -f 6x4x2 -l 1 \
+      -m mattes[ "${antsT}", "${antsM}" , 1 , 32, regular, 0.3 ] \
+          -t rigid[ 0.1 ] \
+          -c [${antsCalc2},1.e-8,20]  \
+          -s 4x2x1vox  \
+          -f 3x2x1 -l 1 \
+      -m mattes[ "${antsT}", "${antsM}" , 1 , 32, regular, 0.3 ] \
+          -t affine[ 0.1 ] \
+          -c [${antsCalc3},1.e-8,20]  \
+          -s 4x2x1vox  \
+          -f 3x2x1 -l 1 \
+      -m mattes[ "${antsT}" , "${antsM}" , 0.5 , 32 ] \
+      -m cc[ "${antsT}" , "${antsM}" , 0.5 , 4 ] \
+          -t SyN[ .20, 3, 0 ] \
+          -c [ ${antsCalc4},-0.01,5 ]  \
+          -s 1x0.5x0vox  \
+          -f 4x2x1 -l 1 -u 1 -z 1 \
+      -o [${antsP},${antsN},${antsI}] \
+      -v 1
+
+    ANTS_RETURN_CODE=$? 
+
+    DATE=`date`
+
+    echo
+    echo "${DATE} Finished up ANTS for ${antsS}, warping ${antsM} to template ${antsT} with return code ${ANTS_RETURN_CODE}"
+    echo
+
+
+  
+    #
+    # done with codelet
+    #
+

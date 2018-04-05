@@ -1,0 +1,141 @@
+# Now write out the other images
+
+#
+# Set the error code to bad input data
+#
+SPM12BATCH_ERROR_CODE=65
+#
+
+# go through and see that all other images exist for the
+# subjects
+
+for (( is=1 ; is<=$nSubjects ; is++ ))
+do
+    destPATH=${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/${fmriPATH}/${coregPATH}
+    anatPATH=${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/${anatomyPATH}
+    cd ${anatPATH}
+    if [ $iother -gt 0 ]
+    then
+	# 
+	# remove any current coregistation in that directory of the other images.
+	#
+	for (( io=0; io<$iother ; io++ ))
+	do
+	    thisOther=${otherName[$io]}
+            # do the subject replacement.
+	    thisOther=`echo $thisOther | sed s/'\[S\]'/${subjects[$is]}/`
+	    destThisOther=`basename ${thisOther}`
+	    #
+	    # Did they specify an absolute or relative path to the other image.
+	    #
+	    if [ "${otherDIR[$io]}" == "1" ]
+	    then
+		otherSRCNAME=$thisOther
+	    else
+		otherSRCNAME=${anatPATH}/${thisOther}
+	    fi
+	    # 
+	    # We need to find if .nii.gz or .nii
+	    #
+	    if [ -z "${otherExt[$io]}" ]
+	    then
+		for EXT in .nii.gz .nii
+		do
+		    if [ -e "${otherSRCNAME}${EXT}" ]
+		    then
+			USEEXT=${EXT}
+		    fi
+		done
+	    else
+		USEEXT=${otherExt[$io]}
+	    fi
+	    
+	    #
+	    # Make sure that now the other image exists.
+	    #
+	    
+	    if [ ! -e "${otherSRCNAME}${USEEXT}" ]
+	    then
+		echo
+		echo "FATAL ERROR, Can't find other image : ${otherSRCNAME}${USEEXT}"
+		echo
+		echo ABORTING
+		echo
+	        . ${thisDir}/auxiliary/exit_w_removal
+	    fi
+	    
+	    otherSOURCE=${otherSRCNAME}${USEEXT}
+	    #
+	    debugout "Other name is : $otherSOURCE"    $SuperDebugFLAG
+	    debugout "- - - - - - - - - - - - - - - -" $SuperDebugFLAG
+	    
+	    
+	    if [ -e "${otherSOURCE}" ]
+	    then
+	        cp ${otherSOURCE} ${destPATH}
+		# 
+		# set the names of the object and target image for co-registration.
+		#
+		objcIMG=${destPATH}/${destThisOther}${USEEXT}
+		debugout "Object is : ${objcIMG}" $SuperDebugFLAG
+		debugout "- - - - - - - - - - - - - -" $SuperDebugFLAG
+	    else
+		echo
+		echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
+		echo
+		echo "other image (${otherNAME}) for subject : ${subjects[$is]} is missing."
+		echo 
+		echo "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "
+		echo
+	        . ${thisDir}/auxiliary/exit_w_removal
+	    fi
+	done
+    fi
+done
+
+# now we can write out the code to the shell script
+
+
+echo "#"                                          >> ${FULLSCRIPTNAME}.sh
+echo "# other images for ANTS to apply the warp"  >> ${FULLSCRIPTNAME}.sh
+echo "#"                                          >> ${FULLSCRIPTNAME}.sh
+echo -n "OTHERIMAGES=( "                          >> ${FULLSCRIPTNAME}.sh
+
+for (( io=0; io<$iother ; io++ ))
+do
+    thisOther=${otherName[$io]}
+    # do the subject replacement.
+    thisOther=`echo $thisOther | sed s/'\[S\]'/${subjects[$is]}/`
+    destThisOther=`basename ${thisOther}`
+    #
+    # Did they specify an absolute or relative path to the other image.
+    #
+    if [ "${otherDIR[$io]}" == "1" ]
+    then
+	otherSRCNAME=$thisOther
+    else
+	otherSRCNAME=${anatPATH}/${thisOther}
+    fi
+    # 
+    # We need to find if .nii.gz or .nii
+    #
+    if [ -z "${otherExt[$io]}" ]
+    then
+	for EXT in .nii.gz .nii
+	do
+	    if [ -e "${otherSRCNAME}${EXT}" ]
+	    then
+		USEEXT=${EXT}
+	    fi
+	done
+    else
+	USEEXT=${otherExt[$io]}
+    fi
+    echo -n "${destThisOther}${USEEXT} "         >> ${FULLSCRIPTNAME}.sh
+done
+echo ")"                                          >> ${FULLSCRIPTNAME}.sh
+echo                                              >> ${FULLSCRIPTNAME}.sh
+# 
+# Change back to success
+#
+SPM12BATCH_ERROR_CODE=0

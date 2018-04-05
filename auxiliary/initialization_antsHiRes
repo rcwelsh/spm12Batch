@@ -1,0 +1,49 @@
+#
+# Inialization.
+#
+
+# we do things in the top level of the subject, so not 
+# in the func directory.
+
+fmriPATH=./
+
+# Output directory
+
+coregPATH=anatomy/newSeg/
+
+#
+
+outputName=ants
+
+# erosion flag
+ 
+EROSIONLAST=1
+EROSIONLASTOPT=
+
+# Erosion default factors
+
+mcOPT="-s 5 -sub 0.333"
+WMEROSION=2
+CSFEROSION=1
+
+# Default output resolution
+
+voxelSize=2
+
+# Currently point to the avg152 inside SPM, issue is needing to get other resolutions
+# as well, so might need to pull in FSL templates.
+
+TemplateImageDir=${SPM12B1}/canonical
+TemplateImageFile=avg152T1.nii
+TemplateImage=${TemplateImageDir}/${TemplateImageFile}
+
+# Iteration settings:
+
+antsCalc1="10000x111110x11110"
+antsCalc2="10000x111110x11110"
+antsCalc3="10000x111110x11110"
+antsCalc4="100x100x50"
+
+#
+# all done
+#

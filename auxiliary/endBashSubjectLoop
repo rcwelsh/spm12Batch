@@ -1,0 +1,16 @@
+#
+# end a bash loop for the subjects
+#
+# This is inline code to be called
+#
+
+echo "done"                                                                                    >> ${FULLSCRIPTNAME}.sh
+echo "echo"                                                                                    >> ${FULLSCRIPTNAME}.sh
+echo "echo \" All done\""                                                                      >> ${FULLSCRIPTNAME}.sh
+echo "echo"                                                                                    >> ${FULLSCRIPTNAME}.sh
+echo                                                                                           >> ${FULLSCRIPTNAME}.sh
+echo
+
+#
+# finish of inline code
+#

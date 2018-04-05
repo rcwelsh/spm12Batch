@@ -1,0 +1,65 @@
+
+#
+# now build the ants command
+#
+# need to define the source directory
+#
+
+echo "    #"                                               >> ${FULLSCRIPTNAME}.sh
+echo "    # setup the source directory"                    >> ${FULLSCRIPTNAME}.sh
+echo "    #"                                               >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    antsS=${UMBatchMaster}/${SUBJDIR}/\${SUBJECT}/${fmriPATH}/${coregPATH}" >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    cd \${antsS}"                                    >> ${FULLSCRIPTNAME}.sh
+
+cat ${thisDir}/auxiliary/ants_calculate_warp               >> ${FULLSCRIPTNAME}.sh 
+
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    if [ \${ANTS_RETURN_CODE} != 0 ]"                >> ${FULLSCRIPTNAME}.sh
+echo "    then"                                            >> ${FULLSCRIPTNAME}.sh
+echo "       MATLAB_RETURN_CODE=\${ANTS_RETURN_CODE}"      >> ${FULLSCRIPTNAME}.sh
+echo "    fi"                                              >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+
+# Now if there are other images we need to warp those
+
+echo "    #"
+echo "    # setup other images"                            >> ${FULLSCRIPTNAME}.sh
+echo "    #"                                               >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    ANTSOTHER=0"                                     >> ${FULLSCRIPTNAME}.sh
+echo "    ANTSAPPLY_RETURN_CODE=0"                         >> ${FULLSCRIPTNAME}.sh
+echo "    NOTHER=\${#OTHERIMAGES[@]}"                         >> ${FULLSCRIPTNAME}.sh
+echo "    if [ \${NOTHER} -gt 0 ]"                         >> ${FULLSCRIPTNAME}.sh
+echo "    then"                                            >> ${FULLSCRIPTNAME}.sh
+echo "       ANTSOTHER=1"                                  >> ${FULLSCRIPTNAME}.sh
+echo "       antsMSave=\${antsM}"                          >> ${FULLSCRIPTNAME}.sh
+echo "       for (( io=0; io<\${#OTHERIMAGES[@]} ; io++ ))"   >> ${FULLSCRIPTNAME}.sh
+echo "       do"                                           >> ${FULLSCRIPTNAME}.sh
+echo "          antsM=\${OTHERIMAGES[\${io}]}"             >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+
+cat ${thisDir}/auxiliary/ants_apply_warp_4D                >> ${FULLSCRIPTNAME}.sh
+
+echo "          if [ \${RETURNCODE} != 0 ]"                >> ${FULLSCRIPTNAME}.sh
+echo "          then"                                      >> ${FULLSCRIPTNAME}.sh
+echo "              ANTSAPPLY_ERROR_CODE=\${RETURNCODE}"   >> ${FULLSCRIPTNAME}.sh
+echo "          fi"                                        >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "       done"                                         >> ${FULLSCRIPTNAME}.sh
+echo "       antsM=\${antsMSave}"                          >> ${FULLSCRIPTNAME}.sh
+echo "    fi"                                              >> ${FULLSCRIPTNAME}.sh
+
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    if [ \${ANTSAPPLY_RETURN_CODE} != 0 ]"           >> ${FULLSCRIPTNAME}.sh
+echo "    then"                                            >> ${FULLSCRIPTNAME}.sh
+echo "       MATLAB_RETURN_CODE=\${ANTSAPPLY_RETURN_CODE}" >> ${FULLSCRIPTNAME}.sh
+echo "    fi"                                              >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+
+# Now calculate the tissue segments in the native frame
+
+cat ${thisDir}/auxiliary/ants_segment_tpm                  >> ${FULLSCRIPTNAME}.sh
+
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh

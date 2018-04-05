@@ -1,0 +1,32 @@
+#
+# Start a bash loop for the subjects
+#
+# This is inline code to be called
+#
+
+if [ ! -z "${commandOptionsFile}" ]
+then
+  echo "#"                                                                                   >> ${FULLSCRIPTNAME}.sh 
+  echo "# excute optional code in ${FULLSCRIPTNAME}_options.sh"                              >> ${FULLSCRIPTNAME}.sh 
+  echo "#"                                                                                   >> ${FULLSCRIPTNAME}.sh 
+  echo                                                                                       >> ${FULLSCRIPTNAME}.sh
+  echo ". ${FULLSCRIPTNAME}_options.sh"                                                      >> ${FULLSCRIPTNAME}.sh
+  echo                                                                                       >> ${FULLSCRIPTNAME}.sh
+fi
+echo                                                                                         >> ${FULLSCRIPTNAME}.sh
+echo                                                                                         >> ${FULLSCRIPTNAME}.sh
+echo "# Need to have this available for findFirstRunInList"                                  >> ${FULLSCRIPTNAME}.sh
+echo "export volumeWILD"                                                                     >> ${FULLSCRIPTNAME}.sh
+echo                                                                                         >> ${FULLSCRIPTNAME}.sh
+echo "testFLAG=${testFLAG}"                                                                  >> ${FULLSCRIPTNAME}.sh
+echo -n "for SUBJECT in"                                                                     >> ${FULLSCRIPTNAME}.sh
+for (( is=1 ; is<=$nSubjects ; is++ ))
+do
+  echo -n " ${subjects[$is]}"                                                                >> ${FULLSCRIPTNAME}.sh
+done
+echo                                                                                         >> ${FULLSCRIPTNAME}.sh
+echo "do"                                                                                    >> ${FULLSCRIPTNAME}.sh
+
+#
+# finish of inline code
+#

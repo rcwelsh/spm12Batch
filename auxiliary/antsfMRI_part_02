@@ -1,0 +1,20 @@
+#
+# variables needed for ANTS
+#
+
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "# variables needed for ANTS"                               >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "antsM="                                                    >> ${FULLSCRIPTNAME}.sh
+echo "antsP=${outputName}"                                       >> ${FULLSCRIPTNAME}.sh
+echo "antsS=${anaPATH}"                                          >> ${FULLSCRIPTNAME}.sh
+echo "antsT=${TemplateImage}"                                    >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "MATLAB_RETURN_CODE=0"                                      >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+
+#
+#
+#

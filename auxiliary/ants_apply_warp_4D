@@ -1,0 +1,71 @@
+      #
+      # Code to be copied into the main script
+      #
+      # should be done with a cat ... >> ${FULLSCRIPTNAME}.sh
+      #
+      # built by antsfMRI spm12Batch
+      #
+      # 2018-02-08
+      # Core codelet by Vincent Koppelmans
+      # modified by Robert Welsh
+      # Salt Lake City, UT
+      #
+      #
+      # Must supply the following things
+      #
+      # This codelet assumes that it's going to be operating
+      # in the directory of the object to be warped.
+      #
+      # antsM = input file
+      #         outputfile name is determined by the prepend
+      #         option "outputName"
+      #
+      # antsP = ants_prepend name for output transformation
+      #
+      # antsS = source directory, where to find the normalization
+      #         rules (ants_1Warp.nii.gz and (ants_0GenericAffine.mat)
+      #
+      # antsT = template file to base sampling on, this should
+      #         match was was used in the antsHiRes command
+      #
+      # This will inherit outputName from spm12Batch environment
+      #
+      # This currently assumed four default parameters:
+      #
+      #    -d 3
+      #    -e 3
+      #    -n linear
+      #    -v 1
+      #
+
+      # Output name of image
+
+      oName="${antsP}$(basename ${antsM})"
+
+      DATE=`date`
+
+      echo
+      echo "${DATE} Starting up ANTS Apply for ${antsS}, warping ${antsM} to template ${antsT}"
+      echo
+      # Apply warp using ANTs with SyN
+      antsApplyTransforms \
+          -d 3 \
+          -e 3 \
+          -i "${antsM}" \
+          -r "${antsT}" \
+          -n linear \
+          -t ${antsS}/${antsP}1Warp.nii.gz \
+          -t ${antsS}/${antsP}0GenericAffine.mat \
+          -o "${oName}" \
+          -v 1
+
+      RETURNCODE=$?
+
+      DATE=`date`
+
+      echo
+      echo "${DATE} Finished up ANTS Apply for ${antsS}, warping ${antsM} to template ${antsT} with return code ${ANTS_RETURN_CODE}"
+      echo
+      #
+      # all done with codelet
+      #

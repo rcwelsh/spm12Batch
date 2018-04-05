@@ -1,0 +1,11 @@
+# validate that we have what we need.
+
+. ${thisDir}/auxiliary/checkANTSParts
+
+# and we need FSL
+
+. ${thisDir}/auxiliary/checkFSLParts
+
+# Initialize variables
+
+. ${thisDir}/auxiliary/initialization_all

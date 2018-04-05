@@ -1,0 +1,91 @@
+
+#
+# now build the ants command
+#
+# need to define the source directory
+#
+
+echo "    #"                                                                             >> ${FULLSCRIPTNAME}.sh
+echo "    # setup the source directory"                                                  >> ${FULLSCRIPTNAME}.sh
+echo "    #"                                                                             >> ${FULLSCRIPTNAME}.sh
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+echo "    antsS=${UMBatchMaster}/${SUBJDIR}/\${SUBJECT}/${fmriPATH}/${coregPATH}"        >> ${FULLSCRIPTNAME}.sh
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+
+# Now if there are other images we need to warp those
+
+echo "    #"
+echo "    # setup functonal images"                                                      >> ${FULLSCRIPTNAME}.sh
+echo "    #"                                                                             >> ${FULLSCRIPTNAME}.sh
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+echo "    cd ${UMBatchMaster}/${SUBJDIR}/\${SUBJECT}/${fmriPATH}"                        >> ${FULLSCRIPTNAME}.sh
+echo "    ANTSAPPLY_RETURN_CODE=0"                                                       >> ${FULLSCRIPTNAME}.sh
+echo "    FUNCDIRS=\`findVols.sh ./ ${volumeWILD}| sed -e's/,/ /g'\`"                    >> ${FULLSCRIPTNAME}.sh
+echo "    for FUNCDIR in \${FUNCDIRS}"                                                   >> ${FULLSCRIPTNAME}.sh
+echo "    do"                                                                            >> ${FULLSCRIPTNAME}.sh
+echo "       cd \${FUNCDIR}"                                                             >> ${FULLSCRIPTNAME}.sh
+echo "       echo \"   Working on \${FUNCDIR}\""                                         >> ${FULLSCRIPTNAME}.sh
+echo "       antsM=\`ls ${volumeWILD}*.nii*\`"                                           >> ${FULLSCRIPTNAME}.sh
+echo "       NantsM=\`ls ${volumeWILD}*.nii* | wc -l\`"                                  >> ${FULLSCRIPTNAME}.sh
+echo "       if [ \${NantsM} != 1 ] "                                                    >> ${FULLSCRIPTNAME}.sh
+echo "       then"                                                                       >> ${FULLSCRIPTNAME}.sh
+echo "          echo "                                                                   >> ${FULLSCRIPTNAME}.sh
+echo "          echo \"FATAL ERROR WITH \${FUNCDIR} in \""                               >> ${FULLSCRIPTNAME}.sh
+echo "          echo \"${UMBatchMaster}/${SUBJDIR}/\${SUBJECT}/${fmriPATH}\""            >> ${FULLSCRIPTNAME}.sh
+echo "          echo "                                                                   >> ${FULLSCRIPTNAME}.sh
+echo "          exit 1"                                                                  >> ${FULLSCRIPTNAME}.sh
+echo "       fi"                                                                         >> ${FULLSCRIPTNAME}.sh
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+
+cat ${thisDir}/auxiliary/ants_apply_warp_4D                                              >> ${FULLSCRIPTNAME}.sh
+
+echo "       if [ \${RETURNCODE} != 0 ]"                                                 >> ${FULLSCRIPTNAME}.sh
+echo "       then"                                                                       >> ${FULLSCRIPTNAME}.sh
+echo "           ANTSAPPLY_ERROR_CODE=\${RETURNCODE}"                                    >> ${FULLSCRIPTNAME}.sh
+echo "       fi"                                                                         >> ${FULLSCRIPTNAME}.sh
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+echo "     done"                                                                         >> ${FULLSCRIPTNAME}.sh
+
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+echo "    if [ \${ANTSAPPLY_RETURN_CODE} != 0 ]"                                         >> ${FULLSCRIPTNAME}.sh
+echo "    then"                                                                          >> ${FULLSCRIPTNAME}.sh
+echo "       MATLAB_RETURN_CODE=\${ANTSAPPLY_RETURN_CODE}"                               >> ${FULLSCRIPTNAME}.sh
+echo "    fi"                                                                            >> ${FULLSCRIPTNAME}.sh
+echo ""                                                                                  >> ${FULLSCRIPTNAME}.sh
+
+echo "    # Now reslice the p2, and p3 segments into WM and CSF for use in COMPCOR"      >> ${FULLSCRIPTNAME}.sh
+echo "    # We will get these from the ${antsS} directory"                               >> ${FULLSCRIPTNAME}.sh
+echo "    # They will be called native_p2.nii(.gz) and native_p3.nii(.gz)"               >> ${FULLSCRIPTNAME}.sh
+
+echo "    OBJECTSTOWARP=( native_p2 native_p3 )"                                         >> ${FULLSCRIPTNAME}.sh
+echo "    NEWOBJECTNAMES=( WM_mask CSF_mask )"                                           >> ${FULLSCRIPTNAME}.sh 
+
+echo "    echo \"****************************************************\""                 >> ${FULLSCRIPTNAME}.sh
+echo "    echo \"Building CSF and WM masks at same resolution as fmri\""                 >> ${FULLSCRIPTNAME}.sh
+echo "    echo \"****************************************************\""                 >> ${FULLSCRIPTNAME}.sh
+echo "    for iOBJ in 0 1"                                                               >> ${FULLSCRIPTNAME}.sh
+echo "    do"                                                                            >> ${FULLSCRIPTNAME}.sh
+echo "        cd \${antsS}"                                                              >> ${FULLSCRIPTNAME}.sh
+echo "        NATIVE=\`ls \${OBJECTSTOWARP[\${iOBJ}]}.nii* 2> /dev/null\`"               >> ${FULLSCRIPTNAME}.sh
+echo "        if [ -z \"\${NATIVE}\" ]"                                                  >> ${FULLSCRIPTNAME}.sh
+echo "        then"                                                                      >> ${FULLSCRIPTNAME}.sh
+echo "    	echo"                                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    	echo \"CANNOT CREATE THE \${NEWOBJECTNAMES[\${iOBJ}]}\""                 >> ${FULLSCRIPTNAME}.sh
+echo "    	echo \"AS \${OBJECTSTOWARP[\${iOBJ}]}.nii.* IS MISSING FROM \${antsS}\"" >> ${FULLSCRIPTNAME}.sh
+echo "    	echo"                                                                    >> ${FULLSCRIPTNAME}.sh
+echo "        else"                                                                      >> ${FULLSCRIPTNAME}.sh
+echo "    	FILENAME=\${NATIVE}"                                                     >> ${FULLSCRIPTNAME}.sh
+echo "          echo \"   working on \${FILENAME} -> \${NEWOBJECTNAMES[\${iOBJ}]}\""     >> ${FULLSCRIPTNAME}.sh
+echo "    	. ${thisDir}/auxiliary/fileExtensionDetermination"                       >> ${FULLSCRIPTNAME}.sh
+echo "    	cp \${FILENAME}\${FILEEXT} temporary_image\${FILEEXT}"                   >> ${FULLSCRIPTNAME}.sh
+echo "    	antsM=temporary_image\${FILEEXT}"                                        >> ${FULLSCRIPTNAME}.sh
+
+cat ${thisDir}/auxiliary/ants_apply_warp_4D                                              >> ${FULLSCRIPTNAME}.sh
+
+echo "    	mv \${antsP}\${antsM} \${NEWOBJECTNAMES[\${iOBJ}]}\${FILEEXT}"           >> ${FULLSCRIPTNAME}.sh
+echo "        fi"                                                                        >> ${FULLSCRIPTNAME}.sh
+echo "    done"                                                                          >> ${FULLSCRIPTNAME}.sh
+
+#
+# end of codelet
+#

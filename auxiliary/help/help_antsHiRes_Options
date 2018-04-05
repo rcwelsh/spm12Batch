@@ -1,0 +1,17 @@
+    echo "${helpComment} anatomy path             : ${anatomyPATH}"
+    echo "${helpComment} name of hisres image     : ${HIRESNAME}"
+    echo "${helpComment} directory to ants        : ${coregPATH}/"
+    echo "${helpComment} prepending name          : ${outputName}"
+    echo "${helpComment} Erosion Last flag        : ${EROSIONLAST}"
+    echo "${helpComment} Template Image           : ${TemplateImage}"
+    echo "${helpComment} # Other images           : $iother"
+    echo -n "${helpComment} Other Images             : ( "
+    for (( io=0; io<$iother ; io++ ))
+    do
+       thisOther=${otherName[$io]}
+       echo -n "${thisOther} "
+    done
+    echo ")"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_options_end

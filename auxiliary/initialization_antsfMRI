@@ -1,0 +1,31 @@
+#
+# Inialization.
+#
+
+# we do things in the top level of the subject, so not 
+# in the func directory.
+
+fmriPATH=func
+
+# Output directory
+
+coregPATH=coReg/ANTS
+
+#
+
+outputName=ants
+
+# Default output resolution
+
+voxelSize=2
+
+# Currently point to the avg152 inside SPM, issue is needing to get other resolutions
+# as well, so might need to pull in FSL templates.
+
+TemplateImageDir=${SPM12B1}/canonical
+TemplateImageFile=avg152T1.nii
+TemplateImage=${TemplateImageDir}/${TemplateImageFile}
+
+#
+# all done
+#
