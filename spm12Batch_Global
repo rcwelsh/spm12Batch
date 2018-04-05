@@ -59,8 +59,13 @@ then
 # You must point to SPM12 !!!
     
     SPM12B1=${topDIR}/SPM/SPM12/spm12_with_R6313
-    SPM12B1=/Users/rcwelsh/Software/spm12_r6906
-    
+    SPM12B1=/Users/rcwelsh/Software/spm12_r7219
+    # Are we running on mnemosyne?
+    if [ -d /erato ]
+    then
+        SPM12B1=/home/Software/SPM/spm12_r7219
+    fi
+
 # This is Robert Welsh's UNIX batch interface to spm12
     
     SPM12B2=${topDIR}/spm12Batch
@@ -74,6 +79,10 @@ then
 # The directory for the matlab code to do spiral reconstruction
 
     RECONMLIB=/Users/rcwelsh/matlabScripts/WELLES/mfiles
+    if [ ! -d ${RECONMLIB} ]
+    then
+       RECONMLIB=
+    fi
     
 #
 # If the sandbox is populated then we copy files to local disk for processing
@@ -99,7 +108,7 @@ then
 # Mail job will be sent to your user name at the institutionname
 # Please set the instituion email server name here.
     
-    MAILRECPT=umich.edu
+    MAILRECPT=utah.edu
     
 #
 # Default email address to send messages to, on the linux machines
@@ -114,7 +123,7 @@ then
 #   Where to find the template image to normalize to.
 #   This is site DEPENDENT!!!!
     
-    TemplateImageDir=${SPM12B1}/Templates/
+    TemplateImageDir=${SPM12B1}/toolbox/OldNorm
     TemplateImageFile=T1.nii
     
     TemplateImage=${TemplateImageDir}/${TemplateImageFile}
