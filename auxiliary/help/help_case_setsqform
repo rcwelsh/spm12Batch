@@ -1,0 +1,4 @@
+    echo "    -Q                   qform will take precedence."
+    echo "                         default is to use sform."
+    echo "                         once set, you cannot unset this flag."
+    echo 

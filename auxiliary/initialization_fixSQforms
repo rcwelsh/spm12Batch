@@ -1,0 +1,16 @@
+#
+# Inialization for fixSQforms
+#
+
+# default to only look in the search directory
+ALLRUNSFLAG=0
+
+# if the output name is blank, then we overwrite, else copy and fix.
+outputName=
+
+# default is to have s form precedence
+whichSQFORM=s
+
+#
+# all done
+#

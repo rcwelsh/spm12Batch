@@ -1,0 +1,8 @@
+    echo "${helpComment} search path              : ${fMRIPATH}"
+    echo "${helpComment} file name wild card      : ${volumeWILD}"
+    echo "${helpComment} outputName prefix        : ${outputName}"
+    echo "${helpComment} do all found files (0/1) : ${ALLRUNSFLAG}"
+    echo "${helpComment} which form precedent     : ${whichSQFORM}"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_options_end

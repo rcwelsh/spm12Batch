@@ -1,0 +1,107 @@
+    #
+    # inline code for doing the
+    # actual work to fix sforms/qforms
+    #
+    
+    # this resides inside the subject loop
+    
+    # this is expecting the following variables to be defined
+    #
+    #  DoAllFilesFound    -- if set, then find all matching
+    #                        files under the direectory mentioned
+    #                        if NOT set, then only search in the
+    #                        current search directory
+    #  outputName         -- if non-blank then copy the copy
+    #                        and fix that file instead of original
+    #  searchDirectory    -- directory to start the search in.
+    #  imageWild          -- file name to match ^${imageWild}
+    #  whichSQFORM        -- copy which form to which form.
+    #
+    #  UMBatchMaster      -- top level directory of the experiment.
+    #  SUBJECT            -- the subject to process
+    
+    CURDIR=`pwd`
+    
+    cd ${UMBatchMaster}
+    cd ${SUBJDIR}
+    cd ${SUBJECT}
+    
+    echo "Working on subject ${SUBJECT}"
+    # All subject should already exist. 
+    
+    if [ $? != 0 ]
+    then
+        echo
+        echo FATAL the subject ${SUBJECT} is not there
+        echo
+        cd ${CURDIR}
+        exit 1
+    fi
+    
+    # make sure the data is there.
+    
+    if [ ! -e ${searchDirectory} ]
+    then
+        echo
+        echo FATAL the subject ${SUBJECT} is missing ${searchDirectory}
+        echo
+        cd ${CURDIR}
+        exit 1
+    fi
+    
+    echo -n " and digging into ${searchDirectory}"
+    cd ${searchDirectory}
+    
+    # what is the search depth to find files?
+    
+    MAXDEPTH=9999
+    
+    if [ ${DoAllFoundFiles} == 0 ]
+    then
+        MAXDEPTH=1
+        echo " to a single depth"
+    else
+        echo " to an exhaustive depth"
+    fi
+    
+    # Now loop on the files to fix
+    
+    SEARCHDIR=`pwd`
+    for FILE in `find ./ -maxdepth ${MAXDEPTH} -type f | grep ".nii"`
+    do
+        FILENAME=`basename ${FILE}`
+        DOFILE=`echo ${FILENAME} | grep ^${imageWild} | wc -l | awk '{print $1}'`
+        DIRNAME=`dirname ${FILE}`
+        cd ${DIRNAME}
+        THISWORKINGDIR=`pwd`
+        if [ -z ${outputName} ]
+        then
+    	FILETOPROCESS=${FILENAME}
+        else
+    	if [ -e ${outputName}${FILENAME} ] 
+                        	then
+     	    echo  
+    	    echo FATAL the output name ${outputName}${FILENAME} in ${THISWORKINGDIR}
+    	    echo
+    	    exit 1
+    	fi
+    	cp ${FILENAME} ${outputName}${FILENAME}
+    	FILETOPROCESS=${outputName}${FILENAME}
+    	logTheUMProcess fixSQforms fixSQforms "cp ${FILENAME} ${outputName}${FILENAME}"
+                        	echo "   making copy of ${FILENAME} to ${outputName}${FILENAME}"
+        fi
+        if [ "${whichSQFORM}" == "q" ]
+        then 
+    	echo "   replicating qform for ${FILETOPROCESS}"
+    	fslorient -copyqform2sform ${FILETOPROCESS}
+    	logTheUMProcess fixSQforms fixSQforms "fslorient -copyqform2sform ${FILETOPROCESS}"
+        else
+    	echo "   replicating sform for ${FILETOPROCESS}"
+    	fslorient -copysform2qform ${FILETOPROCESS}
+    	logTheUMProcess fixSQforms fixSQforms "fslorient -copysform2qform ${FILETOPROCESS}"
+        fi
+        cd ${SEARCHDIR}
+    done
+        
+    cd ${CURDIR}
+

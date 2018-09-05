@@ -1,0 +1,26 @@
+    echo
+    echo " A command line command to drive batch processing to fix the S/Q form for images."
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo 
+    echo " e.g. "
+    echo
+    echo "   To process fix the qform for a subject for the default files"
+    echo "   image do:"
+    echo 
+    echo "     ${thisCommand} 050126zz"
+    echo
+    echo " The code will copy the sform to the qform by default."
+    echo " If you wish for the qform to take precedence, then you"
+    echo " must specify the -Q flag."
+    echo
+    echo " This command can be DESTRUCTIVE so use with care."
+    echo
+    
+    . ${thisDir}/auxiliary/help/help_matlabOptions
+
+    echo " Current command default configuration is:"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options

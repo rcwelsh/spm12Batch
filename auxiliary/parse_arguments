@@ -74,7 +74,7 @@ do
 
               # case_all_runs 
 	      #
-	      # All runs in func
+	      # All runs in func, or all files in a directory for the fixSQforms command.
 	      #
 		"A")
 		    ALLRUNSFLAG=1
@@ -293,6 +293,12 @@ do
 	      #
                 "q")
                     . ${thisDir}/auxiliary/setQualityCheckFlag
+                    ;;
+              # case_Qform
+	      #
+	      #
+                "Q")
+                    . ${thisDir}/auxiliary/setSQFormPrecedence
                     ;;
               # case_reslice_2 
 	      #

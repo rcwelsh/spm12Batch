@@ -1,0 +1,9 @@
+#
+# part 3 for the fixSQforms code
+#
+
+cat ${thisDir}/auxiliary/fixSQforms_worker                  >> ${FULLSCRIPTNAME}.sh
+
+#
+# all done
+#

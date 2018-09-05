@@ -4,3 +4,6 @@
 echo "echo "                                                          >> ${FULLSCRIPTNAME}.sh
 echo "echo \"Starting command '${thisCommand}' at \${STARTTIME}\" "   >> ${FULLSCRIPTNAME}.sh
 echo "echo "                                                          >> ${FULLSCRIPTNAME}.sh
+echo "echo \"UMBatchMaster  :   ${UMBatchMaster}\""                   >> ${FULLSCRIPTNAME}.sh
+echo "echo \"SUBJDIR        :   ${SUBJDIR}\""                         >> ${FULLSCRIPTNAME}.sh
+echo "echo "                                                          >> ${FULLSCRIPTNAME}.sh

@@ -130,6 +130,9 @@
             "q")
                 . ${thisDir}/auxiliary/help/help_case_qualitycheck
                 ;;
+            "Q")
+                . ${thisDir}/auxiliary/help/help_case_setsqform
+                ;;
 	    "R") 
 	        . ${thisDir}/auxiliary/help/help_case_reslice_2
 	        ;;

@@ -6,6 +6,14 @@
 SPM12BATCH_ERROR_CODE=78
 #
 
+if [ -z ${ANTSPATH} ]
+then
+	echo
+	echo "* * * * You need to install ANTS and define ANTSPATH * * * *"
+	echo
+	. ${thisDir}/auxiliary/exit_w_removal
+fi
+
 for ITEM in antsRegistration antsApplyTransforms antsBrainExtraction.sh N4BiasFieldCorrectionantsAtroposN4.sh
 do
     results=`which ${ITEM}`
