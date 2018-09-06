@@ -32,8 +32,7 @@
       #
       # This currently assumed four default parameters:
       #
-      #    -d 3
-      #    -e 3
+      #    -e 3       (which indicates time series)
       #    -n linear
       #    -v 1
       #
@@ -49,7 +48,6 @@
       echo
       # Apply warp using ANTs with SyN
       antsApplyTransforms \
-          -d 3 \
           -e 3 \
           -i "${antsM}" \
           -r "${antsT}" \

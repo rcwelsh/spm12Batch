@@ -57,7 +57,7 @@ echo "    # Now reslice the p2, and p3 segments into WM and CSF for use in COMPC
 echo "    # We will get these from the ${antsS} directory"                               >> ${FULLSCRIPTNAME}.sh
 echo "    # They will be called native_p2.nii(.gz) and native_p3.nii(.gz)"               >> ${FULLSCRIPTNAME}.sh
 
-echo "    OBJECTSTOWARP=( native_p2 native_p3 )"                                         >> ${FULLSCRIPTNAME}.sh
+echo "    OBJECTSTOWARP=( native_WM native_CSF )"                                         >> ${FULLSCRIPTNAME}.sh
 echo "    NEWOBJECTNAMES=( WM_mask CSF_mask )"                                           >> ${FULLSCRIPTNAME}.sh 
 
 echo "    echo \"****************************************************\""                 >> ${FULLSCRIPTNAME}.sh

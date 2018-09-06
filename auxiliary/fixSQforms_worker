@@ -67,39 +67,42 @@
     # Now loop on the files to fix
     
     SEARCHDIR=`pwd`
-    for FILE in `find ./ -maxdepth ${MAXDEPTH} -type f | grep ".nii"`
+    for FILE in `find ./ -maxdepth ${MAXDEPTH} | grep ".nii"`
     do
         FILENAME=`basename ${FILE}`
         DOFILE=`echo ${FILENAME} | grep ^${imageWild} | wc -l | awk '{print $1}'`
-        DIRNAME=`dirname ${FILE}`
-        cd ${DIRNAME}
-        THISWORKINGDIR=`pwd`
-        if [ -z ${outputName} ]
-        then
-    	FILETOPROCESS=${FILENAME}
-        else
-    	if [ -e ${outputName}${FILENAME} ] 
-                        	then
-     	    echo  
-    	    echo FATAL the output name ${outputName}${FILENAME} in ${THISWORKINGDIR}
-    	    echo
-    	    exit 1
-    	fi
-    	cp ${FILENAME} ${outputName}${FILENAME}
-    	FILETOPROCESS=${outputName}${FILENAME}
-    	logTheUMProcess fixSQforms fixSQforms "cp ${FILENAME} ${outputName}${FILENAME}"
-                        	echo "   making copy of ${FILENAME} to ${outputName}${FILENAME}"
-        fi
-        if [ "${whichSQFORM}" == "q" ]
-        then 
-    	echo "   replicating qform for ${FILETOPROCESS}"
-    	fslorient -copyqform2sform ${FILETOPROCESS}
-    	logTheUMProcess fixSQforms fixSQforms "fslorient -copyqform2sform ${FILETOPROCESS}"
-        else
-    	echo "   replicating sform for ${FILETOPROCESS}"
-    	fslorient -copysform2qform ${FILETOPROCESS}
-    	logTheUMProcess fixSQforms fixSQforms "fslorient -copysform2qform ${FILETOPROCESS}"
-        fi
+	if [ ${DOFILE} == 1 ]
+	then
+           DIRNAME=`dirname ${FILE}`
+           cd ${DIRNAME}
+           THISWORKINGDIR=`pwd`
+           if [ -z ${outputName} ]
+           then
+    	   FILETOPROCESS=${FILENAME}
+           else
+    	   if [ -e ${outputName}${FILENAME} ] 
+           then
+     	       echo  
+    	       echo FATAL the output name ${outputName}${FILENAME} in ${THISWORKINGDIR}
+    	       echo
+    	       exit 1
+    	   fi
+    	   cp ${FILENAME} ${outputName}${FILENAME}
+    	   FILETOPROCESS=${outputName}${FILENAME}
+    	   logTheUMProcess fixSQforms fixSQforms "cp ${FILENAME} ${outputName}${FILENAME}"
+                           	echo "   making copy of ${FILENAME} to ${outputName}${FILENAME}"
+           fi
+           if [ "${whichSQFORM}" == "q" ]
+           then 
+    	      echo "   replicating qform for ${FILETOPROCESS}"
+    	      fslorient -copyqform2sform ${FILETOPROCESS}
+    	      logTheUMProcess fixSQforms fixSQforms "fslorient -copyqform2sform ${FILETOPROCESS}"
+           else
+    	      echo "   replicating sform for ${FILETOPROCESS}"
+    	      fslorient -copysform2qform ${FILETOPROCESS}
+    	      logTheUMProcess fixSQforms fixSQforms "fslorient -copysform2qform ${FILETOPROCESS}"
+           fi
+	fi
         cd ${SEARCHDIR}
     done
         

@@ -167,6 +167,15 @@
     done
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
 
+    # create the CSF and WM masks now.
+    
+    export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
+    export FSLOUTPUTTYPE=NIFTI
+    fslmaths native_p3.nii.gz -add native_p4.nii.gz native_CSF.nii
+    cp native_p2.nii.gz native_WM.nii.gz
+    gunzip native_WM.nii.gz
+    export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
+
     # need to warp the native_p* to get into MNI space and specify a space-defining template (e.g. 2mm)
 
     # Restrict labeled image to brain mask
