@@ -454,7 +454,7 @@ do
 	      # Anything should result in an error.
 	      #
 		*)
-		    . ${thisDir}/auxiliary/caseError
+		    . ${thisDir}/auxiliary/case_error
 		    . ${thisDir}/auxiliary/exit_w_removal
 	    esac
 	else

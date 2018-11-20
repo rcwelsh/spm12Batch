@@ -176,7 +176,7 @@ echo
 
 # Now build the shell script command that will get launched into the background.
 
-. ${thisDir}/auxiliary/startBashSubjectloop
+. ${thisDir}/auxiliary/startBashSubjectLoop
 
 # Add the ANTS code to the shell script
 
