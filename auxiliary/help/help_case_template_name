@@ -2,5 +2,9 @@
     echo "                         you can specify relative to:"
     echo "                             ${TemplateImageDir}, or."
     echo "                         specify an absolute directory path."
-    echo "                         default is ${TemplateImage}"
+    echo "                         default is:"
+    echo "                           ${TemplateImage}."
+    echo "                         If, however, the -ss flag is indicated, then the"
+    echo "                         template image chosen is:"
+    echo "                           ${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz"
     echo 

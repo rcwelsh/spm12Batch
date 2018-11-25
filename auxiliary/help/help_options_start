@@ -34,21 +34,25 @@
     echo " Options"
     echo
 
-    nOptions=${#allowedOptions}
+    # modified on 2018-11-20 to handle multi-char options.
+    
+    # nOptions=${#allowedOptions}
 
     echo
-    echo "   Number of allowed options : $nOptions"
+    echo "   Allowed options : ${allowedOptions}"
     echo
 
     echo "   Key Parameter         Description"
     echo "   --- ---------------   ----------------------------------------------------"    
     echo 
 
-    let jOptions=( $nOptions - 1 )
+    #let jOptions=( $nOptions - 1 )
 
-    for iOPT in `seq 0 ${jOptions}`
+    #for iOPT in `seq 0 ${jOptions}`
+    for iOPT in ${allowedOptions}
     do
-        case ${allowedOptions:$iOPT:1} in 
+        #case ${allowedOptions:$iOPT:1} in 
+        case ${iOPT} in 
     	    "A") 
 	        . ${thisDir}/auxiliary/help/help_case_all_runs
 	        ;;
@@ -145,6 +149,9 @@
 	    "s") 
 	        . ${thisDir}/auxiliary/help/help_case_sub_path
 	        ;;
+	    "ss") 
+	        . ${thisDir}/auxiliary/help/help_case_skullstrip
+	        ;;
 	    "T") 
 	        . ${thisDir}/auxiliary/help/help_case_template_name
 	        ;;
@@ -184,9 +191,9 @@
 	    "2") 
 	        . ${thisDir}/auxiliary/help/help_case_vbm8Check_warpfMRI
 	        ;;
-	    "*") 
+	    *) 
 	        echo
-	        echo "     Unrecognized option : ${allowedOptions:$iOPT:1}"
+	        echo "     Unrecognized option : ${iOPT}"
 	        echo
         esac
     done

@@ -6,12 +6,13 @@ echo ""                                                          >> ${FULLSCRIPT
 echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
 echo "# variables needed for ANTS"                               >> ${FULLSCRIPTNAME}.sh
 echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
-echo "antsM=${destSOURCENAME}${USEEXT}"                          >> ${FULLSCRIPTNAME}.sh
+echo "antsE=${USEEXT}"                                           >> ${FULLSCRIPTNAME}.sh
+echo "antsM=${destSOURCENAME}"                                   >> ${FULLSCRIPTNAME}.sh
 echo "antsP=${outputName}"                                       >> ${FULLSCRIPTNAME}.sh
 echo "antsS=${anaPATH}"                                          >> ${FULLSCRIPTNAME}.sh
 echo "antsT=${TemplateImage}"                                    >> ${FULLSCRIPTNAME}.sh
-echo "antsN=\${antsP}${destSOURCENAME}.nii.gz"                   >> ${FULLSCRIPTNAME}.sh
-echo "antsI=\${antsP}InverWarpField_${destSOURCENAME}.nii.gz"    >> ${FULLSCRIPTNAME}.sh
+echo "antsN=\${antsP}${destSOURCENAME}"                          >> ${FULLSCRIPTNAME}.sh
+echo "antsI=\${antsP}InverWarpField_${destSOURCENAME}"           >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
 echo "# Iteration values for calc warp"                          >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
@@ -23,6 +24,9 @@ echo ""                                                          >> ${FULLSCRIPT
 echo "ANTSTPM=${ANTSTPM}"                                        >> ${FULLSCRIPTNAME}.sh
 echo "ANTSPRIOR=${ANTSPRIOR}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "HIRESNAME=${HIRESNAME}"                                    >> ${FULLSCRIPTNAME}.sh
+echo "ANTSTEMPLDIR=${ANTSTEMPLDIR}"                              >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "SKULLSTRIP=${SKULLSTRIP}"                                  >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
 echo "MATLAB_RETURN_CODE=0"                                      >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh

@@ -9,7 +9,7 @@ fmriPATH=./
 
 # Output directory
 
-coregPATH=anatomy/newSeg/
+coregPATH=anatomy/ANTs/
 
 #
 
@@ -43,6 +43,11 @@ antsCalc1="10000x111110x11110"
 antsCalc2="10000x111110x11110"
 antsCalc3="10000x111110x11110"
 antsCalc4="100x100x50"
+
+# Default to no skull-stripping
+
+SKULLSTRIP=FALSE
+ANTSTEMPLDIR=/home/Software/ANTS-2.3.1/Templates/MICCAI2012-Multi-Atlas-Challenge-Data
 
 #
 # all done

@@ -46,6 +46,10 @@ OVERLAYEXT=
 HIRESNAME=ht1spgr
 HIRESEXT=
 
+# No template set yet
+
+TemplateImageNameSet=FALSE
+
 # Array for other images to be drug into co-registration.
 iother=0
 otherName=

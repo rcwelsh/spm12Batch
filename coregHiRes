@@ -40,7 +40,7 @@ thisDir=`dirname $theCommand`
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
 #allowedOptions="aDdfhMnOoRrtUw"  - "reslice only" is NOT working with other images.
-allowedOptions="aBDdfhMnOorrtUw"
+allowedOptions=" a B D d f h M n O o r r t U w "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart

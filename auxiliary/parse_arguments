@@ -4,7 +4,7 @@
 
 # permitted arguments
 # 
-# AabDdEeFfghiMmnOopPRrSsTtUuVvwZ#
+# A a b D d E e F f g h i M m n O o p P R r S s T t U u V v w Z#
 #
 #
 
@@ -38,32 +38,33 @@ do
       # Check to see if option
 	if [ "${curParam:0:1}" == "-" ]
       	then 
+            curFlag=${curParam:1:${#curParam}}
             #
 	    # Modified 2017-09-15 -- Remove requirement that flag is 1 character only, as we 
 	    # need to expand to multi-character flags to accommodate BIDS2
 	    #
             #if (( ${#curParam} < 2 ))
 	    #then	
-		ALLOWED=
+		ALLOWED=`echo "${allowedOptions}" | grep " ${curFlag} "`
             #else
 		#ALLOWED=`echo ${allowedOptions} | grep ${curParam:1:1}`
             #fi
-	    #if [ -z "${ALLOWED}" ]
-	    #then 
-		#echo 
-		#echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
-		#echo "     * * * *"
-		#echo "     * * * * Option : $curParam : is not allowed for ${thisCommand}"
-		#echo "     * * * *"
-		#echo "     * * * *"
-		#echo "     * * * * To learn more about this command, type"
-		#echo "     * * * *"
-       		#echo "     * * * *      ${thisCommand} <CR>"
-		#echo "     * * * *"
-		#echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
-		#echo
-	        #. ${thisDir}/auxiliary/exit_w_removal
-            #fi
+	    if [ -z "${ALLOWED}" ]
+	    then 
+		echo 
+		echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+		echo "     * * * *"
+		echo "     * * * * Option : $curParam : is not allowed for ${thisCommand}"
+		echo "     * * * *"
+		echo "     * * * *"
+		echo "     * * * * To learn more about this command, type"
+		echo "     * * * *"
+       		echo "     * * * *      ${thisCommand} <CR>"
+		echo "     * * * *"
+		echo "     * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+		echo
+	        . ${thisDir}/auxiliary/exit_w_removal
+            fi
 	    
 	    debugout "Parsing command : ${curParam}" $SuperDebugFLAG
 	    
@@ -330,6 +331,14 @@ do
 	      #
 		"s")
 		    . ${thisDir}/auxiliary/setFunctionalSubPathName
+		    ;;
+
+              # case_skull_strip
+ 	      #
+	      # skull-strip option
+	      #
+		"ss")
+		    . ${thisDir}/auxiliary/setSkullStrip
 		    ;;
 
               # case_template_name 

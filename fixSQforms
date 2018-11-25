@@ -45,7 +45,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions="AdDfMnUvQ"
+allowedOptions=" A d D f M n U v Q "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart

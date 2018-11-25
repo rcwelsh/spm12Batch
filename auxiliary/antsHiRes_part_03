@@ -34,10 +34,10 @@ echo "    NOTHER=\${#OTHERIMAGES[@]}"                         >> ${FULLSCRIPTNAM
 echo "    if [ \${NOTHER} -gt 0 ]"                         >> ${FULLSCRIPTNAME}.sh
 echo "    then"                                            >> ${FULLSCRIPTNAME}.sh
 echo "       ANTSOTHER=1"                                  >> ${FULLSCRIPTNAME}.sh
-echo "       antsMSave=\${antsM}"                          >> ${FULLSCRIPTNAME}.sh
+echo "       antsMSave=\${antsMI}"                         >> ${FULLSCRIPTNAME}.sh
 echo "       for (( io=0; io<\${#OTHERIMAGES[@]} ; io++ ))"   >> ${FULLSCRIPTNAME}.sh
 echo "       do"                                           >> ${FULLSCRIPTNAME}.sh
-echo "          antsM=\${OTHERIMAGES[\${io}]}"             >> ${FULLSCRIPTNAME}.sh
+echo "          antsMI=\${OTHERIMAGES[\${io}]}"            >> ${FULLSCRIPTNAME}.sh
 echo ""                                                    >> ${FULLSCRIPTNAME}.sh
 
 cat ${thisDir}/auxiliary/ants_apply_warp_4D                >> ${FULLSCRIPTNAME}.sh

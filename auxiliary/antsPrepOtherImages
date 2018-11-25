@@ -131,7 +131,7 @@ do
     else
 	USEEXT=${otherExt[$io]}
     fi
-    echo -n "${destThisOther}${USEEXT} "         >> ${FULLSCRIPTNAME}.sh
+    echo -n "${destThisOther}${USEEXT} "          >> ${FULLSCRIPTNAME}.sh
 done
 echo ")"                                          >> ${FULLSCRIPTNAME}.sh
 echo                                              >> ${FULLSCRIPTNAME}.sh

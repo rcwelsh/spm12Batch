@@ -1,0 +1,12 @@
+
+              # Set the skull stripping on for antsHiRes
+
+		  SKULLSTRIP=TRUE
+		  
+                  if [ "${TemplateImageNameSet}" != TRUE ]
+		  then
+
+                     # set the template to the 1mm MNI from fsl
+		     TemplateImage=${FSLDIR}/data/standard/MNI152_T1_1mm_brain.nii.gz
+		  fi
+		  

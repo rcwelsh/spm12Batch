@@ -39,17 +39,17 @@
 
       # Output name of image
 
-      oName="${antsP}$(basename ${antsM})"
+      oName="${antsP}$(basename ${antsMI})"
 
       DATE=`date`
 
       echo
-      echo "${DATE} Starting up ANTS Apply for ${antsS}, warping ${antsM} to template ${antsT}"
+      echo "${DATE} Starting up ANTS Apply for ${antsS}, warping ${antsMI} to template ${antsT}"
       echo
       # Apply warp using ANTs with SyN
       antsApplyTransforms \
           -e 3 \
-          -i "${antsM}" \
+          -i "${antsMI}" \
           -r "${antsT}" \
           -n linear \
           -t ${antsS}/${antsP}1Warp.nii.gz \

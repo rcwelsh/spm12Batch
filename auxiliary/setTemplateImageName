@@ -15,3 +15,5 @@
 		  . ${thisDir}/auxiliary/verifyTargetImage
 
 		  TemplateImage=${TARGETIMG}
+
+                  TemplateImageNameSet=TRUE
