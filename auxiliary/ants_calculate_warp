@@ -71,60 +71,60 @@
     # ANTSTEMPLDIR="/home/Software/ANTS-2.3.1/Templates/MICCAI2012-Multi-Atlas-Challenge-Data"
 
     echo "<---------- 01: Skull Strip ---------->"
-    antsBrainExtraction.sh \\
-       -d 3 \\
-       -a ${antsM}.${antsE} \\
-       -e ${ANTSTEMPLDIR}/T_template0.nii.gz \\
-       -m ${ANTSTEMPLDIR}/T_template0_BrainCerebellumProbabilityMask.nii.gz \\
-       -f ${ANTSTEMPLDIR}/T_template0_BrainCerebellumRegistrationMask.nii.gz \\
-       -o ${antsMSS}_ \\
+    antsBrainExtraction.sh \
+       -d 3 \
+       -a ${antsM}.${antsE} \
+       -e ${ANTSTEMPLDIR}/T_template0.nii.gz \
+       -m ${ANTSTEMPLDIR}/T_template0_BrainCerebellumProbabilityMask.nii.gz \
+       -f ${ANTSTEMPLDIR}/T_template0_BrainCerebellumRegistrationMask.nii.gz \
+       -o ${antsMSS}_ \
        -k 0
 
     # N4 Bias Field Correction
     echo "<---------- 02: N4 Bias Field Correction ---------->"
 
-    fslmaths \\
-       ${antsMSS}_BrainExtractionMask.nii.gz \\
-       -dilM -dilM \\
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM -dilM \
        ${antsMSS}_BrainExtractionMask_dilM2.nii.gz
 
-    fslmaths \\
-       ${antsMSS}_BrainExtractionMask.nii.gz \\
-       -dilM -dilM -dilm -dilM \\
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM -dilM -dilm -dilM \
        ${antsMSS}_BrainExtractionMask_dilM4.nii.gz
 
-    fslcpgeom \\
-       ${antsM} \\
+    fslcpgeom \
+       ${antsM} \
        ${antsMSS}_BrainExtractionMask.nii.gz
 
-    fslcpgeom \\
-       ${antsM} \\
+    fslcpgeom \
+       ${antsM} \
        ${antsMSS}_BrainExtractionMask_dilM2.nii.gz
 
-    fslcpgeom \\
-       ${antsM} \\
+    fslcpgeom \
+       ${antsM} \
        ${antsMSS}_BrainExtractionMask_dilM4.nii.gz
 
     # Note: adding a mask forces the N4 application within the mask
     # We want to do the estimation within the mask, but the application
     # on the whole image. So we use -w but not -x.
-    N4BiasFieldCorrection \\
-       -d 3 \\
-       -i ${antsM}.${antsE} \\
-       -w ${antsMSS}_BrainExtractionMask_dilM4.nii.gz \\
-       -s 2 \\
-       -c [125x100x75x50] \\
-       -o [N4_${antsM}.nii.gz,BF_${antsM}.nii.gz] \\
+    N4BiasFieldCorrection \
+       -d 3 \
+       -i ${antsM}.${antsE} \
+       -w ${antsMSS}_BrainExtractionMask_dilM4.nii.gz \
+       -s 2 \
+       -c [125x100x75x50] \
+       -o [N4_${antsM}.nii.gz,BF_${antsM}.nii.gz] \
        -v 1
 
     # Fix the geometry
     
-    fslcpgeom \\
-       ${antsM} \\
+    fslcpgeom \
+       ${antsM} \
        N4_${antsM}.nii.gz
 
-    fslcpgeom \\
-       ${antsM} \\
+    fslcpgeom \
+       ${antsM} \
        BF_${antsM}.nii.gz
 
     # If we are using skull stripped, then strip it!
