@@ -73,7 +73,7 @@
     echo "<---------- 01: Skull Strip ---------->"
     antsBrainExtraction.sh \
        -d 3 \
-       -a ${antsM}.${antsE} \
+       -a ${antsM}${antsE} \
        -e ${ANTSTEMPLDIR}/T_template0.nii.gz \
        -m ${ANTSTEMPLDIR}/T_template0_BrainCerebellumProbabilityMask.nii.gz \
        -f ${ANTSTEMPLDIR}/T_template0_BrainCerebellumRegistrationMask.nii.gz \
@@ -110,7 +110,7 @@
     # on the whole image. So we use -w but not -x.
     N4BiasFieldCorrection \
        -d 3 \
-       -i ${antsM}.${antsE} \
+       -i ${antsM}${antsE} \
        -w ${antsMSS}_BrainExtractionMask_dilM4.nii.gz \
        -s 2 \
        -c [125x100x75x50] \
@@ -136,7 +136,7 @@
 	antsN=${antsP}ss_N4_${antsM}
 	antsI=${antsP}InverseWarpField_ss_N4_${antsM}
     else
-        antsMI=N4_${antsM}.${antsE}
+        antsMI=N4_${antsM}${antsE}
 	antsN=${antsP}N4_${antsM}
 	antsI=${antsP}InverseWarpField_N4_${antsM}
     fi
