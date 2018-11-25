@@ -90,7 +90,7 @@
 
     fslmaths \
        ${antsMSS}_BrainExtractionMask.nii.gz \
-       -dilM -dilM -dilm -dilM \
+       -dilM -dilM -dilM -dilM \
        ${antsMSS}_BrainExtractionMask_dilM4.nii.gz
 
     fslcpgeom \
@@ -131,17 +131,20 @@
     
     if [ "${SKULLSTRIP}" == TRUE ]
     then
-	fslmaths N4_${antsM}.nii.gz -mul ${antsMSS}_BrainExtractionMask_dilM2.nii.gz ss_${antsM}.nii.gz
+	fslmaths N4_${antsM}.nii.gz -mul ${antsMSS}_BrainExtractionMask_dilM2.nii.gz ss_N4_${antsM}.nii.gz
         antsMI=ss_N4_${antsM}.nii.gz
 	antsN=${antsP}ss_N4_${antsM}
 	antsI=${antsP}InverseWarpField_ss_N4_${antsM}
     else
-        antsMI=N4_${antsM}${antsE}
+        antsMI=N4_${antsM}.nii.gz
 	antsN=${antsP}N4_${antsM}
 	antsI=${antsP}InverseWarpField_N4_${antsM}
     fi
 
     DATE=`date`
+    # Warp Calculation
+    echo "<---------- 03: Caculating the warp --------------->"
+
     echo
     echo "${DATE} Starting up ANTS for ${antsS}, warping ${antsM} to template ${antsT}"
     echo

@@ -51,11 +51,11 @@ echo "#"                                                                        
 echo "# ${execDIR}"                                                                    >> ${FULLSCRIPTNAME}.sh
 echo "#"                                                                               >> ${FULLSCRIPTNAME}.sh
 
-BATCHVERSION=`cat ${thisDir}/.spm12BatchVersion`
+BATCHVERSION=`tail -1 ${thisDir}/.spm12BatchVersion`
 [[ -f ${thisDir}/../.local/CurrentVersionSHA ]] && mcSHA=`cat ${thisDir}/../.local/CurrentVersionSHA`
 [[ -f ${thisDir}/../.local/mc_releasetag ]] && mc_releasetag=`cat ${thisDir}/../.local/mc_releasetag`
 
-echo "# spm12Batch Version : ${BATCHVERSION}"                                           >> ${FULLSCRIPTNAME}.sh
+echo "# spm12Batch Version : ${BATCHVERSION}"                                          >> ${FULLSCRIPTNAME}.sh
 echo "# MethodsCore Release Tag : ${mc_releasetag}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "# MethodsCore Repository SHA-ID: $mcSHA"                                         >> ${FULLSCRIPTNAME}.sh
 echo "#"                                                                               >> ${FULLSCRIPTNAME}.sh

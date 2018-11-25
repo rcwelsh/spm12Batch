@@ -3,6 +3,7 @@
     echo "${helpComment} directory to ants        : ${coregPATH}/"
     echo "${helpComment} prepending name          : ${outputName}"
     echo "${helpComment} Erosion Last flag        : ${EROSIONLAST}"
+    echo "${helpComment} Skull Stripping          : ${SKULLSTRIP}"
     echo "${helpComment} Template Image           : ${TemplateImage}"
     echo "${helpComment} # Other images           : $iother"
     echo -n "${helpComment} Other Images             : ( "
