@@ -169,7 +169,7 @@
 
     export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
     export FSLOUTPUTTYPE=NIFTI_GZ
-    for i in `seq 1 ${CLASSNUM}}`
+    for i in `seq 1 ${CLASSNUM}`
     do
        # Mask out
        fslmaths \

@@ -133,17 +133,17 @@
     then
 	fslmaths N4_${antsM}.nii.gz -mul ${antsMSS}_BrainExtractionMask_dilM2.nii.gz ss_N4_${antsM}.nii.gz
         antsMI=ss_N4_${antsM}.nii.gz
-	antsN=${antsP}ss_N4_${antsM}
-	antsI=${antsP}InverseWarpField_ss_N4_${antsM}
+	antsN=${antsP}ss_N4_${antsM}.nii.gz
+	antsI=${antsP}InverseWarpField_ss_N4_${antsM}.nii.gz
     else
         antsMI=N4_${antsM}.nii.gz
-	antsN=${antsP}N4_${antsM}
-	antsI=${antsP}InverseWarpField_N4_${antsM}
+	antsN=${antsP}N4_${antsM}.nii.gz
+	antsI=${antsP}InverseWarpField_N4_${antsM}.nii.gz
     fi
 
     DATE=`date`
     # Warp Calculation
-    echo "<---------- 03: Caculating the warp --------------->"
+    echo "<---------- 03: Calculating the warp --------------->"
 
     echo
     echo "${DATE} Starting up ANTS for ${antsS}, warping ${antsM} to template ${antsT}"
@@ -182,7 +182,7 @@
     DATE=`date`
 
     echo
-    echo "${DATE} Finished up ANTS for ${antsS}, warping ${antsM} to template ${antsT} with return code ${ANTS_RETURN_CODE}"
+    echo "${DATE} Finished up ANTS for ${antsS}, warping ${antsMI} to template ${antsT} with return code ${ANTS_RETURN_CODE}"
     echo
 
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
