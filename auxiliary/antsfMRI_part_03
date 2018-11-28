@@ -25,7 +25,7 @@ echo "    for FUNCDIR in \${FUNCDIRS}"                                          
 echo "    do"                                                                            >> ${FULLSCRIPTNAME}.sh
 echo "       cd \${FUNCDIR}"                                                             >> ${FULLSCRIPTNAME}.sh
 echo "       echo \"   Working on \${FUNCDIR}\""                                         >> ${FULLSCRIPTNAME}.sh
-echo "       antsM=\`ls ${volumeWILD}*.nii*\`"                                           >> ${FULLSCRIPTNAME}.sh
+echo "       antsMI=\`ls ${volumeWILD}*.nii*\`"                                          >> ${FULLSCRIPTNAME}.sh
 echo "       NantsM=\`ls ${volumeWILD}*.nii* | wc -l\`"                                  >> ${FULLSCRIPTNAME}.sh
 echo "       if [ \${NantsM} != 1 ] "                                                    >> ${FULLSCRIPTNAME}.sh
 echo "       then"                                                                       >> ${FULLSCRIPTNAME}.sh
@@ -57,7 +57,7 @@ echo "    # Now reslice the p2, and p3 segments into WM and CSF for use in COMPC
 echo "    # We will get these from the ${antsS} directory"                               >> ${FULLSCRIPTNAME}.sh
 echo "    # They will be called native_p2.nii(.gz) and native_p3.nii(.gz)"               >> ${FULLSCRIPTNAME}.sh
 
-echo "    OBJECTSTOWARP=( native_WM native_CSF )"                                         >> ${FULLSCRIPTNAME}.sh
+echo "    OBJECTSTOWARP=( native_WM native_CSF )"                                        >> ${FULLSCRIPTNAME}.sh
 echo "    NEWOBJECTNAMES=( WM_mask CSF_mask )"                                           >> ${FULLSCRIPTNAME}.sh 
 
 echo "    echo \"****************************************************\""                 >> ${FULLSCRIPTNAME}.sh
@@ -78,11 +78,11 @@ echo "    	FILENAME=\${NATIVE}"                                                 
 echo "          echo \"   working on \${FILENAME} -> \${NEWOBJECTNAMES[\${iOBJ}]}\""     >> ${FULLSCRIPTNAME}.sh
 echo "    	. ${thisDir}/auxiliary/fileExtensionDetermination"                       >> ${FULLSCRIPTNAME}.sh
 echo "    	cp \${FILENAME}\${FILEEXT} temporary_image\${FILEEXT}"                   >> ${FULLSCRIPTNAME}.sh
-echo "    	antsM=temporary_image\${FILEEXT}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "    	antsMI=temporary_image\${FILEEXT}"                                       >> ${FULLSCRIPTNAME}.sh
 
 cat ${thisDir}/auxiliary/ants_apply_warp_4D                                              >> ${FULLSCRIPTNAME}.sh
 
-echo "    	mv \${antsP}\${antsM} \${NEWOBJECTNAMES[\${iOBJ}]}\${FILEEXT}"           >> ${FULLSCRIPTNAME}.sh
+echo "    	mv \${antsP}\${antsMI} \${NEWOBJECTNAMES[\${iOBJ}]}\${FILEEXT}"          >> ${FULLSCRIPTNAME}.sh
 echo "        fi"                                                                        >> ${FULLSCRIPTNAME}.sh
 echo "    done"                                                                          >> ${FULLSCRIPTNAME}.sh
 
