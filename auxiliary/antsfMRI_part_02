@@ -11,6 +11,7 @@ echo "antsP=${outputName}"                                       >> ${FULLSCRIPT
 echo "antsS=${anaPATH}"                                          >> ${FULLSCRIPTNAME}.sh
 echo "antsT=${TemplateImage}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "ANTSODT=${ANTSODT}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "ANTSODTOPTION=${ANTSODTOPTION}"                            >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
 echo "MATLAB_RETURN_CODE=0"                                      >> ${FULLSCRIPTNAME}.sh
