@@ -5,6 +5,7 @@
     echo "${helpComment} Erosion Last flag        : ${EROSIONLAST}"
     echo "${helpComment} Skull Stripping          : ${SKULLSTRIP}"
     echo "${helpComment} Template Image           : ${TemplateImage}"
+    echo "${helpComment} data type                : ${ANTSODT}"
     echo "${helpComment} # Other images           : $iother"
     echo -n "${helpComment} Other Images             : ( "
     for (( io=0; io<$iother ; io++ ))

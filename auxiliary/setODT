@@ -1,0 +1,42 @@
+		  #
+		  # Set the error code to bad parameter.
+		  #
+		  SPM12BATCH_ERROR_CODE=64
+		  #
+		  shift
+		  let argn++
+		  if (( $argn >= $args ))
+		      then
+		      echo "Missing parameter for setting the data type for antsApplyTransforms"
+	              . ${thisDir}/auxiliary/exit_w_removal
+		  else
+		      ANTSODT=`echo $1 | tr '[:upper:]' '[:lower:]'`
+		      case "${ANTSODT}" in
+		         #
+			 # must be 16 or 64
+			 #
+			 "float")
+			    ANTSODT=float
+			    ANTSODTOPTION=--float
+			    ;;
+			 "f")
+			    ANTSODT=float
+			    ANTSODTOPTION=--float
+			    ;;
+			 "double")
+			    ANTSODT=double
+			    ANTSODTOPTION=
+			    ;;
+			 "d")
+			    ANTSODT=double
+			    ANTSODTOPTION=
+			    ;;
+			 *)
+		            echo "Invalid data type, only float and double allowed"
+	                    . ${thisDir}/auxiliary/exit_w_removal
+                      esac
+                  fi
+		  # 
+		  # Change back to success
+		  #
+		  SPM12BATCH_ERROR_CODE=0

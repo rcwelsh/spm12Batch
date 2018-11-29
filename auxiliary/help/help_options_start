@@ -125,6 +125,9 @@
 	    "o") 
 	        . ${thisDir}/auxiliary/help/help_case_overlay_name
 	        ;;
+	    "odt") 
+	        . ${thisDir}/auxiliary/help/help_case_setodt
+	        ;;
 	    "P") 
 	        . ${thisDir}/auxiliary/help/help_case_physiooptions
 	        ;;

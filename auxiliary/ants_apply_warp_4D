@@ -55,7 +55,7 @@
           -t ${antsS}/${antsP}1Warp.nii.gz \
           -t ${antsS}/${antsP}0GenericAffine.mat \
           -o "${oName}" \
-          -v 1
+	  ${ANTSODTOPTION} -v 1
 
       RETURNCODE=$?
 

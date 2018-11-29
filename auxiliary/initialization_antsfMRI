@@ -26,6 +26,10 @@ TemplateImageDir=${SPM12B1}/canonical
 TemplateImageFile=avg152T1.nii
 TemplateImage=${TemplateImageDir}/${TemplateImageFile}
 
+# Default datatype
+
+ANTSODT=float
+ANTSODTOPTION=--float
 #
 # all done
 #

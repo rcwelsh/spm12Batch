@@ -1,0 +1,3 @@
+    echo "    -odt [float/double]  Set the datetype for writing out antsApplyTransforms data"
+    echo "                         The default is \"${ANTSODT}\""
+    echo 

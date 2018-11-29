@@ -4,6 +4,7 @@
     echo "${helpComment} Template Image           : ${TemplateImage}"
     echo "${helpComment} volumeWILD               : ${volumeWILD}"
     echo "${helpComment} functional sub-dir       : ${subPATH}"
+    echo "${helpComment} data type                : ${ANTSODT}"
     echo 
 
     . ${thisDir}/auxiliary/help/help_options_end

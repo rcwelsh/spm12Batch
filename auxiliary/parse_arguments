@@ -273,6 +273,15 @@ do
 		    . ${thisDir}/auxiliary/setOverlayName
 		    ;;
 		
+
+              # case_set_odt
+	      # 
+	      # set the data type antsApplyTransforms
+	      #
+		"odt")
+		    . ${thisDir}/auxiliary/setODT
+		    ;;
+		
               # case_physfile_name
 	      # 
 	      # physio phys file table
