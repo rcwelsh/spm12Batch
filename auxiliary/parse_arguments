@@ -219,10 +219,10 @@ do
                    . ${thisDir}/auxiliary/setErosionLast
                    ;;
               #
-              # do NOT use the sandbox even if possible
+              # only use sandbox if set and possible
               #
                 "l")
-                   . ${thisDir}/auxiliary/setNoSandBox
+                   . ${thisDir}/auxiliary/setYesSandBox
                    ;;
               # case_subject_dir 
 	      # 

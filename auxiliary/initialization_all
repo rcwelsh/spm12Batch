@@ -113,9 +113,9 @@ BATCHCOMMAND=1
 
 BACKGROUNDJOBFLAG=1
 
-# Sand Box override flag
+# Sand Box override flag, default is to not use, even if possible.
 
-OverrideNoSandBoxFLAG=0
+OverrideNoSandBoxFLAG=1
 
 # Are you running this command in qualitycheck mode?
 

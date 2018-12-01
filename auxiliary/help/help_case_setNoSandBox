@@ -1,2 +1,2 @@
-    echo "    -l                   DO NOT use the sand box, even if possible."
+    echo "    -l                   Only use the sand box, if possible. Default is no sandbox."
     echo 

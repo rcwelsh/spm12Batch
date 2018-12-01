@@ -91,11 +91,11 @@ then
 #
 
     SANDBOXHOST=`echo $HOSTNAME | awk -F. '{print $1}' | awk -F- '{print $1}'`
-    SANDBOX=/${SANDBOXHOST}/sandbox/
+    SANDBOX=/home/sandbox/${SANDBOXHOST}/sandbox/
 
 # list the devices that require the use of the sandbox
 
-    SANDBOXUSE="-e data4 -e data3 -e data2 -e data1 -e /Volumes/ALS"
+    SANDBOXUSE="-e erato"
 
 #
 # You should put in the user id of the person
