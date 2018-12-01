@@ -1,11 +1,11 @@
 
 case "${thisCommand}" in
-    "realignfMRI")
+    "realignfMRI12")
 	echo "    -O refName           name to give realignRefVolume"
 	echo "                         default : ${otherName[0]}"
 	echo " "
 	;;
-    "sliceTime8")
+    "sliceTime12")
         echo "    -O slice order       slice acquisition order"
 	echo "                         this can be an array which must be speficifed "
 	echo "                         with double set of quotes e.g. \"'[1:40]'\" "
