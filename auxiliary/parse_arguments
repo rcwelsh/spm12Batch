@@ -133,6 +133,14 @@ do
 		    . ${thisDir}/auxiliary/setDebugFlag
 		    ;;
 
+              # case_set_dilationFactor
+	      #
+	      # dilation factor for antsHiRes
+	      #
+		"df")
+		    . ${thisDir}/auxiliary/setDilationFactor
+		    ;;
+
               # case_erosion_settings
 	      #
 	      # set the amount to erode the WM and CSF segments.
@@ -298,6 +306,20 @@ do
 		    . ${thisDir}/auxiliary/setPhysioOptions
 		    ;;
 		
+              # case_set_numberPriors
+	      #
+	      # indicate the number of priors to use
+	      #
+	        "pn")
+		    . ${thisDir}/auxiliary/setNumberOfPriors
+		    ;;
+              # case_set_priorsOASIS
+	      #
+	      # indicate the priors to be as OASIS
+	      #
+	        "pO")
+		    . ${thisDir}/auxiliary/setOASIS
+		    ;;
               # case_qualitycheck
 	      #
 	      #

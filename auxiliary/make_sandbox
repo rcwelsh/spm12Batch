@@ -8,6 +8,9 @@ DATESECONDS=`date +%s | awk '{printf "%012d",$1}'`
 
 useSandBox=`echo $CURDIR | grep ${SANDBOXUSE}`
 
+debugout "Checking if we should build sandbox, flag is ${OverrideNoSandBoxFLAG}" $SuperDebugFLAG
+debugout "Checking if we should build sandbox, useSandBox ${useSandBox}" $SuperDebugFLAG
+
 if [ "${OverrideNoSandBoxFLAG}" == "1" ]
 then
 	echo

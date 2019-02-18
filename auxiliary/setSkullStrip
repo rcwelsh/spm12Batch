@@ -2,7 +2,7 @@
               # Set the skull stripping on for antsHiRes
 
 		  SKULLSTRIP=TRUE
-		  
+                  ANTSPN=4		  
                   if [ "${TemplateImageNameSet}" != TRUE ]
 		  then
 

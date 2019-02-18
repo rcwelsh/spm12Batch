@@ -71,6 +71,9 @@
 	    "d") 
 	        . ${thisDir}/auxiliary/help/help_case_debug_flag
 	        ;;
+	    "df") 
+	        . ${thisDir}/auxiliary/help/help_case_set_dilationFactor
+	        ;;
 	    "E") 
 	        . ${thisDir}/auxiliary/help/help_case_setErosion
 	        ;;
@@ -133,6 +136,12 @@
 	        ;;
 	    "p") 
 	        . ${thisDir}/auxiliary/help/help_case_physioname
+	        ;;
+	    "pn") 
+	        . ${thisDir}/auxiliary/help/help_case_set_numberPriors
+	        ;;
+	    "pO") 
+	        . ${thisDir}/auxiliary/help/help_case_set_priorsOASIS
 	        ;;
             "q")
                 . ${thisDir}/auxiliary/help/help_case_qualitycheck

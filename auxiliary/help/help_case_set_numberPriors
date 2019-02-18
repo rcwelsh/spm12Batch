@@ -1,0 +1,3 @@
+    echo "    -pn [#]              set the number of tissue priors for antsHiRes,"
+    echo "                         must be between 1 and 6."
+    echo 

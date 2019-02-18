@@ -13,6 +13,8 @@ echo "antsS=${anaPATH}"                                          >> ${FULLSCRIPT
 echo "antsT=${TemplateImage}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "antsN=\${antsP}${destSOURCENAME}"                          >> ${FULLSCRIPTNAME}.sh
 echo "antsI=\${antsP}InverWarpField_${destSOURCENAME}"           >> ${FULLSCRIPTNAME}.sh
+echo "antsPN=${ANTSPN}"                                          >> ${FULLSCRIPTNAME}.sh
+echo "antsDF=${ANTSDF}"                                          >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
 echo "# Iteration values for calc warp"                          >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh

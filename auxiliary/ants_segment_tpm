@@ -14,51 +14,6 @@
 
     DATE=`date`
 
-    #STEPNO=$(( ${STEPNO} + 1))
-    #STEPNOF=`printf "%02d" ${STEPNO}`
-    #echo
-    #echo "${DATE} step ${STEPNOF} antsBrainExtraction * * * * * * * * * * * * * * "
-    #echo 
-    #echo "antsBrainExtraction.sh \\ "
-    #echo "       -d 3 \\ "
-    #echo "	  -a \"${antsM}\" \\ "
-    #echo "	  -e \"${ANTSTPM}/T_template0.nii.gz\" \\ "
-    #echo "	  -m \"${ANTSTPM}/T_template0_BrainCerebellumProbabilityMask.nii.gz\" \\ "
-    #echo "	  -f \"${ANTSTPM}/T_template0_BrainCerebellumRegistrationMask.nii.gz\" \\ "
-    #echo "	  -o \"ss_${HIRESNAME}_\" \\ "
-    #echo "	  -k 0"
-    #echo
- 
-    #antsBrainExtraction.sh \
-    #      -d 3 \
-    #	  -a "${antsM}" \
-    #	  -e "${ANTSTPM}/T_template0.nii.gz" \
-    #	  -m "${ANTSTPM}/T_template0_BrainCerebellumProbabilityMask.nii.gz" \
-    #	  -f "${ANTSTPM}/T_template0_BrainCerebellumRegistrationMask.nii.gz" \
-    #	  -o "ss_${HIRESNAME}_" \
-    #	  -k 0 
-
-
-    #DATE=`date`
-    #STEPNO=$(( ${STEPNO} + 1))
-    #STEPNOF=`printf "%02d" ${STEPNO}`
-    #echo
-    #echo "${DATE} step ${STEPNOF} N4BiasFieldCorrection * * * * * * * * * * * * * *"
-    #echo 
-    #echo "    N4BiasFieldCorrection \\ "
-    #echo "        -d 3 \\ "
-    #echo "        -i \"ss_${HIRESNAME}_BrainExtractionBrain.nii.gz\" \\ "
-    #echo "        -o [N4_${antsM},BF_${antsM}] \\ "
-    #echo "        -v 1 "
-    #echo
-
-    #N4BiasFieldCorrection \
-    #    -d 3 \
-    #    -i "ss_${HIRESNAME}_BrainExtractionBrain.nii.gz" \
-    #    -o [N4_${antsM},BF_${antsM}] \
-    #    -v 1 
-
-
     # Apply registration
     DATE=`date`
     STEPNO=$(( ${STEPNO} + 1))
@@ -93,37 +48,17 @@
          -v 1 
     done
 
-
-    ## Create mask, very liberal mask
-    #DATE=`date`
-    #STEPNO=$(( ${STEPNO} + 1))
-    #STEPNOF=`printf "%02d" ${STEPNO}`
-    #echo
-    #echo "${DATE} step ${STEPNOF} fslmaths * * * * * * * * * * * * * *"
-    #echo 
-    #echo "    fslmaths \\ "
-    #echo "       ${antsM} \\ "
-    #echo "       -bin \\ "
-    #echo "       liberalMask.nii.gz "
-    #echo
-
     export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
     export FSLOUTPUTTYPE=NIFTI_GZ
-
-    #fslmaths \
-    #   ${antsM} \
-    #   -bin \
-    #   liberalMask.nii.gz
-
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
+
+    CLASSNUM=${antsPN}
 
     if [ "${SKULLSTRIP}" == TRUE ]
     then
-       MASK4ATROPOS=${antsMSS}_BrainExtractionMask_dilM2.nii.gz
-       CLASSNUM=4
+       MASK4ATROPOS=${antsMSS}_BrainExtractionMask_dilM${antsDF}.nii.gz
     else
        MASK4ATROPOS=${antsMSS}_BrainExtractionMask_dilM4.nii.gz
-       CLASSNUM=6
     fi
        
     # Run atropos
@@ -180,12 +115,26 @@
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
 
     # create the CSF and WM masks now.
+    # this is dependent on whether they use the SPM
+    # or the OASIS templates! 
     
     export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
     export FSLOUTPUTTYPE=NIFTI
-    fslmaths native_p3.nii.gz -add native_p4.nii.gz native_CSF.nii
-    cp native_p2.nii.gz native_WM.nii.gz
-    gunzip native_WM.nii.gz
+
+    # initialize the CSF
+    fslmaths native_p1.nii.gz -mul 0 native_CSF.nii
+    for iCSF in ${ANTSCSF}
+    do
+       fslmaths native_CSF.nii -add native_p${CSF}.nii.gz native_CSF.nii 
+    done
+
+    # initialize the WM
+    fslmaths native_p1.nii.gz -mul 0 native_WM.nii
+    for iWM in ${ANTSWM}
+    do
+       fslmaths native_WM.nii -add native_p${WM}.nii.gz native_WM.nii 
+    done
+
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
 
     # need to warp the native_p* to get into MNI space and specify a space-defining template (e.g. 2mm)

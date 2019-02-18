@@ -1,0 +1,9 @@
+
+              # Set the priors to use as the OASIS ones, and set the number
+	      # to be 6. Also set which ones are for WM and CSF
+
+		  ANTSPRIOR=${thisDir}/Templates/ANTS_OASIS_Priors
+                  ANTSPN=6
+		  ANTSCSF="1"
+		  ANTSWM="3"
+		  

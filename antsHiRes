@@ -15,18 +15,28 @@
 #
 #
 #                         Robert C. Welsh
-#                         Copyright 2005-2018
+#                         Copyright 2005-2019
 #
 # antsHiRes
+#
+#
+# 2019-02-18 - Works with ANTs 2.3.1
+#
+# 2019-02-18 - add ability to indicate the number of
+#              priors to use (-pn), overriding the defaults
+#              and to indicate the directory for the
+#              priors (-pO) is OASIS. And to indicate the
+#              dilation factor (-df) to use for the skull-stripped
+#              option. 
 #
 # # # # # # # # # # # # # # # # # #
 
 #
-# Main newSeg function.
+# Main antsHiRes function.
 #
 
-VERSION="1.0"
-VERSIONDATE="2018-02-12"
+VERSION="1.1"
+VERSIONDATE="2019-02-18"
 
 # Find out where the current command lives and execute some common code.
 
@@ -40,7 +50,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions=" a B D d E h M m n odt ss T t U w "
+allowedOptions=" a B D d df E h M m n pn pO odt ss T t U w "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart

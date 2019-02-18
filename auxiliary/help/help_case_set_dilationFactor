@@ -1,0 +1,3 @@
+    echo "    -df [#]              set the dilation factor for antsHiRes,"
+    echo "                         must be between 0 and 4."
+    echo 

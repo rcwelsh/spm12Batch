@@ -48,6 +48,11 @@ antsCalc4="100x100x50"
 
 SKULLSTRIP=FALSE
 ANTSTEMPLDIR=/home/Software/ANTS-2.3.1/Templates/MICCAI2012-Multi-Atlas-Challenge-Data
+ANTSPN=6
+ANTSDF=2
+
+ANTSWM="2"
+ANTSCSF="3 4"
 
 # Default datatype
 

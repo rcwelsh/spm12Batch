@@ -6,6 +6,9 @@
     echo "${helpComment} Skull Stripping          : ${SKULLSTRIP}"
     echo "${helpComment} Template Image           : ${TemplateImage}"
     echo "${helpComment} data type                : ${ANTSODT}"
+    echo "${helpComment} ANTs priors              : ${ANTSPRIOR}"
+    echo "${helpComment} ANTs # priors            : ${ANTSPN}"
+    echo "${helpComment} ANTs dilation factor     : ${ANTSDF}"
     echo "${helpComment} # Other images           : $iother"
     echo -n "${helpComment} Other Images             : ( "
     for (( io=0; io<$iother ; io++ ))

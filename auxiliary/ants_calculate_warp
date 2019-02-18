@@ -17,23 +17,25 @@
     # This codelet assumes that it's going to be operating
     # in the directory of the object to be warped.
     #
-    # antsM = input file
+    # antsM  = input file
     #         outputfile name is determined by the prepend
     #         option "outputName"
     #
-    # antsE = file extension for the source.
+    # antsE  = file extension for the source.
     #
-    # antsP = ants_prepend name for output transformation
+    # antsP  = ants_prepend name for output transformation
     #
-    # antsS = source directory, where to find the normalization
+    # antsS  = source directory, where to find the normalization
     #         rules (ants_1Warp.nii.gz and (ants_0GenericAffine.mat)
     #
-    # antsT = template file to base sampling on, this should
+    # antsT  = template file to base sampling on, this should
     #         match was was used in the antsHiRes command
     #
-    # antsN = ants output normalized image
+    # antsN  = ants output normalized image
     #
-    # antsI = inverse ants warped image
+    # antsI  = inverse ants warped image
+    #
+    # antsDF = dilation factor to use for the skull-stripped brain
     #
     # many assumed ANTS parameters being used.
     #
@@ -42,7 +44,7 @@
 
     # 2018-02-08
     # 2018-11-23 -- Added skull stripping option.
-
+    # 2019-02-18 -- Added option to indicate the dilation factor for the skull-stripp
 
     DATE=`date`
 
@@ -83,10 +85,22 @@
     # N4 Bias Field Correction
     echo "<---------- 02: N4 Bias Field Correction ---------->"
 
+    cp ${antsMSS}_BrainExtractionMask.nii.gz ${antsMSS}_BrainExtractionMask_dilM0.nii.gz
+
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM \
+       ${antsMSS}_BrainExtractionMask_dilM1.nii.gz
+
     fslmaths \
        ${antsMSS}_BrainExtractionMask.nii.gz \
        -dilM -dilM \
        ${antsMSS}_BrainExtractionMask_dilM2.nii.gz
+
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM -dilM -dilM \
+       ${antsMSS}_BrainExtractionMask_dilM3.nii.gz
 
     fslmaths \
        ${antsMSS}_BrainExtractionMask.nii.gz \
@@ -97,13 +111,12 @@
        ${antsM} \
        ${antsMSS}_BrainExtractionMask.nii.gz
 
-    fslcpgeom \
+    for DILF in 0 1 2 3 4
+    do 
+       fslcpgeom \
        ${antsM} \
-       ${antsMSS}_BrainExtractionMask_dilM2.nii.gz
-
-    fslcpgeom \
-       ${antsM} \
-       ${antsMSS}_BrainExtractionMask_dilM4.nii.gz
+       ${antsMSS}_BrainExtractionMask_dilM${DILF}.nii.gz
+    done
 
     # Note: adding a mask forces the N4 application within the mask
     # We want to do the estimation within the mask, but the application
@@ -131,7 +144,7 @@
     
     if [ "${SKULLSTRIP}" == TRUE ]
     then
-	fslmaths N4_${antsM}.nii.gz -mul ${antsMSS}_BrainExtractionMask_dilM2.nii.gz ss_N4_${antsM}.nii.gz
+	fslmaths N4_${antsM}.nii.gz -mul ${antsMSS}_BrainExtractionMask_dilM${antsDF}.nii.gz ss_N4_${antsM}.nii.gz
         antsMI=ss_N4_${antsM}.nii.gz
 	antsN=${antsP}ss_N4_${antsM}.nii.gz
 	antsI=${antsP}InverseWarpField_ss_N4_${antsM}.nii.gz
