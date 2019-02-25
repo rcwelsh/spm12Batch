@@ -23,7 +23,7 @@
     echo
     echo "${DATE} step ${STEPNOF} antsApplyTransforms * * * * * * * * * * * * * *"
     echo 
-    echo "    for i in {1..${CLASSNUM}}
+    echo "    for ((i=1;i<=${CLASSNUM};i++))
     echo "    do
     echo "       antsApplyTransforms \\ "
     echo "         -d 3 \\ "
@@ -37,7 +37,7 @@
     echo "    done"
     echo
 
-    for i in {1..${CLASSNUM}}
+    for ((i=1;i<=${CLASSNUM};i++))
     do
        antsApplyTransforms \
          -d 3 \
