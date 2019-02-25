@@ -19,7 +19,7 @@
 			  echo "Parameter $1 is not a valid number"
 			  echo "Buggering out"
 	                  . ${thisDir}/auxiliary/exit_w_removal
-                      if
+                      fi
 		      if [ ${ANTSDF} -lt 0 ] || [ ${ANTSDF} -gt 4 ]
 		      then
 			  echo -e "\a"
@@ -27,7 +27,8 @@
 			  echo "Buggering out"
 	                  . ${thisDir}/auxiliary/exit_w_removal
                       fi
-		  fi
+                      echo "Setting antsHiRes dilation factor to ${ANTSDF}"
+                  fi
 		  # 
 		  # Change back to success
 		  #

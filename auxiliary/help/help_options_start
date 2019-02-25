@@ -143,6 +143,9 @@
 	    "pO") 
 	        . ${thisDir}/auxiliary/help/help_case_set_priorsOASIS
 	        ;;
+	    "pOP") 
+	        . ${thisDir}/auxiliary/help/help_case_set_priorsOASISPlus
+	        ;;
             "q")
                 . ${thisDir}/auxiliary/help/help_case_qualitycheck
                 ;;

@@ -14,6 +14,8 @@
 
     DATE=`date`
 
+    CLASSNUM=${antsPN}
+
     # Apply registration
     DATE=`date`
     STEPNO=$(( ${STEPNO} + 1))
@@ -21,7 +23,7 @@
     echo
     echo "${DATE} step ${STEPNOF} antsApplyTransforms * * * * * * * * * * * * * *"
     echo 
-    echo "    for i in {1..6}
+    echo "    for i in {1..${CLASSNUM}}
     echo "    do
     echo "       antsApplyTransforms \\ "
     echo "         -d 3 \\ "
@@ -35,7 +37,7 @@
     echo "    done"
     echo
 
-    for i in {1..6}
+    for i in {1..${CLASSNUM}}
     do
        antsApplyTransforms \
          -d 3 \
@@ -51,8 +53,6 @@
     export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
     export FSLOUTPUTTYPE=NIFTI_GZ
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
-
-    CLASSNUM=${antsPN}
 
     if [ "${SKULLSTRIP}" == TRUE ]
     then

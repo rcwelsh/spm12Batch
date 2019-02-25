@@ -27,7 +27,10 @@
 #              and to indicate the directory for the
 #              priors (-pO) is OASIS. And to indicate the
 #              dilation factor (-df) to use for the skull-stripped
-#              option. 
+#              option.
+#
+# 2019-02-25 - add a 7th class with OASIS, OASIS_Plus, which is
+#              non brain.
 #
 # # # # # # # # # # # # # # # # # #
 
@@ -50,7 +53,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions=" a B D d df E h M m n pn pO odt ss T t U w "
+allowedOptions=" a B D d df E h M m n pn pO pOP odt ss T t U w "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart

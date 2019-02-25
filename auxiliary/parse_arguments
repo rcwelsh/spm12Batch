@@ -320,6 +320,13 @@ do
 	        "pO")
 		    . ${thisDir}/auxiliary/setOASIS
 		    ;;
+              # case_set_priorsOASIS_Plus
+	      #
+	      # indicate the priors to be as OASIS
+	      #
+	        "pOP")
+		    . ${thisDir}/auxiliary/setOASISPlus
+		    ;;
               # case_qualitycheck
 	      #
 	      #
