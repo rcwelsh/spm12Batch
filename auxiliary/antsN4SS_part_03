@@ -1,0 +1,23 @@
+
+#
+# now build the ants command
+#
+# need to define the source directory
+#
+
+echo "    #"                                               >> ${FULLSCRIPTNAME}.sh
+echo "    # setup the source directory"                    >> ${FULLSCRIPTNAME}.sh
+echo "    #"                                               >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    antsS=${UMBatchMaster}/${SUBJDIR}/\${SUBJECT}/${fmriPATH}/${coregPATH}" >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    cd \${antsS}"                                    >> ${FULLSCRIPTNAME}.sh
+
+cat ${thisDir}/auxiliary/ants_N4_ss                        >> ${FULLSCRIPTNAME}.sh 
+
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh
+echo "    if [ \${ANTS_RETURN_CODE} != 0 ]"                >> ${FULLSCRIPTNAME}.sh
+echo "    then"                                            >> ${FULLSCRIPTNAME}.sh
+echo "       MATLAB_RETURN_CODE=\${ANTS_RETURN_CODE}"      >> ${FULLSCRIPTNAME}.sh
+echo "    fi"                                              >> ${FULLSCRIPTNAME}.sh
+echo ""                                                    >> ${FULLSCRIPTNAME}.sh

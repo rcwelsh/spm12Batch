@@ -2,44 +2,34 @@
 
 # # # # # # # # # # # # # # # # # # 
 #
-# A command to make it easier on the user to warp the 
-# hires to the standard template using ANTS
+# A command to make it easier on the user to skull strip
+# and N4 the hires  using ANTS
 #
 # This command will build a script to run and will also 
 # run the script in background.
 #
-# This was written with ANTS 2.2.0 as the testing
+# This was written with ANTS 2.3.1 as the testing
 # context.
 #
-#   e.g.    antsHiRes
+#   e.g.    antsN4SS
 #
 #
 #                         Robert C. Welsh
 #                         Copyright 2005-2019
 #
-# antsHiRes
+# antsN4SS
 #
 #
-# 2019-02-18 - Works with ANTs 2.3.1
 #
-# 2019-02-18 - add ability to indicate the number of
-#              priors to use (-pn), overriding the defaults
-#              and to indicate the directory for the
-#              priors (-pO) is OASIS. And to indicate the
-#              dilation factor (-df) to use for the skull-stripped
-#              option.
-#
-# 2019-02-25 - add a 7th class with OASIS, OASIS_Plus, which is
-#              non brain.
 #
 # # # # # # # # # # # # # # # # # #
 
 #
-# Main antsHiRes function.
+# Main antsN4SS function.
 #
 
-VERSION="1.1"
-VERSIONDATE="2019-02-18"
+VERSION="1.0"
+VERSIONDATE="2019-03-06"
 
 # Find out where the current command lives and execute some common code.
 
@@ -53,7 +43,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions=" a B D d df E h M m n pn pO pOP odt ss T t U w "
+allowedOptions=" a B D d h M m odt t U w "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart
@@ -64,7 +54,7 @@ allowedOptions=" a B D d df E h M m n pn pO pOP odt ss T t U w "
 # This is common in-line code for all spm12Batch script to make sure arguments were passed
 . ${thisDir}/auxiliary/commonCode_checkIfArgsPassed
 
-# This is common code for ANTs
+# This is the common in-line code for the warping steps.
 . ${thisDir}/auxiliary/commonCode_ANTS_02
 
 #
@@ -175,8 +165,6 @@ echo
 . ${thisDir}/auxiliary/antsHiRes_part_02
 
 # Now build the shell script command that will get launched into the background.
-
-. ${thisDir}/auxiliary/antsPrepOtherImages
 
 . ${thisDir}/auxiliary/startBashSubjectLoop
 

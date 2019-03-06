@@ -1,0 +1,136 @@
+    #
+    # ants_N2_ss
+    # Code to be copied into the main script
+    #
+    # should be done with a cat ... >> ${FULLSCRIPTNAME}.sh 
+    #
+    # built by antsN4ss spm12Batch
+    #
+    # 2018-02-08
+    # Core codelet by Vincent Koppelmans
+    # modified by Robert Welsh
+    # Salt Lake City, UT
+    #
+    #
+    # Must supply the following things
+    #
+    # This codelet assumes that it's going to be operating
+    # in the directory of the object to be warped.
+    #
+    # antsM  = input file
+    #         outputfile name is determined by the prepend
+    #         option "outputName"
+    #
+    # antsE  = file extension for the source.
+    #
+    # antsS  = source directory, where to find the normalization
+    #         rules (ants_1Warp.nii.gz and (ants_0GenericAffine.mat)
+    #
+    # antsI  = inverse ants warped image
+    #
+    # many assumed ANTS parameters being used.
+    #
+
+    # This will inherit outputName from spm12Batch environment
+
+    DATE=`date`
+
+    # Setup to use .nii.gz
+    
+    export FSLOUTPUTTYPETMP=${FSLOUTPUTTYPE}
+    export FSLOUTPUTTYPE=NIFTI_GZ
+
+    # We will skull-strip no matter what.
+
+    DATE=`date`
+
+    echo
+    echo "${DATE} Starting up ANTS for ${antsS}, skullstripping ${antsM}"
+    echo
+
+    # Skull Strip
+
+    antsMSS=ss_${antsM}
+    
+    echo "<---------- 01: Skull Strip ---------->"
+    antsBrainExtraction.sh \
+       -d 3 \
+       -a ${antsM}${antsE} \
+       -e ${ANTSTEMPLDIR}/T_template0.nii.gz \
+       -m ${ANTSTEMPLDIR}/T_template0_BrainCerebellumProbabilityMask.nii.gz \
+       -f ${ANTSTEMPLDIR}/T_template0_BrainCerebellumRegistrationMask.nii.gz \
+       -o ${antsMSS}_ \
+       -k 0
+
+    # N4 Bias Field Correction
+    echo "<---------- 02: N4 Bias Field Correction ---------->"
+
+    cp ${antsMSS}_BrainExtractionMask.nii.gz ${antsMSS}_BrainExtractionMask_dilM0.nii.gz
+
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM \
+       ${antsMSS}_BrainExtractionMask_dilM1.nii.gz
+
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM -dilM \
+       ${antsMSS}_BrainExtractionMask_dilM2.nii.gz
+
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM -dilM -dilM \
+       ${antsMSS}_BrainExtractionMask_dilM3.nii.gz
+
+    fslmaths \
+       ${antsMSS}_BrainExtractionMask.nii.gz \
+       -dilM -dilM -dilM -dilM \
+       ${antsMSS}_BrainExtractionMask_dilM4.nii.gz
+
+    fslcpgeom \
+       ${antsM} \
+       ${antsMSS}_BrainExtractionMask.nii.gz
+
+    for DILF in 0 1 2 3 4
+    do 
+       fslcpgeom \
+       ${antsM} \
+       ${antsMSS}_BrainExtractionMask_dilM${DILF}.nii.gz
+    done
+
+    # Note: adding a mask forces the N4 application within the mask
+    # We want to do the estimation within the mask, but the application
+    # on the whole image. So we use -w but not -x.
+    N4BiasFieldCorrection \
+       -d 3 \
+       -i ${antsM}${antsE} \
+       -w ${antsMSS}_BrainExtractionMask_dilM4.nii.gz \
+       -s 2 \
+       -c [125x100x75x50] \
+       -o [N4_${antsM}.nii.gz,BF_${antsM}.nii.gz] \
+       -v 1
+
+    # Fix the geometry
+    
+    fslcpgeom \
+       ${antsM} \
+       N4_${antsM}.nii.gz
+
+    fslcpgeom \
+       ${antsM} \
+       BF_${antsM}.nii.gz
+
+    ANTS_RETURN_CODE=$? 
+
+    DATE=`date`
+
+    echo
+    echo "${DATE} Finished up ANTS N4 for ${antsS}, with return code ${ANTS_RETURN_CODE}"
+    echo
+
+    export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}
+      
+    #
+    # done with codelet
+    #
+

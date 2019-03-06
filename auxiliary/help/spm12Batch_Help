@@ -52,6 +52,12 @@ echo "coregOverlay    A wrapper to the coregistration routine in SPM12."
 echo
 echo "coregHiRes      A wrapper to the coregistration routine in SPM12."
 echo
+echo "antsHiRes       A wrapper to ANTs functionality for doing warping of HIRES."
+echo
+echo "antsfMRI        A wrapper to ANTs functionality for warping fMRI data."
+echo 
+echo "antsN4SS        A wrapper to ANTs functionality to N4 and skull strip HIRES."
+echo
 echo "cat12HiRes      NOT YET IMPLEMENTED A wrapper to do MNI warping of hi-resolution image"
 echo "                to MNI space using the cat12 toolbox add-on for SPM12."
 echo

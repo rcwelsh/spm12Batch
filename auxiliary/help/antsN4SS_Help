@@ -1,0 +1,22 @@
+    echo
+    echo " A command line command to drive batch processing to antsHiRes the 'HIRES' image."
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo 
+    echo " e.g. "
+    echo
+    echo "   To process the image 'ht1spgr.nii' through ANTs SS and N4"
+    echo "   image do:"
+    echo 
+    echo "     ${thisCommand} 050126zz"
+    echo 
+    echo "      e.g. ${thisCommand} 050126zz -a func/coReg -w func/coReg/ANTsN4"
+    echo
+    
+    . ${thisDir}/auxiliary/help/help_matlabOptions
+
+    echo " Current command default configuration is:"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options

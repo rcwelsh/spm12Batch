@@ -10,5 +10,6 @@ erodeMask
 warpSeg
 smoothfMRI
 antsHiRes
+antsN4SS
 antsfMRI
 fixSQforms
