@@ -170,7 +170,7 @@ echo
 
 # Add the ANTS code to the shell script
 
-. ${thisDir}/auxiliary/antsHiRes_part_03
+. ${thisDir}/auxiliary/antsN4SS_part_03
 
 . ${thisDir}/auxiliary/endBashSubjectLoop
 
