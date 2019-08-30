@@ -13,6 +13,9 @@
 % Added a call to "validateSandBoxMove" due to an error in "cp" as it MATLAB tries to use "cp -p" with their
 % copy to preserve the flags and on some systems the chflags error is generated but the copy succeeded.
 %
+% 2019-08-20 
+% Fix for removing '.*.' from how volume extension variable is created which this code depended on that.
+% 
 % - - - - - - - - - - - - - - - - - - - -
 
 function [CS SandBoxPID Images2Write] = moveToSandBox(sourceDir,sourceVolume,SandBoxPID,sourceExtension)
@@ -20,12 +23,12 @@ function [CS SandBoxPID Images2Write] = moveToSandBox(sourceDir,sourceVolume,San
 % Check to see if sourceExtension was specified
 
 if exist('sourceExtension') == 0
-    sourceExtension = '.*.nii';
+    sourceExtension = 'nii';
 end
 
 % Default is to use what we have on the source directory
 
-Images2Write = spm_select('ExtFPList',sourceDir,['^' sourceVolume sourceExtension],inf);
+Images2Write = spm_select('ExtFPList',sourceDir,['^' sourceVolume '.*.' sourceExtension],inf);
 CS           = 0;
 
 % Does the sandbox even exist?
@@ -50,7 +53,7 @@ if exist(SandBoxPID,'dir')
         % Empty?
         if CSmyCheck
             % SandBox is empty and clean.
-            FILESTOMOVE=dir([sourceDir '/' sourceVolume sourceExtension(2:end)]);
+            FILESTOMOVE=dir([sourceDir '/' sourceVolume '*.' sourceExtension]);
             %
             % Big assumption is one nifti file per directory
             %
@@ -69,7 +72,7 @@ if exist(SandBoxPID,'dir')
                 xtoc=toc;
                 fprintf('; It took %f seconds\n',xtoc);
                 if ( CS && CSmyCheck ) || ( ~CS && CSmyCheck && strfind(CM,'chflags') && strfind(computer,'MAC'))
-                    Images2Write = spm_select('ExtFPList',SandBoxPID,['^' sourceVolume sourceExtension],inf);
+                    Images2Write = spm_select('ExtFPList',SandBoxPID,['^' sourceVolume '.*.' sourceExtension],inf);
                     % Log in the process log that we are using the sand box.
                     UMBatchLogProcess(sourceDir,sprintf('Using sandbox : %s to work on file %s',SandBoxPID,FILESTOMOVE(1).name));
                     % Need to now use my status.
