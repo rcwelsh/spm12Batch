@@ -136,8 +136,9 @@ then
     then
         # Use the latest MATLAB we can find, but this should be static for stability.
         # MATLAB VERSIONs :  MATLAB_R2011b.app MATLAB_R2014b.app MATLAB_R2015b.app
-        MATLAB=/Applications/MATLAB_R2016b.app/bin/matlab
-        MATLAB=/Applications/MATLAB_R2017b.app/bin/matlab
+        #MATLAB=/Applications/MATLAB_R2016b.app/bin/matlab
+        #MATLAB=/Applications/MATLAB_R2017b.app/bin/matlab
+        MATLAB=/Applications/MATLAB_R2019a.app/bin/matlab    # added 2020-06-19
     else
         MATLAB=`which matlab`
     fi

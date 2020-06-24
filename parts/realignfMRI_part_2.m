@@ -29,6 +29,19 @@ for iSub = 1:length(UMBatchSubjs)
   if UMCheckFailure(results)
     exit(abs(results))
   end
+  %
+  % Plot the movement parameters, added 2020-06-17/23 - RCWelsh
+  % 
+  for iRun = 1:length(UMImgDIRS{iSub})
+    sessionName            = UMBatchSubjs{iSub};
+    [realignDirectory,~,~] = fileparts(Images2Realign{iRun}{1});
+    runName                = regexp(UMImgDIRS{iSub}{iRun},filesep,'split');
+    runName                = runName{end};
+    [results]              = UMBatchPlotSPMMoveParam(sessionName,realignDirectory,UMFuncDir,runName,UMVolumeWild);
+    if results ~= 0
+      fprintf('Error in plotting results for %s %s %s %s %s\n',sessionName,realignDirectory,UMFuncDir,runName,UMVolumeWild);
+    end    
+  end  
 end
 
 fprintf('\nAll done with realigning fMRI images images.\n');
