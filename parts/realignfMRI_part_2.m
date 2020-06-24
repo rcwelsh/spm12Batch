@@ -34,13 +34,16 @@ for iSub = 1:length(UMBatchSubjs)
   % 
   for iRun = 1:length(UMImgDIRS{iSub})
     sessionName            = UMBatchSubjs{iSub};
-    [realignDirectory,~,~] = fileparts(Images2Realign{iRun}{1});
+    [realignDirectory,~,~] = fileparts(Images2Write{iRun}{1});
     runName                = regexp(UMImgDIRS{iSub}{iRun},filesep,'split');
     runName                = runName{end};
     [results]              = UMBatchPlotSPMMoveParam(sessionName,realignDirectory,UMFuncDir,runName,UMVolumeWild);
     if results ~= 0
       fprintf('Error in plotting results for %s %s %s %s %s\n',sessionName,realignDirectory,UMFuncDir,runName,UMVolumeWild);
+    else
+      fprintf('Plotted movement parameters for %s %s %s %s %s\n',sessionName,realignDirectory,UMFuncDir,runName,UMVolumeWild);
     end    
+    
   end  
 end
 
