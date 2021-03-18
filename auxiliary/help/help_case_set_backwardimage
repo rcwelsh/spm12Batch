@@ -1,0 +1,3 @@
+    echo "    -bi name             set the name of the field map backward image,"
+    echo "                         default \"${backwardImage}\""
+    echo 

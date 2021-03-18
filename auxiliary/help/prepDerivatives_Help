@@ -1,0 +1,18 @@
+    echo
+    echo " A command line command to copy items to the derivatives folder."
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo 
+    echo " e.g. "
+    echo
+    echo "   To copy the anatomy directory from the Subjects to the SubjectsDerivative folder:"
+    echo
+    echo "     ${thisCommand} -inc \"anatomy\" 050126zz "
+    echo
+    echo
+
+    echo " Current command default configuration is:"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options

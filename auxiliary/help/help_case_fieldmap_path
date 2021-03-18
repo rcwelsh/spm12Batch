@@ -1,0 +1,3 @@
+    echo "    -fm sub-directory    set relative path to the fieldmap directory,"
+    echo "                         default \"${fieldMapPath}\""
+    echo 

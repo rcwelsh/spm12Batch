@@ -13,3 +13,5 @@ antsHiRes
 antsN4SS
 antsfMRI
 fixSQforms
+distortionCorrect
+prepDerivatives

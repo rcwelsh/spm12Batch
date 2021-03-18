@@ -1,0 +1,3 @@
+    echo "    -fi name             set the name of the field map forward image,"
+    echo "                         default \"${forwardImage}\""
+    echo 

@@ -1,0 +1,12 @@
+#
+# Some common code the ANTS based commands.
+#
+
+if [ ! -z "${commandOptionsFile}" ]
+then
+    cp ${commandOptionsDir}/${commandOptionsFile} ${FULLSCRIPTNAME}_options.sh
+fi
+
+echo "echo "                                                          >> ${FULLSCRIPTNAME}.sh
+echo "echo \"Starting command '${thisCommand}' at \${STARTTIME}\" "   >> ${FULLSCRIPTNAME}.sh
+echo "echo "                                                          >> ${FULLSCRIPTNAME}.sh

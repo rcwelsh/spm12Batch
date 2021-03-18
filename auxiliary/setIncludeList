@@ -1,0 +1,19 @@
+                  #
+                  # Set the error code to bad parameter.
+                  #
+                  SPM12BATCH_ERROR_CODE=64
+                  #
+                  shift
+                  let argn++
+                  if (( $argn >= $args ))
+                  then
+                      echo "Missing the object inclusion list"
+                      . ${thisDir}/auxiliary/exit_w_removal
+                  else
+ 		      prepCopyList="$1"
+		      copyAllFlag=false
+                  fi
+                  #
+                  # Change back to success
+                  #
+                  SPM12BATCH_ERROR_CODE=0

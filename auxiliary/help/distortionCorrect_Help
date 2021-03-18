@@ -1,0 +1,33 @@
+    echo
+    echo " A command line command to drive batch processing for distortion correction."
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo 
+    echo " e.g. "
+    echo
+    echo "   To process BOLD run files and use ANIMA to perform distortion correction"
+    echo "   on the files using a 'forward.nii' and 'backward.nii' file to do the fieldMap"
+    echo "   correction you would do the following:"
+    echo
+    echo "     ${thisCommand} 050126zz"
+    echo
+    echo " If you field map files are called something different, then you will need"
+    echo " to specify what they are called. Sometimes they have the PA or AP in their"
+    echo " name. It is best to verify which corresponds to the BOLD run file, and that"
+    echo " will be the forward direction, while the one that has EPI distortion that is"
+    echo " opposite is to be called the backward direction."
+    echo
+    echo " THIS CODE DOES NOT CURRENTLY HAVE A WAY TO VERIFY WHAT YOU CALL 'forward'"
+    echo " AND WHAT YOU CALL 'backward'"
+    echo
+    echo " SPECIAL NOTE FOR THIS COMMAND:"
+    echo
+    echo "       You can specify a different output directory as to put the"
+    echo "       resulting files into a new directory tree."    
+    echo
+
+    echo " Current command default configuration is:"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options

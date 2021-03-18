@@ -1,0 +1,3 @@
+# Initialize variables
+
+. ${thisDir}/auxiliary/initialization_all

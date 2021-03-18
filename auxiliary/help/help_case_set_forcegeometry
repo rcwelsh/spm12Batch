@@ -1,0 +1,3 @@
+    echo "    -fg                  turn on force geometry for distortion correction,"
+    echo "                         default \"${forceGeometry}\""
+    echo 

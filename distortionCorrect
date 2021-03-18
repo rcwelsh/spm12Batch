@@ -1,0 +1,200 @@
+#!/bin/bash
+
+# # # # # # # # # # # # # # # # # # 
+#
+# This code will use anima to do distortion
+# correction of data.
+#
+# This code prefers to have a target directory that will
+# be where derivatsive data live to keep separated
+# from the orignal Subjects/ directory
+#
+#
+#                         Robert C. Welsh
+#                         Copyright 2005-2021
+#
+# distortionCorrection
+#
+# This will correct all data associated with a give task
+# assuming there is a fieldMap directory in that task.
+#
+# Expected is:
+#
+#        [task]/
+#            fieldMap/
+#                forward.nii
+#                backward.nii
+#            run_01/
+#                run_01.nii
+#                run_02.nii
+#
+# This script utilized anima for the correction
+#
+# # # # # # # # # # # # # # # # # #
+
+#
+# Main distortionCorrect function.
+#
+
+VERSION="1.0"
+VERSIONDATE="2021-03-14"
+
+# Find out where the current command lives and execute some common code.
+
+theFullCommand="$0 $*"
+execDIR=`pwd`
+
+# Find out where the current command lives and execute some common code.
+
+theCommand=`which $0`
+thisDir=`dirname $theCommand`
+
+thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
+
+allowedOptions=" B bi f fg fi fm M MO n t U v "
+
+# This piece of code all of the spm12Batch scripts will use
+. ${thisDir}/auxiliary/commonCode_AllScriptsStart
+
+# This is the common in-line code for the distort
+. ${thisDir}/auxiliary/commonCode_Distort_01
+
+# This is common in-line code for all spm12Batch script to make sure arguments were passed
+. ${thisDir}/auxiliary/commonCode_checkIfArgsPassed
+
+# This is common code for distortion_correctionn
+#. ${thisDir}/auxiliary/commonCode_Distort_02
+
+#
+# The actual function.
+#
+
+. ${thisDir}/auxiliary/parse_arguments
+
+# Small trick to remove trailing / as needed. and remove any double-/
+
+SUBJDIR=`dirname ${SUBJDIR}/nonsense.txt| sed -e 's/\/\//\//g'`
+SUBJDIROUT=`dirname ${SUBJDIROUT}/nonsense.txt| sed -e 's/\/\//\//g'`
+
+#
+
+. ${thisDir}/auxiliary/superDebugStatus
+
+#
+# Ok - let's start displaying things back to the terminal
+#
+
+. ${thisDir}/auxiliary/shellScriptInfo
+
+#
+# Prepare to write the script.
+#
+
+# Makes sure they specified some subjects.
+. ${thisDir}/auxiliary/checkInputForSubjects
+
+# Write out debug status
+. ${thisDir}/auxiliary/debugStatus
+
+# Ok, lets do the business.
+
+# Print out the list of subjects that we operate upon.
+. ${thisDir}/auxiliary/printSubjectsList
+
+# Now start building the automatic scripts.
+
+#
+# the following environmental variables are from spm12Batch_Global
+#
+#    HOSTCOMPUTER     - name of the computer.
+#    SCRIPTNAME       - name of the scripts to write.
+#    UMBatchMatcher   - present working directory.
+#    FULLSCRIPTNAME   - full path and name of scripts to write.
+# 
+
+# Check that all data is there to proceed.
+
+# Now build the list of directories for each subject.
+
+declare -i is
+declare -i ii
+
+curDIR=`pwd`
+
+# Prepare the directory where the work is to take place.
+
+echo "    4) checking images before building command"
+echo
+BAD_DATA=0
+BAD_SESSIONS=
+
+for (( is=1 ; is<=$nSubjects ; is++ ))
+do
+    if [ -d ${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/ ]
+    then
+	cd ${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/
+	# Look for the field map images.
+	OK_FORWARD=`ls ${fmriPATH}/${fieldMapPath}/${forwardImage} 2> /dev/null | wc -l | awk '{print $1}'`
+	OK_BACKWARD=`ls ${fmriPATH}/${fieldMapPath}/${backwardImage} 2> /dev/null | wc -l | awk '{print $1}'`
+	# Look for how many run images
+	NRUNS=`ls ${fmriPATH}/run*/${volumeWILD}*.nii 2> /dev/null | wc -l | awk '{print $1}'`
+	if [ ${NRUNS} -eq 0 ] || [ ${OK_FORWARD} -ne 1 ] || [ ${OK_BACKWARD} -ne 1 ]
+	then
+	    BAD_DATA=1
+	    BAD_SESSION="${subjects[$is]} ${BAD_SESSIONS}"
+	    echo "       Bad condition for ${subjects[$is]} runs(${NRUNS}) forward(${OK_FORWARD}) backward(${OK_BACKWARD}) "
+	else
+	    echo "       Good condition for ${subjects[$is]}"
+	fi
+    fi
+done
+
+cd ${curDIR}
+
+if [ ${BAD_DATA} -ne 0 ]
+then
+    echo
+    echo Found issues with the data .. prefering not to run.
+    echo
+    exit 1
+fi
+
+echo
+
+. ${thisDir}/auxiliary/distortCorrect_part_01
+
+# Common star to all shell scripts
+
+. ${thisDir}/auxiliary/buildMatlabScripts_01
+
+. ${thisDir}/auxiliary/shellScriptStart
+
+#. ${thisDir}/auxiliary/distortCorrectScript
+
+
+echo "    5) building shell script"
+echo
+
+# Now put in some varibles needed
+
+. ${thisDir}/auxiliary/distortCorrect_part_02
+
+. ${thisDir}/auxiliary/startBashSubjectLoop
+
+# Add the distortionn code to the shell script
+
+cat ${thisDir}/auxiliary/distortCorrect_part_03 >> ${FULLSCRIPTNAME}.sh
+
+. ${thisDir}/auxiliary/endBashSubjectLoop
+
+# Finalize the shell script.
+
+. ${thisDir}/auxiliary/shellScriptFinalize
+
+# Now launch into the background if desired.
+
+. ${thisDir}/auxiliary/shellScriptLaunch
+
+#
+# all done.
+#

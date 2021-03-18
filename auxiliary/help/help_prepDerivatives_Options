@@ -1,0 +1,7 @@
+    echo "${helpComment} include all               : ${copyAllFlag}"
+    echo "${helpComment} include list              : ${prepCopyList}"
+    echo "${helpComment} subject output directory  : ${SUBJDIROUT}"
+    echo "${helpComment}"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_options_end

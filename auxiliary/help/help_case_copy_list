@@ -1,0 +1,4 @@
+    echo "    -inc \"list\"          list of things to copy to the derivatives folder,"
+    echo "                         default is empty."
+    echo "                         Mutually exclusive with -all flag."
+    echo 

@@ -1,0 +1,3 @@
+    echo "    -MO SUBJECTMASTER    set the directory to write subjects, "
+    echo "                         default is \"${SUBJDIROUT}\""
+    echo 

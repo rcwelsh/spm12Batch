@@ -18,12 +18,13 @@
 	echo " This script is expecting to find the necessary components in the"
 	echo " directory scruture of :"
 	echo
-	echo "     yymmddLF/                           (subject directory)"
+	echo "     [session]/                           (subject directory)"
 	echo "            anatomy/"
 	echo "            func/"
-	echo "               coReg/"
-        echo "               Physio/"
-	echo "               run_XX/"
+	echo "               [task]/"
+	echo "                  coReg/"
+        echo "                  fieldMap/"
+	echo "                  run_XX/"
 	echo
     fi
     echo " Usage: "
@@ -59,11 +60,17 @@
 	    "a") 
 	        . ${thisDir}/auxiliary/help/help_case_anatomy_path
 	        ;;
+	    "all") 
+	        . ${thisDir}/auxiliary/help/help_case_copy_all
+	        ;;
 	    "B")
                 . ${thisDir}/auxiliary/help/help_case_no_background_job
 		;;
 	    "b") 
    	        . ${thisDir}/auxiliary/help/help_case_bet_best_flag
+	        ;;
+	    "bi") 
+   	        . ${thisDir}/auxiliary/help/help_case_set_backwardimage
 	        ;;
 	    "D") 
 	        . ${thisDir}/auxiliary/help/help_case_super_debug_flag
@@ -86,6 +93,15 @@
 	    "f") 
 	        . ${thisDir}/auxiliary/help/help_case_functional_path
 	        ;;
+	    "fg") 
+	        . ${thisDir}/auxiliary/help/help_case_set_forcegeometry
+	        ;;
+	    "fi") 
+	        . ${thisDir}/auxiliary/help/help_case_set_forwardimage
+	        ;;
+	    "fm") 
+	        . ${thisDir}/auxiliary/help/help_case_fieldmap_path
+	        ;;
 	    "G") 
 	        . ${thisDir}/auxiliary/help/help_case_TGLOBAL
 	        ;;
@@ -104,6 +120,9 @@
 	    "i") 
 	        . ${thisDir}/auxiliary/help/help_case_set_run
 	        ;;
+	    "inc") 
+	        . ${thisDir}/auxiliary/help/help_case_copy_list
+	        ;;
             "L") 
                 . ${thisDir}/auxiliary/help/help_case_erosion_flag
                 ;;
@@ -112,6 +131,9 @@
                 ;;
 	    "M") 
 	        . ${thisDir}/auxiliary/help/help_case_subject_dir
+	        ;;
+	    "MO") 
+	        . ${thisDir}/auxiliary/help/help_case_subject_dir_out
 	        ;;
 	    "m") 
 	        . ${thisDir}/auxiliary/help/help_case_flirt_options

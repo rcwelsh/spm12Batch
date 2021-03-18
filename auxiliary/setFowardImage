@@ -1,0 +1,6 @@
+	         ERORORMESSAGE="For subject : ${subjects[$is]} returned no result."
+	          . ${thisDir}/auxiliary/setGenericFileName
+		  forwardImageName=$FILENAME
+		  forwardImageExt=$FILEEXT
+		  forwardImage=${forwardImageName}.${forwardImageExt}
+		  echo called forward

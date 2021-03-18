@@ -1,0 +1,23 @@
+#
+# variables needed for the copy to derivatives
+#
+
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "# variables needed for running anima"                      >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "UMBatchMaster=${UMBatchMaster}"                            >> ${FULLSCRIPTNAME}.sh
+echo "thisDir=${thisDir}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "copyAllFlag=${copyAllFlag}"                                >> ${FULLSCRIPTNAME}.sh
+echo "prepCopyList=\"${prepCopyList}\""                          >> ${FULLSCRIPTNAME}.sh
+echo "SUBJDIROUT=${SUBJDIROUT}"                                  >> ${FULLSCRIPTNAME}.sh
+echo "SUBJDIR=${SUBJDIR}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "FULLSCRIPTNAME=${FULLSCRIPTNAME}"                          >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "MATLAB_RETURN_CODE=0"                                      >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+
+#
+#
+#
+

@@ -7,14 +7,13 @@
 		  let argn++
 		  if (( $argn >= $args ))
 		      then
-		      echo "Missing parameter for subject directory."
+		      echo "Missing parameter for subject output directory."
 	              . ${thisDir}/auxiliary/exit_w_removal
 		  else
-		      SUBJDIR=$1
-		      if [ ! -d "${SUBJDIR}" ]
+		      SUBJDIROUT=$1
+		      if [ ! -d "${SUBJDIROUT}" ]
 			  then
-			  echo "The master subject directory that you have specified does not exist."
-	                  . ${thisDir}/auxiliary/exit_w_removal
+			  echo "The output subject directory that you have specified does not exist, but will be created as needed."
                       fi
 		  fi
 		  # 

@@ -1,0 +1,5 @@
+	         ERORORMESSAGE="For subject : ${subjects[$is]} returned no result."
+	          . ${thisDir}/auxiliary/setGenericFileName
+		  backwardImageName=$FILENAME
+		  backwardImageExt=$FILEEXT
+		  backwardImage=${backwardImageName}${backwardImageExt}

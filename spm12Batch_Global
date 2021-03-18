@@ -1,12 +1,13 @@
 #
 # Copyright Robert C. Welsh, Ann Arbor MI 2005-2016
 # 	    	      	     Salt Lake City, UT, 2017
+#
 # No warranty or guarantee made. USE AT OWN RISK.
 #
 # To make this work at your site you need to change the 
 # definition of "topDIR" below. Point to the parent directory
 # of the spm12 and spm12Batch directories. In our local installation
-# at the University of Michigan the directories "spm12" and "spm12Batch" and "spm12_patch"
+# the directories "spm12" and "spm12Batch" and "spm12_patch"
 # live side-by-side under the same parent. If you wish something differnt 
 # than that then you will need "bash" knowledge greater than novice.
 #
@@ -16,10 +17,12 @@
 #  topDIR
 #  LOCALOWNER
 #  MATLAB
-#  TemplateImageFile      (we have our own are the University of Michigan)
+#  TemplateImageFile      (we have our own)
 #  MAILRECPT
 #
-
+#
+# YOU NEED TO MAKE SURE TO HAVE ANTs and ANIMA installed and in your path
+#
 # Using standard error exit codes as shown in
 # https://www.freebsd.org/cgi/man.cgi?query=sysexits&apropos=0&sektion=0&manpath=FreeBSD%204.3-RELEASE&format=html
 #
@@ -35,6 +38,8 @@
 
 COPYRIGHTENDYEAR=`date +%Y`
 COPYRIGHT="Copyright Robert C. Welsh, 2005-${COPYRIGHTENDYEAR}, Version"
+
+# There can be a recursive call accidentally, so don't allow.
 
 if [ -z "${SPM12BATCHGLOBAL_CALLED}" ]
 then
@@ -55,6 +60,8 @@ then
 
     curdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     topDIR="$( cd $curdir/.. && pwd )"
+
+# ----------VERY CRUCIAL TO DEFINE THESE CORRECTLY
 
 # You must point to SPM12 !!!
     
@@ -135,10 +142,7 @@ then
     if [ "${OSTYPE}" == "Darwin" ]
     then
         # Use the latest MATLAB we can find, but this should be static for stability.
-        # MATLAB VERSIONs :  MATLAB_R2011b.app MATLAB_R2014b.app MATLAB_R2015b.app
-        #MATLAB=/Applications/MATLAB_R2016b.app/bin/matlab
-        #MATLAB=/Applications/MATLAB_R2017b.app/bin/matlab
-        MATLAB=/Applications/MATLAB_R2019a.app/bin/matlab    # added 2020-06-19
+        MATLAB=/Applications/MATLAB_R2020b.app/bin/matlab    # added 2020-03-12
     else
         MATLAB=`which matlab`
     fi
@@ -230,7 +234,7 @@ then
 # the nanosecond timing and then take the first two (most significan digits)
 
 # On MAC OS X we just have to suck it up and hope there are no
-# clashes of file names. In genearl it shoudlnt' happen as
+# clashes of file names. In general it shoudl not happen as
 # the script builing has a forced delay of 1 second in it.
 
 # For MAC OS X we just throw a 3-digit random number on it.
@@ -252,7 +256,8 @@ then
     fi
     
     HOSTCOMPUTER=`echo $HOSTNAME | awk -F. '{print $1}' | sed 's/-/_/g'`
-    
+
+    # grab part of host name.
     if (( ${#HOSTCOMPUTER} > 8 ))
     then
 	HOSTCOMPUTER=${HOSTCOMPUTER:0:8}

@@ -1,0 +1,27 @@
+#
+# variables needed for ANIMA
+#
+
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "# variables needed for running anima"                      >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "UMBatchMaster=${UMBatchMaster}"                            >> ${FULLSCRIPTNAME}.sh
+echo "thisDir=${thisDir}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "forwardImage=${forwardImage}"                              >> ${FULLSCRIPTNAME}.sh
+echo "backwardImage=${backwardImage}"                            >> ${FULLSCRIPTNAME}.sh
+echo "forceGeometry=${forceGeometry}"                            >> ${FULLSCRIPTNAME}.sh
+echo "fmriPATH=${fmriPATH}"                                      >> ${FULLSCRIPTNAME}.sh
+echo "fieldMapPath=${fieldMapPath}"                              >> ${FULLSCRIPTNAME}.sh
+echo "SUBJDIROUT=${SUBJDIROUT}"                                  >> ${FULLSCRIPTNAME}.sh
+echo "SUBJDIR=${SUBJDIR}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "volumeWILD=${volumeWILD}"                                  >> ${FULLSCRIPTNAME}.sh
+echo "outputName=${outputName}"                                  >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "MATLAB_RETURN_CODE=0"                                      >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+
+#
+#
+#
+

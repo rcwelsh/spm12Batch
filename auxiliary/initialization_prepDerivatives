@@ -1,0 +1,12 @@
+#
+# Inialization.
+#
+
+# Default to copy nothing.
+
+copyAllFlag=false
+prepCopyList=
+
+#
+# all done
+#

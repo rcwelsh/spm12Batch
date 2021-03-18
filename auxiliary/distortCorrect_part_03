@@ -1,0 +1,62 @@
+
+    #
+    # now build the anima command
+    #
+    # 
+   
+    # We need a small random number for using in file names to avoid
+    # conflicts when correcting runs one at time
+    #
+
+    RANDOMNUM=$$
+    RND5DIGIT=`echo ${RANDOMNUM} | awk '{printf "%05d",$1}'`
+    RND3DIGIT=${RND5DIGIT:0:3}
+    
+    # Make some abbreviations
+   
+    TMPINPUT=${UMBatchMaster}/${SUBJDIR}/${SUBJECT}/${fmriPATH}
+    TMPOUTPUT=${UMBatchMaster}/${SUBJDIROUT}/${SUBJECT}/${fmriPATH}
+    
+    # Make the output if needed.
+    
+    if [ "${SUBJDIR}" != "${SUBJDIROUT}" ]
+    then
+      mkdir -p ${TMPOUTPUT}/${fieldMapPath}
+    fi
+    
+    FIRSTRUNFILE=`ls ${TMPINPUT}/run*/${volumeWILD}*.nii 2> /dev/null | head -1`
+    
+    # Make the geometry corrected fieldmap file.
+    cd ${TMPOUTPUT}/${fieldMapPath}
+    ${thisDir}/geometryAssertV2.sh ${FIRSTRUNFILE} ${TMPINPUT}/${fieldMapPath}/${forwardImage} geo_${RND3DIGIT}_${forwardImage}
+    ${thisDir}/geometryAssertV2.sh ${FIRSTRUNFILE} ${TMPINPUT}/${fieldMapPath}/${backwardImage} geo_${RND3DIGIT}_${backwardImage}
+    
+    # Now loop on possible runs.
+    cd ${TMPINPUT}
+    
+    for RUNFILE in `ls run*/${volumeWILD}*.nii`
+    do
+       RUNNII=${TMPINPUT}/${RUNFILE}
+       cd ${UMBatchMaster}/${SUBJDIROUT}/${SUBJECT}/${fmriPATH}
+       RUNDIR=`echo ${RUNFILE} | awk -F/ '{print $1}'`
+       RUNNAME=`echo ${RUNFILE} | awk -F/ '{print $2}'`
+       mkdir -p ${RUNDIR}
+       cd ${RUNDIR}
+       if [ "${forceGeometry}" == "true" ]
+       then
+          mkdir tmpDir
+          cd tmpDir
+          ${thisDir}/geometryAssertV2.sh ${FIRSTRUNFILE} ${RUNNII} ${RUNNAME}
+          ${thisDir}/distortionCorrection.sh ${RUNNAME} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${backwardImage} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${forwardImage}
+          rm ${RUNNAME}
+          mv * ../
+          cd ../
+          rmdir tmpDir
+       else			     		     
+          ${thisDir}/distortionCorrection.sh ${RUNNII} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${backwardImage} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${forwardImage}
+       fi				         
+    done
+   
+    #
+    #
+    #

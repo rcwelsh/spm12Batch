@@ -89,6 +89,15 @@ do
 		    . ${thisDir}/auxiliary/setAnatomyPath
 		    ;;
 
+              # case_copy_all
+ 	      #
+	      # for prepDerivatives, indicates to copy all 
+	      #
+		"all")
+		    copyAllFlag=true
+		    prepCopyList=
+                    ;;
+
               # case_no_background_job
               #
               # don't launch the job into the background, but run in the foreground, 
@@ -117,6 +126,30 @@ do
 		    . ${thisDir}/auxiliary/setBETFLAG
 		    ;;
 		
+              # set the backward image
+	      #
+	      #
+                "bi")
+		    . ${thisDir}/auxiliary/setBackwardImage
+		    ;;
+	      # set the forward image
+	      #
+	      #
+                "fi")
+		    . ${thisDir}/auxiliary/setForwardImage
+		    ;;
+	      # set the field map directory path
+	      #
+	      #
+                "fm")
+		    . ${thisDir}/auxiliary/setFieldmapPath
+		    ;;
+	      # set the force geometry flag
+	      #
+	      #
+                "fg")
+		    forceGeometry=true
+		    ;;
               # case_super_debug_flag 
 	      #
 	      # super debug flag
@@ -219,6 +252,14 @@ do
 		    . ${thisDir}/auxiliary/setRunList
 		    ;;
 		
+              # case_what_to_copy
+ 	      #
+	      # for prepDerivatives, indicates what to copy 
+	      #
+		"inc")
+		    . ${thisDir}/auxiliary/setIncludeList
+		    ;;
+
 	      # case_do_erosion_last
               #
               # a flag to tell vbm8HiRes/newSeg to do erosion as last step
@@ -238,6 +279,14 @@ do
 	      #
 		"M")
 		    . ${thisDir}/auxiliary/setSubjectsMasterDir
+		    ;;
+		
+              # case_subject_out_dir 
+	      # 
+	      # subject directory name to use
+	      #
+		"MO")
+		    . ${thisDir}/auxiliary/setSubjectsMasterDirOut
 		    ;;
 		
               # case_flirt_options 
@@ -534,6 +583,15 @@ do
     shift
     let argn++
 done
+
+# Some clean up
+shopt -s extglob
+SUBJDIROUT=${SUBJDIROUT//+([\/])//}
+SUBJDIROUT=`dirname ${SUBJDIROUT}/nonsense.txt`
+SUBJDIR=${SUBJDIR//+([\/])//}
+SUBJDIR=`dirname ${SUBJDIR}/nonsense.txt`
+
+
 
 # 
 # Change back to success

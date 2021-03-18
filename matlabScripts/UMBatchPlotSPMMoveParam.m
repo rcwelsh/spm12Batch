@@ -45,7 +45,7 @@ try
     end
     
     rpFile = dir(fullfile(outputDirectory,sprintf('rp_*%s*.txt',UMVolumeWild)));
-    rp     = load(fullfile(rpFile.folder,rpFile.name));
+    rp     = load(fullfile(outputDirectory,rpFile.name));
     
     figure;
     subplot(2,1,1);
@@ -53,7 +53,7 @@ try
     grid on;
     ylabel('translation (mm)','fontsize',14,'fontweight','bold');
     legend('x','y','z','location','northwest');
-    title(sprintf('%s : %s : %s',sessionNameF,fmriPATHF,runNameF),'fontsize',14,'fontweight','bold');
+    title(sprintf('%s : %s : %s : %s',date,sessionNameF,fmriPATHF,runNameF),'fontsize',14,'fontweight','bold');
     subplot(2,1,2);
     p2 = plot(rp(:,4:6)*180/pi);
     legend('pitch','roll','yaw','location','northwest');

@@ -20,11 +20,14 @@ nParam=0
 FINDVOLEXT=nii
 
 # User email to send mail to at job completion.
-USEREMAIL=
+USEREMAIL=NOMAIL
 
 # Where are the subjects located with respect to the 
 # experimental directory.
-SUBJDIR=ImagingData/Subjects/
+SUBJDIR=ImagingData/Subjects
+
+# for this command we can also have a subject output directory
+SUBJDIROUT=ImagingData/SubjectsDerived/
 
 # Look in the anatomy folder by default
 anatomyPATH=anatomy/

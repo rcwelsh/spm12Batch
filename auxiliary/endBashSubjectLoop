@@ -4,6 +4,7 @@
 # This is inline code to be called
 #
 
+echo                                                                                           >> ${FULLSCRIPTNAME}.sh
 echo "done"                                                                                    >> ${FULLSCRIPTNAME}.sh
 echo "echo"                                                                                    >> ${FULLSCRIPTNAME}.sh
 echo "echo \" All done\""                                                                      >> ${FULLSCRIPTNAME}.sh

@@ -1,0 +1,12 @@
+    echo "${helpComment} prepending name          : ${outputName}"
+    echo "${helpComment} forward image            : ${forwardImage}"
+    echo "${helpComment} backward image           : ${backwardImage}"
+    echo "${helpComment} Functional Path          : ${fmriPATH}"
+    echo "${helpComment} Volume Wildcard          : ${volumeWILD}"
+    echo "${helpComment} fieldMap path            : ${fieldMapPath}"
+    echo "${helpComment} force geometry           : ${forceGeometry}"
+    echo "${helpComment} subject output directory : ${SUBJDIROUT}"
+    echo "${helpComment}"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_options_end

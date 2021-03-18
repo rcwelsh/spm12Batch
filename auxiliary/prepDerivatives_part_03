@@ -1,0 +1,34 @@
+    # Copy over things to the derivatives folder
+
+ 
+    # Make some abbreviations
+   
+    TMPINPUT=${UMBatchMaster}/${SUBJDIR}/${SUBJECT}
+    TMPOUTPUT=${UMBatchMaster}/${SUBJDIROUT}/${SUBJECT}
+
+    # Make the output if needed.
+    
+    if [ "${SUBJDIR}" != "${SUBJDIROUT}" ]
+    then
+      mkdir -p ${TMPOUTPUT}
+    fi
+
+    DATE=`date`
+    if [ -d ${UMBatchMaster}/${SUBJDIR}/${SUBJECT}/ ]
+	then
+            echo Processing ${TMPINPUT} to ${TMPOUTPUT} 
+            cd ${UMBatchMaster}/${SUBJDIR}/${SUBJECT}
+            echo "${DATE} : ${USER} : prepDerivatives ${FULLSCRIPTNAME} ${copyAllFlag} ${prepCopyList} " >> ${TMPOUTPUT}/.prepDerivatives
+            if [ "${copyAllFlag}" == "true" ]
+	    then
+		cp -rp * ${TMPOUTPUT}
+		echo "${DATE} : ${USER} : cp -rp * ${TMPOUTPUT}" >> ${TMPOUTPUT}/.prepDerivatives
+            else
+                for COPYOBJ in ${prepCopyList}
+	        do
+		   # https://docstore.mik.ua/orelly/unix3/upt/ch10_13.htm
+		   tar -cf - ${COPYOBJ} | (cd ${TMPOUTPUT} && tar -xvf -)
+		   echo "${DATE} : ${USER} : tar -cf - ${COPYOBJ} | (cd ${TMPOUTPUT} && tar -xvf -)" >> ${TMPOUTPUT}/.prepDerivatives
+	        done
+	    fi
+	fi

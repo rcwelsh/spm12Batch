@@ -1,0 +1,4 @@
+    echo "    -all                 copy everything to the derivatives directory,"
+    echo "                         default is 'false'."
+    echo "                         Mutually exclusive with -inc flag."
+    echo 

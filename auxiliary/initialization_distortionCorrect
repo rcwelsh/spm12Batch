@@ -1,0 +1,32 @@
+#
+# Inialization.
+#
+
+# default task, must be set.
+
+fmriPATH=func/
+
+# where to find the fieldmap
+
+fieldMapPath=fieldMap/
+forwardImage=forward.nii
+backwardImage=backward.nii
+
+# force the geometry to match. this will take
+# the first run and apply that to other runs
+# via a temporary file. will also apply
+# it to the field map, but will save those
+
+forceGeometry=false
+
+# Volumes to look for to do distortion correction.
+
+volumeWILD=run_
+
+# what to prepend for the name
+
+outputName=dc_
+
+#
+# all done
+#
