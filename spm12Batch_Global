@@ -69,7 +69,7 @@ then
     # Are we running on mnemosyne?
     if [ -d /erato ]
     then
-        SPM12B1=/home/Software/SPM/spm12_r7219
+        SPM12B1=/erato/mnemosyne/Software/SPM/spm12_r7771
     fi
 
 # This is Robert Welsh's UNIX batch interface to spm12
@@ -136,6 +136,10 @@ then
         MATLAB=/Applications/MATLAB_R2020b.app/bin/matlab    # added 2020-03-12
     else
         MATLAB=`which matlab`
+    	if [ -d /erato ]
+    	then
+	   MATLAB=/home/Software/MATLAB/R2020b/bin/matlab
+    	fi
     fi
 #    
 # Only allow author to execute code during switch.

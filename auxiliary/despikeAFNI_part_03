@@ -30,8 +30,8 @@
        cd ${RUNDIR}
        export AFNI_3dDespike_NEW=YES
        tmpFile=ds_tmp_$$
-       3dDespike -ssave ${tmpFile}_pattern -prefix ${tmpFile} ${RUNNAME}
-       echo "${DATE} : ${USER} : 3dDespike -ssave ${tmpFile}_pattern -prefix ${tmpFile} ${RUNNAME}" >> .despike
+       3dDespike -ssave ${tmpFile}_pattern -prefix ${tmpFile} ${TMPINPUT}/${RUNDIR}/${RUNNAME}
+       echo "${DATE} : ${USER} : 3dDespike -ssave ${tmpFile}_pattern -prefix ${tmpFile} ${TMPINPUT}/${RUNDIR}/${RUNNAME}" >> .despike
        3dAFNItoNIFTI ${tmpFile}+orig       
        echo "${DATE} : ${USER} : 3dAFNItoNIFTI ${tmpFile}+orig   " >> .despike    
        mv ${tmpFile}.nii ${outputName}${RUNNAME}

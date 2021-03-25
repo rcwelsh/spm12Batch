@@ -1,10 +1,9 @@
 #!/bin/bash
 #
 #
-# Run a job to prepare derivatives for a list of subjects
+# Run a job to do SPM-based segmentation
 #
-# This job does the work explicitly, as there is not an spm12Batch command
-# at the moment. Feel free to launch this to the backgound.
+# This will build the spm12Batch jobs and submit to the background.
 #
 # You will want to verify the following variables:
 #
@@ -18,8 +17,7 @@
 
 EXPDIR=/thalia/data/NERDLab/joedata/Eureka/RestingState_Striatal_ConnTool
 
-MASTERSUBJ=ImagingData/Subjects20201104
-MASTERDERIV=ImagingData/Subjects20201104_Derived
+MASTERSUBJ=ImagingData/Subjects20201104_Derived
 
 # put the subject list here, put in side quotes separated by space
 SESSIONLIST="PTest PTest2 Ptest3"
@@ -30,13 +28,13 @@ FUNC=func/connect
 # ---------------- Probably don't need to edit below ----------------------
 
 # Overlay file
-OVERLAY=t1overlay.nii
-
-# Overlay file
-HIRES=t1spgr.nii
+HIRES=N4_t1spgr.nii
 
 # Anatomy directory
-ANATDIR=anatomy
+ANATDIR=${FUNC}/coReg/ANTs
+
+# Where to put results
+NEWSEGDIR=${ANATDIR}/newSeg
 
 # Run all sequential or parallel?
 RUNAS=parallel
@@ -58,16 +56,6 @@ do
     fi
 done
 
-for SESSION in ${SESSIONLIST}
-do
-    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${ANATDIR}/${OVERLAY} 2> /dev/null | wc -l`
-    if [ ${NRUNS} -eq 0 ]
-    then
-	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with ${OVERLAY}"
-	BAD=1
-    fi
-done
-
 # Exit if bad
 
 if [ ${BAD} -eq 1 ]
@@ -76,19 +64,19 @@ then
     exit 1
 fi
 
-# All good, so do the work, here we explicitly do the work, and not send to a job.
+# All good, so do the work.
 
 cd ${EXPDIR}
 
 echo "${DATE} : ${USER} : building job(s)"
 
-THELOG=.ptmp.log
+THELOG=.nstmp.log
 
 rm -r ${THELOG} 2> /dev/null
 
-SPMCMD=prepDerivatives
+SPMCMD=newSeg
 
-CMD="${SPMCMD} -inc anatomy -M ${MASTERSUBJ} -MO ${MASTERDERIV}"
+CMD="${SPMCMD} -a ${ANATDIR} -h ${HIRES} -M ${MASTERSUBJ} -w ${NEWSEGDIR}"
 
 if [ "${RUNAS}" == "parallel" ]
 then
@@ -111,7 +99,9 @@ echo
 grep ${SPMCMD} ${THELOG} | grep -e "\.sh" | awk -F. '{print $1 ".log"}'
 
 echo
+echo All done
+echo
 
 #
-# all done.
+# all done
 # 
