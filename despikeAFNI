@@ -1,0 +1,140 @@
+#!/bin/bash
+
+# # # # # # # # # # # # # # # # # # 
+#
+# A command to make it easier on the user to detect 
+# spikes in the fmri time-series.
+#
+# This command will build a script to run and will also 
+# run the script in background.
+#
+#   e.g.    despikeAFNI 
+#
+#
+# despikeAFNI
+#
+# Expected is:
+#
+#        [task]/
+#            run_01/
+#                run_01.nii
+#            run_02/
+#                run_02.nii
+#
+# # # # # # # # # # # # # # # # # #
+
+#
+# Main detectSpike function.
+#
+
+VERSION="2.1"
+VERSIONDATE="2021-03-23"
+
+# Find out where the current command lives and execute some common code.
+
+theFullCommand="$0 $*"
+execDIR=`pwd`
+
+# Find out where the current command lives and execute some common code.
+
+theCommand=`which $0`
+thisDir=`dirname $theCommand`
+
+thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
+
+allowedOptions=" B f M MO on t U v "
+
+# This piece of code all of the spm12Batch scripts will use
+. ${thisDir}/auxiliary/commonCode_AllScriptsStart
+
+# This is the common in-line code for the warping steps. ###
+. ${thisDir}/auxiliary/commonCode_Despike_01
+
+# This is common in-line code for all spm12Batch script to make sure arguments were passed
+. ${thisDir}/auxiliary/commonCode_checkIfArgsPassed
+
+#
+# The actual function.
+#
+
+. ${thisDir}/auxiliary/parse_arguments
+
+# Small trick to remove trailing / as needed. and remove any double-/
+
+SUBJDIR=`dirname ${SUBJDIR}/nonsense.txt| sed -e 's/\/\//\//g'`
+SUBJDIROUT=`dirname ${SUBJDIROUT}/nonsense.txt| sed -e 's/\/\//\//g'`
+
+#
+
+. ${thisDir}/auxiliary/superDebugStatus
+
+#
+# Ok - let's start displaying things back to the terminal
+#
+
+. ${thisDir}/auxiliary/shellScriptInfo
+
+#
+# Prepare to write the script.
+#
+
+# Makes sure they speficied some subjects.
+. ${thisDir}/auxiliary/checkInputForSubjects
+
+# Write out debug status
+. ${thisDir}/auxiliary/debugStatus
+
+# Ok, lets do the business.
+
+# Print out the list of subjects that we operate upon.
+. ${thisDir}/auxiliary/printSubjectsList
+
+# Now start building the automatic scripts.
+
+#
+# the following environmental variables are from spm12Batch_Global
+#
+#    HOSTCOMPUTER     - name of the computer.
+#    SCRIPTNAME       - name of the scripts to write.
+#    MATLABDIR        - location of the scripts.
+#    UMBatchMatcher   - present working directory.
+#    FULLSCRIPTNAME   - full path and name of scripts to write.
+# 
+
+. ${thisDir}/auxiliary/despikeAFNI_01
+
+# Common start to all shell scripts
+
+echo "    4) finalizing matlab scripts"
+
+. ${thisDir}/auxiliary/buildMatlabScripts_01
+
+. ${thisDir}/auxiliary/shellScriptStart
+
+echo "    5) building shell script"
+
+# Now build the shell script command that will get launched into the background.
+
+# Common start to all shell scripts
+
+. ${thisDir}/auxiliary/despikeAFNI_part_02
+
+. ${thisDir}/auxiliary/startBashSubjectLoop
+
+# Add the distortion code to the shell script
+
+cat ${thisDir}/auxiliary/despikeAFNI_part_03 >> ${FULLSCRIPTNAME}.sh
+
+. ${thisDir}/auxiliary/endBashSubjectLoop
+
+# Finalize the shell script.
+
+. ${thisDir}/auxiliary/shellScriptFinalize
+
+# Now launch into the background if desired.
+
+. ${thisDir}/auxiliary/shellScriptLaunch
+
+#
+# all done.
+#

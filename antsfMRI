@@ -41,7 +41,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions=" B D d f h M m n odt T t U v w "
+allowedOptions=" B D d f h in M m on odt T t U v w "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart
@@ -148,8 +148,8 @@ do
     # the variable FILENAME and processed by fileExtensionDetermination
     # copies ${HIRES} to ${fmriPATH}/${coregPATH} from the ${anatomyPATH} directory
     
-    WARP_FILE1=`ls ${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/${fmriPATH}/${coregPATH}/${outputName}1Warp.nii.gz 2> /dev/null | wc -l`
-    WARP_FILE2=`ls ${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/${fmriPATH}/${coregPATH}/${outputName}0GenericAffine.mat 2> /dev/null | wc -l`
+    WARP_FILE1=`ls ${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/${fmriPATH}/${coregPATH}/${inputName}1Warp.nii.gz 2> /dev/null | wc -l`
+    WARP_FILE2=`ls ${UMBatchMaster}/${SUBJDIR}/${subjects[$is]}/${fmriPATH}/${coregPATH}/${inputName}0GenericAffine.mat 2> /dev/null | wc -l`
 
     WARP_FILE_OK=$(( ${WARP_FILE1} + ${WARP_FILE2} ))
     

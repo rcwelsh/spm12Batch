@@ -15,7 +15,7 @@ echo -n " -v ${outputName}"
 echo -n " -h ${HIRESNAME}"   
 echo -n " -m \"${mcOPT}\""   
 echo -n " -M ${SUBJDIR}"     
-echo " -n eroMask_    [list of subjects] (see shell script file: ${FULLSCRIPTNAME}.sh)"       
+echo " -on eroMask_    [list of subjects] (see shell script file: ${FULLSCRIPTNAME}.sh)"       
 
 echo "#"                                                                          >> ${FULLSCRIPTNAME}.sh
 echo "# Calling erodeMask now interactively"                                      >> ${FULLSCRIPTNAME}.sh
@@ -37,7 +37,7 @@ echo -n "     -v ${outputName}"                                                 
 echo -n "     -h ${HIRESNAME}"                                                        >> ${FULLSCRIPTNAME}.sh
 echo -n "     -m \"${mcOPT}\""                                                        >> ${FULLSCRIPTNAME}.sh
 echo -n "     -M ${SUBJDIR}"                                                          >> ${FULLSCRIPTNAME}.sh
-echo -n "     -n eroMask_"                                                            >> ${FULLSCRIPTNAME}.sh
+echo -n "     -on eroMask_"                                                           >> ${FULLSCRIPTNAME}.sh
 
 # Now list out the participants.
 

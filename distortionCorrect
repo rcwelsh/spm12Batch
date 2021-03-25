@@ -26,6 +26,7 @@
 #                backward.nii
 #            run_01/
 #                run_01.nii
+#            run_02/
 #                run_02.nii
 #
 # This script utilized anima for the correction
@@ -51,7 +52,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions=" B bi f fg fi fm M MO n t U v "
+allowedOptions=" B bi f fg fi fm M MO on t U v "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart
@@ -163,7 +164,7 @@ echo
 
 . ${thisDir}/auxiliary/distortCorrect_part_01
 
-# Common star to all shell scripts
+# Common start to all shell scripts
 
 . ${thisDir}/auxiliary/buildMatlabScripts_01
 
@@ -181,7 +182,7 @@ echo
 
 . ${thisDir}/auxiliary/startBashSubjectLoop
 
-# Add the distortionn code to the shell script
+# Add the distortion code to the shell script
 
 cat ${thisDir}/auxiliary/distortCorrect_part_03 >> ${FULLSCRIPTNAME}.sh
 

@@ -1,7 +1,7 @@
 echo
 echo This is the suite of spm12Batch unix command-line commands.
 echo	 
-echo The code was written by Robert C. Welsh over the period of 2005-2017
+echo The code was written by Robert C. Welsh over the period of 2005-2021
 echo and it is in further development.
 echo
 echo The driving force behind these scripts is to implement a level of error
@@ -20,43 +20,53 @@ echo processing of data from k-space data to final smoothed, MNI-based
 echo T2* images.
 echo
 echo Developed with support from R01NS052514
-echo "                            R01NS082304"
+echo "                           R01NS082304"
 echo
-echo Updated February-July-2017
+echo Updated March 2021
 echo
 echo --------------------------------------------------------------------------
 echo 
-echo "Command         Purpose"
-echo "----------      ----------------------------------------------------------"
+echo "Command            Purpose"
+echo "----------         ----------------------------------------------------------"
 echo 
-echo "whitePixel      DEPRECATED. Filtering of GE raw pfiles to remove white pixel artifact. DEPRECATED."
+echo "distortionCorrect  A wrapper to ANIMA to correct EPI BOLD images."
 echo 
-echo "reconSpiral     DEPRECATED. To process pfiles and do spiral reconstruction (ala Doug Noll)"
-echo "                and return NIFTI files (radiological convention. DEPRECATED.)"
+echo "prepDerivatives    A script to move data from canonical data to derived data."
+echo 
+echo "sliceTime12        A wrapper to the SPM12 slice time correction routine."
+echo 
+echo "sliceTimeMB        A wrapper to the SPM12 slice time correction routine."
+echo "                   Use this command for multiband data."
+echo 
+echo "realignfMRI12      A wrapper to the SPM12 coregistration for time-series."
+echo 
+echo "detectSpikeAFNI    A bash routine to find bad image slices using AFNI."
 echo
-echo "physioCorr      DEPRECATED. Implements image based physiological correction (ala RETRICOR)"
-echo "                this command will work with both GE and Philips data. DEPRECATED."
-echo 
-echo "undistortEPI    NOT YET IMPLEMENTED A wrapper to FSL/topup/applytopup to correct EPI distortion."
-echo 
-echo "sliceTime12     A wrapper to the SPM12 slice time correction routine."
-echo 
-echo "sliceTimeMB     A wrapper to the SPM12 slice time correction routine."
-echo "                Use this command for multiband data."
-echo 
-echo "realignfMRI12   A wrapper to the SPM12 coregistration for time-series."
-echo 
-echo "detectSpike     A matlab routine to find bad image slices."
+echo "coregOverlay       A wrapper to the coregistration routine in SPM12."
 echo
-echo "coregOverlay    A wrapper to the coregistration routine in SPM12."
+echo "coregHiRes         A wrapper to the coregistration routine in SPM12."
 echo
-echo "coregHiRes      A wrapper to the coregistration routine in SPM12."
-echo
-echo "antsHiRes       A wrapper to ANTs functionality for doing warping of HIRES."
-echo
-echo "antsfMRI        A wrapper to ANTs functionality for warping fMRI data."
+echo "antsHiRes          A wrapper to ANTs functionality for doing warping of HIRES."
+echo   
+echo "antsfMRI           A wrapper to ANTs functionality for warping fMRI data."
 echo 
-echo "antsN4SS        A wrapper to ANTs functionality to N4 and skull strip HIRES."
+echo "antsN4SS           A wrapper to ANTs functionality to N4 and skull strip HIRES."
+echo
+echo "newSeg             A wrapper to do MNI warping of hi-resolution image"
+echo "                   to MNI the standard normalize function in SPM12."
+echo 
+echo "pcafMRI            A wrapper to calculate COMPOR-like regressors."
+echo
+echo "erodeMask          A wrapper to FSL/fslmaths to erode masks."
+echo "                   Usually auto-called by newSeg/cat12 commands"
+echo
+echo "warpSeg            A wrapper to do MNI warping of functional images"
+echo "                   to MNI space based on either output of newSeg or cat12HiRes."
+echo
+echo "smoothfMRI         A wrapper to smooth images using SPM12 routines."
+echo
+echo
+echo "- - - - - - - - - - - - - - - - - - - - - - WIP  - - - - - - - - - - - - - - - - - - - - - - - - -"
 echo
 echo "cat12HiRes      NOT YET IMPLEMENTED A wrapper to do MNI warping of hi-resolution image"
 echo "                to MNI space using the cat12 toolbox add-on for SPM12."
@@ -64,19 +74,15 @@ echo
 echo "cat12Check      NOT YET IMPLEMENTED An auxililary routine to use with vbm8HiRes to do some"
 echo "                visual quality control. This is highly recommended!"
 echo 
-echo "newSeg          A wrapper to do MNI warping of hi-resolution image"
-echo "                to MNI the standard normalize function in SPM12."
+echo "- - - - - - - - - - - - - - - - - - - - - DEPRECATED - - - - - - - - - - - - - - - - - - - - - - -"
+echo
+echo "whitePixel      DEPRECATED. Filtering of GE raw pfiles to remove white pixel artifact. DEPRECATED."
 echo 
-echo "pcafMRI         A wrapper to calculate COMPOR-like regressors."
+echo "reconSpiral     DEPRECATED. To process pfiles and do spiral reconstruction (ala Doug Noll)"
+echo "                and return NIFTI files (radiological convention.) DEPRECATED."
 echo
-echo "erodeMask       A wrapper to FSL/fslmaths to erode masks."
-echo "                Usually auto-called by newSeg/cat12 commands"
-echo
-echo "warpSeg         A wrapper to do MNI warping of functional images"
-echo "                to MNI space based on either output of newSeg or cat12HiRes."
-echo
-echo "smoothfMRI      A wrapper to smooth images using SPM12 routines."
-echo
-echo
-echo "Copyright Robert C. Welsh and others, 2003-2017"
+echo "physioCorr      DEPRECATED. Implements image based physiological correction (ala RETRICOR)"
+echo "                this command will work with both GE and Philips data. DEPRECATED."
+echo 
+echo "Copyright Robert C. Welsh and others, 2003-2021"
 echo

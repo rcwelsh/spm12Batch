@@ -1,0 +1,23 @@
+#
+# variables needed for AFNI
+#
+
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "# variables needed for running AFNI"                       >> ${FULLSCRIPTNAME}.sh
+echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
+echo "UMBatchMaster=${UMBatchMaster}"                            >> ${FULLSCRIPTNAME}.sh
+echo "thisDir=${thisDir}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "fmriPATH=${fmriPATH}"                                      >> ${FULLSCRIPTNAME}.sh
+echo "SUBJDIROUT=${SUBJDIROUT}"                                  >> ${FULLSCRIPTNAME}.sh
+echo "SUBJDIR=${SUBJDIR}"                                        >> ${FULLSCRIPTNAME}.sh
+echo "volumeWILD=${volumeWILD}"                                  >> ${FULLSCRIPTNAME}.sh
+echo "outputName=${outputName}"                                  >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "MATLAB_RETURN_CODE=0"                                      >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+
+#
+#
+#
+

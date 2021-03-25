@@ -11,6 +11,7 @@
 #               working directory.
 # 2018-08-29 -- point to Anima 3.1
 # 2021-03-16 -- stop pointing to Anima and hope they have it defined.
+# 2021-03-17 -- part of spm12Batch now.
 #
 # Release 1.2
 #
@@ -82,7 +83,7 @@ function echol(){
 }
 
 DATE=`date`
-VERSION=1.2
+VERSION=1.3
 
 # Point to the Anima binaries.
 
@@ -109,7 +110,7 @@ RUNNII=$1
 if [ -z "${RUNNII}" ]
 then
     echo
-    echo "distortionCorrection.sh [run nifti file] [[backward image]] [[forward image]] -F"
+    echo "distortionCorrection.sh [run nifti file] [[backward image]] [[forward image]] [[outputName]]"
     echo
     echo "  Code to utilize the ANIMA distortion correction routines."
     echo "  Based on https://github.com/Inria-Visages/Anima-Public/wiki/Registration-tools"
@@ -122,6 +123,7 @@ then
     echo "                            however, if one is not found, then we will"
     echo "                            assume the [run nifti file] is the forward"
     echo "                            image."
+    echo "     [[outputName]]      -- to override using \"dc_\""
     echo
     echo "  The output will go to the current working directory."
     echo 
@@ -132,11 +134,11 @@ then
     echo "  A important criteria is that the headers of the two images must match exactly".
     echo "  Sometimes dcm2nii results in headers that differ in the last decimal -- while "
     echo "  not relevant to neuroimaging processsing -- but Anima will refuse to work "
-    echo "  with the images unless they match exactly. Use fslcpgeom to fix this issue."
+    echo "  with the images unless they match exactly. This uses fslcpgeom and dd to fix this issue."
     echo
     echo "  Also, the order this should take place in the pre-processing steam is a "
     echo "  scientific question. Movement can effect distortion, but in the limit that "
-    echo "  motion is non-existent, then motion correction should take place first."
+    echo "  motion is non-existent, then motion correction could take place first."
     echo 
     echo "  Make backups of everthing!"
     echo
@@ -218,6 +220,15 @@ then
     exit 1
 fi
 
+# Now see if they passed a prepend name
+
+if [ -z "$4" ]
+then
+    outputName=dc_
+else
+    outputName=$4
+fi
+
 # Now get the basenames so that we can be in a different working directory than the actual files.
 
 RUNNIIBASE=`basename ${RUNNII}`
@@ -236,7 +247,7 @@ echol " Configured as"
 echol "      RUN       : ${RUNNII}"                              
 echol "      BACKWARD  : ${BACKWARD}"                            
 echol "      FORWARD   : ${FORWARD}"
-echol "      OUTPUT    : dc_${RUNNIIBASENAME}.nii"
+echol "      OUTPUT    : ${outputName}${RUNNIIBASENAME}.nii"
 echol "  Code Version  : ${VERSION}"
 echol "  Anima Version : ${SCRIPTSDIR}"
 echol " -----------------------------------------------"        
@@ -302,8 +313,8 @@ dd if=${RUNNII} of=${RUNNIIBASENAME}_Correction.nii bs=1 skip=252 count=76 seek=
 
 
 # Step 2
-echol "${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${FORWARD} -t ${RUNNIIBASENAME}_Correction.nii -o dc_1st_${FORWARDBASENAME}.nii"
-${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${FORWARD} -t ${RUNNIIBASENAME}_Correction.nii -o dc_1st_${FORWARDBASENAME}.nii >> .distortionCorrectionLog 2>&1
+echol "${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${FORWARD} -t ${RUNNIIBASENAME}_Correction.nii -o ${outputName}1st_${FORWARDBASENAME}.nii"
+${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${FORWARD} -t ${RUNNIIBASENAME}_Correction.nii -o ${outputName}1st_${FORWARDBASENAME}.nii >> .distortionCorrectionLog 2>&1
 if [ $? != 0 ]
 then
     echol "FAILED animaApplyDistortionCorrection"
@@ -311,14 +322,14 @@ then
     exit 1
 fi
 # Now assert the geometry
-echol "dd if=${RUNNII} of=dc_1st_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
-dd if=${RUNNII} of=dc_1st_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
-#dd if=${RUNNII} of=dc_1st_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
+echol "dd if=${RUNNII} of=${outputName}1st_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
+dd if=${RUNNII} of=${outputName}1st_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
+#dd if=${RUNNII} of=${outputName}1st_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
 
 
 # Step 3
-echol "${SCRIPTSDIR}/animaBMDistortionCorrection -f ${FORWARD} -b ${BACKWARD} -i ${RUNNIIBASENAME}_Correction.nii -O ${RUNNIIBASENAME}_BMCorrection.nii -o dc_test_${FORWARDBASENAME}.nii"
-${SCRIPTSDIR}/animaBMDistortionCorrection -f ${FORWARD} -b ${BACKWARD} -i ${RUNNIIBASENAME}_Correction.nii -O ${RUNNIIBASENAME}_BMCorrection.nii -o dc_2nd_${FORWARDBASENAME}.nii >> .distortionCorrectionLog 2>&1
+echol "${SCRIPTSDIR}/animaBMDistortionCorrection -f ${FORWARD} -b ${BACKWARD} -i ${RUNNIIBASENAME}_Correction.nii -O ${RUNNIIBASENAME}_BMCorrection.nii -o ${outputName}test_${FORWARDBASENAME}.nii"
+${SCRIPTSDIR}/animaBMDistortionCorrection -f ${FORWARD} -b ${BACKWARD} -i ${RUNNIIBASENAME}_Correction.nii -O ${RUNNIIBASENAME}_BMCorrection.nii -o ${outputName}2nd_${FORWARDBASENAME}.nii >> .distortionCorrectionLog 2>&1
 if [ $? != 0 ]
 then
     echol "FAILED animaBMDistortionCorrection"
@@ -329,14 +340,14 @@ fi
 echol "dd if=${RUNNII} of=${RUNNIIBASENAME}_BMCorrection.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
 dd if=${RUNNII} of=${RUNNIIBASENAME}_BMCorrection.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
 #dd if=${RUNNII} of=${RUNNIIBASENAME}_BMCorrection.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
-echol "dd if=${RUNNII} of=dc_2nd_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
-dd if=${RUNNII} of=dc_2nd_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
-#dd if=${RUNNII} of=dc_2nd_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
+echol "dd if=${RUNNII} of=${outputName}2nd_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
+dd if=${RUNNII} of=${outputName}2nd_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
+#dd if=${RUNNII} of=${outputName}2nd_${FORWARDBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
 
 
 # Step 4
-echol "${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${RUNNII} -t ${RUNNIIBASENAME}_BMCorrection.nii -o dc_${RUNNIIBASENAME}.nii"
-${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${RUNNII} -t ${RUNNIIBASENAME}_BMCorrection.nii -o dc_${RUNNIIBASENAME}.nii >> .distortionCorrectionLog 2>&1
+echol "${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${RUNNII} -t ${RUNNIIBASENAME}_BMCorrection.nii -o ${outputName}${RUNNIIBASENAME}.nii"
+${SCRIPTSDIR}/animaApplyDistortionCorrection -f ${RUNNII} -t ${RUNNIIBASENAME}_BMCorrection.nii -o ${outputName}${RUNNIIBASENAME}.nii >> .distortionCorrectionLog 2>&1
 if [ $? != 0 ]
 then
     echol "FAILED animaApplyDistortionCorrection"
@@ -344,12 +355,12 @@ then
     exit 1
 fi
 # Now assert the geometry
-echol "dd if=${RUNNII} of=dc_${RUNNIIBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
-dd if=${RUNNII} of=dc_${RUNNIIBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
-#dd if=${RUNNII} of=dc_${RUNNIIBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
+echol "dd if=${RUNNII} of=${outputName}${RUNNIIBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
+dd if=${RUNNII} of=${outputName}${RUNNIIBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc
+#dd if=${RUNNII} of=${outputName}${RUNNIIBASENAME}.nii bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat
 
 
-echol "Distortion correction completed with output file : dc_${RUNNIIBASENAME}.nii"
+echol "Distortion correction completed with output file : ${outputName}${RUNNIIBASENAME}.nii"
 echo
 
 #

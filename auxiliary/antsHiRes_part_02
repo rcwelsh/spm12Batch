@@ -9,6 +9,7 @@ echo "#"                                                         >> ${FULLSCRIPT
 echo "antsE=${USEEXT}"                                           >> ${FULLSCRIPTNAME}.sh
 echo "antsM=${destSOURCENAME}"                                   >> ${FULLSCRIPTNAME}.sh
 echo "antsP=${outputName}"                                       >> ${FULLSCRIPTNAME}.sh
+echo "antsIP=${outputName}"                                      >> ${FULLSCRIPTNAME}.sh
 echo "antsS=${anaPATH}"                                          >> ${FULLSCRIPTNAME}.sh
 echo "antsT=${TemplateImage}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "antsN=\${antsP}${destSOURCENAME}"                          >> ${FULLSCRIPTNAME}.sh
@@ -27,6 +28,9 @@ echo "ANTSTPM=${ANTSTPM}"                                        >> ${FULLSCRIPT
 echo "ANTSPRIOR=${ANTSPRIOR}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "HIRESNAME=${HIRESNAME}"                                    >> ${FULLSCRIPTNAME}.sh
 echo "ANTSTEMPLDIR=${ANTSTEMPLDIR}"                              >> ${FULLSCRIPTNAME}.sh
+echo ""                                                          >> ${FULLSCRIPTNAME}.sh
+echo "ANTSWM=\"${ANTSWM}\""                                      >> ${FULLSCRIPTNAME}.sh
+echo "ANTSCSF=\"${ANTSCSF}\""                                    >> ${FULLSCRIPTNAME}.sh
 echo ""                                                          >> ${FULLSCRIPTNAME}.sh
 echo "ANTSODT=${ANTSODT}"                                        >> ${FULLSCRIPTNAME}.sh
 echo "ANTSODTOPTION=${ANTSODTOPTION}"                            >> ${FULLSCRIPTNAME}.sh

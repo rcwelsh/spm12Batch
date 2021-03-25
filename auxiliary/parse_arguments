@@ -308,9 +308,17 @@ do
 		
               # case_output_name 
 	      #
+	      # Set the name to add for input -- needed for antsfMRI
+	      #
+		"in")
+		    . ${thisDir}/auxiliary/setInputName
+		    ;;
+		
+              # case_output_name 
+	      #
 	      # Set the name to add.
 	      #
-		"n")
+		"on")
 		    . ${thisDir}/auxiliary/setOutputName
 		    ;;
 		

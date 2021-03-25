@@ -23,8 +23,8 @@
     echo
     echo "${DATE} step ${STEPNOF} antsApplyTransforms * * * * * * * * * * * * * *"
     echo 
-    echo "    for ((i=1;i<=${CLASSNUM};i++))
-    echo "    do
+    echo "    for ((i=1;i<=${CLASSNUM};i++))"
+    echo "    do"
     echo "       antsApplyTransforms \\ "
     echo "         -d 3 \\ "
     echo "         -i ${ANTSPRIOR}/p${i}.nii.gz \\ "
@@ -125,14 +125,14 @@
     fslmaths native_p1.nii.gz -mul 0 native_CSF.nii
     for iCSF in ${ANTSCSF}
     do
-       fslmaths native_CSF.nii -add native_p${CSF}.nii.gz native_CSF.nii 
+       fslmaths native_CSF.nii -add native_p${iCSF}.nii.gz native_CSF.nii 
     done
 
     # initialize the WM
     fslmaths native_p1.nii.gz -mul 0 native_WM.nii
     for iWM in ${ANTSWM}
     do
-       fslmaths native_WM.nii -add native_p${WM}.nii.gz native_WM.nii 
+       fslmaths native_WM.nii -add native_p${iWM}.nii.gz native_WM.nii 
     done
 
     export FSLOUTPUTTYPE=${FSLOUTPUTTYPETMP}

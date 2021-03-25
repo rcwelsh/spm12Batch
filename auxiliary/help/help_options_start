@@ -120,6 +120,9 @@
 	    "i") 
 	        . ${thisDir}/auxiliary/help/help_case_set_run
 	        ;;
+	    "in") 
+	        . ${thisDir}/auxiliary/help/help_case_input_name
+	        ;;
 	    "inc") 
 	        . ${thisDir}/auxiliary/help/help_case_copy_list
 	        ;;
@@ -141,7 +144,7 @@
 	    "N") 
 	        . ${thisDir}/auxiliary/help/help_case_reconrunnumber
 	        ;;
-	    "n") 
+	    "on") 
 	        . ${thisDir}/auxiliary/help/help_case_output_name
 	        ;;
 	    "O") 

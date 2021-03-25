@@ -90,12 +90,9 @@ echol "   geometry file : ${GEOFILE}"
 echol "   old file      : ${OLDFILE}"
 echol "   new file      : ${NEWFILE}"
 
-
-# Need to copy the first 252 bytes from the old to the new
-# and then take the 76 bytes from the run file, and finally,
-# take the remaining from the old to the new.
-
-# RESTOFFILE=$(( ${OLDFILELENGTH} - 328 ))
+# This will take the 76 magical bytes of the matrices and copy
+# from the canonical souce to the target. These after 252 bytes
+# of the header.
 
 # Copy the old to the new file
 
@@ -105,9 +102,9 @@ ls -l ${OLDFILE} ${NEWFILE}
 # And now copy the bits of the header, first using fsl and then dd to make
 # sure they exactly match.
 
-echol "   fslcpgeom ${GEOFILE} ${NEWFILE} -d"
-fslcpgeom ${GEOFILE} ${NEWFILE} -d
-ls -l ${OLDFILE} ${NEWFILE}
+#echol "   fslcpgeom ${GEOFILE} ${NEWFILE} -d"
+#fslcpgeom ${GEOFILE} ${NEWFILE} -d
+#ls -l ${OLDFILE} ${NEWFILE}
 
 echol "   dd if=${GEOFILE} of=${NEWFILE} bs=1 skip=252 count=76 seek=252 conv=notrunc,nocreat"
 dd if=${GEOFILE} of=${NEWFILE} bs=1 skip=252 count=76 seek=252 conv=notrunc

@@ -1,0 +1,22 @@
+    echo
+    echo " A command line command to drive batch processing for despiking time-series."
+    echo
+    . ${thisDir}/auxiliary/help/help_options_start
+
+    echo 
+    echo " e.g. "
+    echo
+    echo "   To process BOLD run files and use AFNI despiking you would do the following:"
+    echo
+    echo "     ${thisCommand} 050126zz"
+    echo
+    echo " SPECIAL NOTE FOR THIS COMMAND:"
+    echo
+    echo "       You can specify a different output directory as to put the"
+    echo "       resulting files into a new directory tree."    
+    echo
+
+    echo " Current command default configuration is:"
+    echo 
+
+    . ${thisDir}/auxiliary/help/help_${thisCommand}_Options

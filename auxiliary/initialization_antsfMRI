@@ -14,6 +14,7 @@ coregPATH=coReg/ANTS
 #
 
 outputName=ants
+inputName=ants
 
 # Default output resolution
 

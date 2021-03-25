@@ -1,0 +1,19 @@
+#
+# Inialization.
+#
+
+# default task, must be set.
+
+fmriPATH=func/
+
+# Volumes to look for to do distortion correction.
+
+volumeWILD=dc_run_
+
+# what to prepend for the name
+
+outputName=ds_
+
+#
+# all done
+#

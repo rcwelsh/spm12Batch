@@ -52,8 +52,8 @@
           -i "${antsMI}" \
           -r "${antsT}" \
           -n linear \
-          -t ${antsS}/${antsP}1Warp.nii.gz \
-          -t ${antsS}/${antsP}0GenericAffine.mat \
+          -t ${antsS}/${antsIP}1Warp.nii.gz \
+          -t ${antsS}/${antsIP}0GenericAffine.mat \
           -o "${oName}" \
 	  ${ANTSODTOPTION} -v 1
 

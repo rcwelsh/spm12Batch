@@ -7,6 +7,7 @@ echo "#"                                                         >> ${FULLSCRIPT
 echo "# variables needed for ANTS"                               >> ${FULLSCRIPTNAME}.sh
 echo "#"                                                         >> ${FULLSCRIPTNAME}.sh
 echo "antsM="                                                    >> ${FULLSCRIPTNAME}.sh
+echo "antsIP=${inputName}"                                       >> ${FULLSCRIPTNAME}.sh
 echo "antsP=${outputName}"                                       >> ${FULLSCRIPTNAME}.sh
 echo "antsS=${anaPATH}"                                          >> ${FULLSCRIPTNAME}.sh
 echo "antsT=${TemplateImage}"                                    >> ${FULLSCRIPTNAME}.sh

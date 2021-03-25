@@ -72,6 +72,9 @@
     # sDIR="${base}/Cerebellum/${scriptdate}/00_Scripts/01_SSN4"
     # ANTSTEMPLDIR="/home/Software/ANTS-2.3.1/Templates/MICCAI2012-Multi-Atlas-Challenge-Data"
 
+    # first must fix the q-form of the input file.
+    fslorient -copysform2qform ${antsM}${antsE}
+
     echo "<---------- 01: Skull Strip ---------->"
     antsBrainExtraction.sh \
        -d 3 \
@@ -136,6 +139,8 @@
        ${antsM} \
        N4_${antsM}.nii.gz
 
+    gunzip N4_${antsM}.nii.gz
+
     fslcpgeom \
        ${antsM} \
        BF_${antsM}.nii.gz
@@ -144,12 +149,12 @@
     
     if [ "${SKULLSTRIP}" == TRUE ]
     then
-	fslmaths N4_${antsM}.nii.gz -mul ${antsMSS}_BrainExtractionMask_dilM${antsDF}.nii.gz ss_N4_${antsM}.nii.gz
+	fslmaths N4_${antsM}.nii -mul ${antsMSS}_BrainExtractionMask_dilM${antsDF}.nii.gz ss_N4_${antsM}.nii.gz
         antsMI=ss_N4_${antsM}.nii.gz
 	antsN=${antsP}ss_N4_${antsM}.nii.gz
 	antsI=${antsP}InverseWarpField_ss_N4_${antsM}.nii.gz
     else
-        antsMI=N4_${antsM}.nii.gz
+        antsMI=N4_${antsM}.nii
 	antsN=${antsP}N4_${antsM}.nii.gz
 	antsI=${antsP}InverseWarpField_N4_${antsM}.nii.gz
     fi

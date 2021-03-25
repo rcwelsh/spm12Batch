@@ -65,7 +65,6 @@ then
 
 # You must point to SPM12 !!!
     
-    SPM12B1=${topDIR}/SPM/SPM12/spm12_with_R6313
     SPM12B1=/Users/rcwelsh/Software/spm12_r7219
     # Are we running on mnemosyne?
     if [ -d /erato ]
@@ -82,14 +81,6 @@ then
     SPM12B3=${SPM12B2}/matlabScripts
     
     AUXPATH=${SPM12B2}/spm12_patch
-
-# The directory for the matlab code to do spiral reconstruction
-
-    RECONMLIB=/Users/rcwelsh/matlabScripts/WELLES/mfiles
-    if [ ! -d ${RECONMLIB} ]
-    then
-       RECONMLIB=
-    fi
     
 #
 # If the sandbox is populated then we copy files to local disk for processing

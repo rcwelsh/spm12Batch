@@ -1,0 +1,62 @@
+
+    #
+    # now build the AFNI despiking command
+    #
+    # 
+   
+    # Make some abbreviations
+   
+    TMPINPUT=${UMBatchMaster}/${SUBJDIR}/${SUBJECT}/${fmriPATH}
+    TMPOUTPUT=${UMBatchMaster}/${SUBJDIROUT}/${SUBJECT}/${fmriPATH}
+    
+    # Make the output if needed.
+    
+    if [ "${SUBJDIR}" != "${SUBJDIROUT}" ]
+    then
+      mkdir -p ${TMPOUTPUT}
+    fi
+            
+    # Now loop on possible runs.
+    cd ${TMPINPUT}
+    
+    for RUNFILE in `ls run*/${volumeWILD}*.nii`
+    do
+       RUNNII=${TMPINPUT}/${RUNFILE}
+       # Go to the output place.
+       cd ${TMPOUTPUT}
+       RUNDIR=`dirname ${RUNFILE}`
+       RUNNAME=`basename ${RUNFILE}`
+       mkdir -p ${RUNDIR}
+       cd ${RUNDIR}
+       export AFNI_3dDespike_NEW=YES
+       tmpFile=ds_tmp_$$
+       3dDespike -ssave ${tmpFile}_pattern -prefix ${tmpFile} ${RUNNAME}
+       echo "${DATE} : ${USER} : 3dDespike -ssave ${tmpFile}_pattern -prefix ${tmpFile} ${RUNNAME}" >> .despike
+       3dAFNItoNIFTI ${tmpFile}+orig       
+       echo "${DATE} : ${USER} : 3dAFNItoNIFTI ${tmpFile}+orig   " >> .despike    
+       mv ${tmpFile}.nii ${outputName}${RUNNAME}
+       echo "${DATE} : ${USER} : mv ${tmpFile}.nii ${outputName}${RUNNAME}" >> .despike
+       rm ${tmpFile}+orig.*
+       echo "${DATE} : ${USER} : rm ${tmpFile}+orig.*" >> .despike
+       3dAFNItoNIFTI ${tmpFile}_pattern+orig       
+       echo "${DATE} : ${USER} : 3dAFNItoNIFTI ${tmpFile}_pattern+orig  " >> .despike     
+       mv ${tmpFile}_pattern.nii ${outputName}pattern_${RUNNAME}
+       echo "${DATE} : ${USER} : mv ${tmpFile}pattern.nii ${outputName}_pattern_${RUNNAME}" >> .despike
+       rm ${tmpFile}_pattern+orig.*
+       echo "${DATE} : ${USER} : rm ${tmpFile}_pattern+orig.*" >> .despike
+       #
+       # Now copy over any matching slice timing file.
+       #
+       RUNFILENAME=`echo ${RUNNAME} | awk -F.nii '{print $1}'`
+       if [ -e ${TMPINPUT}/${RUNDIR}/${RUNFILENAME}.sliceTiming ]
+       then
+          DATE=`date`
+	  cp -rp ${TMPINPUT}/${RUNDIR}/${RUNFILENAME}.sliceTiming ./${outputName}${RUNFILENAME}.sliceTiming
+	  echo "${DATE} : ${USER} : cp -rp ${TMPINPUT}/${RUNDIR}/${RUNFILENAME}.sliceTiming ./${outputName}${RUNFILENAME}.sliceTiming" >> .despike
+       fi
+    done
+   
+    #
+    #
+    #
+    

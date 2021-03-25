@@ -37,9 +37,11 @@
     for RUNFILE in `ls run*/${volumeWILD}*.nii`
     do
        RUNNII=${TMPINPUT}/${RUNFILE}
-       cd ${UMBatchMaster}/${SUBJDIROUT}/${SUBJECT}/${fmriPATH}
-       RUNDIR=`echo ${RUNFILE} | awk -F/ '{print $1}'`
-       RUNNAME=`echo ${RUNFILE} | awk -F/ '{print $2}'`
+       cd ${TMPOUTPUT}
+       RUNDIR=`dirname ${RUNFILE}`
+       RUNNAME=`basename ${RUNFILE}`
+       #RUNDIR=`echo ${RUNFILE} | awk -F/ '{print $1}'`
+       #RUNNAME=`echo ${RUNFILE} | awk -F/ '{print $2}'`
        mkdir -p ${RUNDIR}
        cd ${RUNDIR}
        if [ "${forceGeometry}" == "true" ]
@@ -47,16 +49,27 @@
           mkdir tmpDir
           cd tmpDir
           ${thisDir}/geometryAssertV2.sh ${FIRSTRUNFILE} ${RUNNII} ${RUNNAME}
-          ${thisDir}/distortionCorrection.sh ${RUNNAME} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${backwardImage} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${forwardImage}
+          ${thisDir}/distortionCorrection.sh ${RUNNAME} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${backwardImage} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${forwardImage} ${outputName}
           rm ${RUNNAME}
           mv * ../
           cd ../
           rmdir tmpDir
        else			     		     
-          ${thisDir}/distortionCorrection.sh ${RUNNII} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${backwardImage} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${forwardImage}
+          ${thisDir}/distortionCorrection.sh ${RUNNII} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${backwardImage} ${TMPOUTPUT}/${fieldMapPath}/geo_${RND3DIGIT}_${forwardImage} ${outputName}
        fi				         
+       #
+       # Now copy over any matching slice timing file.
+       #
+       RUNFILENAME=`echo ${RUNNAME} | awk -F.nii '{print $1}'`
+       if [ -e ${TMPINPUT}/${RUNDIR}/${RUNFILENAME}.sliceTiming ]
+       then
+          DATE=`date`
+	  cp -rp ${TMPINPUT}/${RUNDIR}/${RUNFILENAME}.sliceTiming ./${outputName}${RUNFILENAME}.sliceTiming
+	  echo "${DATE} : ${USER} : cp -rp ${TMPINPUT}/${RUNDIR}/${RUNFILENAME}.sliceTiming ./${outputName}${RUNFILENAME}.sliceTiming" >> .distortionCorrectionLog
+       fi
     done
    
     #
     #
     #
+    

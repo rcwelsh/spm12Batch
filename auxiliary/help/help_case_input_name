@@ -1,0 +1,3 @@
+    echo "    -in PrependName      name to add to input file name (specificaly the ANTs warp), "
+    echo "                         default is \"${inputName}\"."
+    echo 

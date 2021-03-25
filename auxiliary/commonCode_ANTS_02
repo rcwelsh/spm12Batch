@@ -2,7 +2,7 @@
 
 . ${thisDir}/auxiliary/checkANTSParts
 
-# and we need FSL
-
-. ${thisDir}/auxiliary/checkFSLParts
+## and we need FSL
+#
+#. ${thisDir}/auxiliary/checkFSLParts
 

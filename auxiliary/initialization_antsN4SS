@@ -47,7 +47,7 @@ antsCalc4="100x100x50"
 # Default to no skull-stripping
 
 SKULLSTRIP=FALSE
-ANTSTEMPLDIR=/home/Software/ANTS-2.3.1/Templates/MICCAI2012-Multi-Atlas-Challenge-Data
+ANTSTEMPLDIR=${ANTSPATH}/../Templates/MICCAI2012-Multi-Atlas-Challenge-Data
 ANTSPN=6
 ANTSDF=2
 
