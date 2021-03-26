@@ -19,10 +19,15 @@ echo The listing of commands is in the rough order that one would do for
 echo processing of data from k-space data to final smoothed, MNI-based 
 echo T2* images.
 echo
-echo Developed with support from R01NS052514
-echo "                           R01NS082304"
+echo "Developed with support from R01NS052514"
+echo "                            R01NS082304"
 echo
 echo Updated March 2021
+echo
+echo
+echo To check your installation and PATH to necessary software, please run:
+echo
+echo "          spm12Batch_CheckInstall"
 echo
 echo --------------------------------------------------------------------------
 echo 
