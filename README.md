@@ -38,7 +38,7 @@ In summary,
 * Slice-time correction is then executed for non-SMS data (**_sliceTime12_**) or for SMS/Multi-band data (**_sliceTimeMB_**). Both commands use SPM.
 * Motion correction is done with SPM using **_realignfMRI12_**.
 * To get the data into normalized space, the high-resolution image (such as a MPRAGE, SPGR, etc) is co-registered (using SPM) to the resulting motion corrected data with **_coregOverlay_**.
-* Normalization is invovoked with **_antsHiRes_** and uses the ANts suite of commands. You can also opt to use SPM for normalization using **_newSeg_**.
+* Normalization is invovoked with **_antsHiRes_** and uses the ANTs suite of commands. You can also opt to use SPM for normalization using **_newSeg_**.
 * BOLD data is the taking to normalized space with **_antsfMRI_**. If you use **_newSeg_**, then instead of **_antsfMRI_** you would invoke **_warpSeg_** to take BOLD to MNI.
 * Resulting BOLD data can be smoothed using SPM by invoking **_smoothfMRI_**.
 * If you need tissue segementation, such as to use with [COMPCOR](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2214855/) and want WM and CSF segments, I have found that SPM does a better job on segmentation, so then you'd invoke **_newSeg_** but have the N4 bias corrected data from the **_antsHiRes_** as the input. After that you would then invoke **_antsfMRI_** in a manner for it to pick up the SPM derived tissue segments.
