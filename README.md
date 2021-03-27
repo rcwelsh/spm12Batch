@@ -2,13 +2,13 @@
 
 #### An ecosystem for doing pre-processing of fMRI data in a flexible, and reproducible manner.
 
-**spm12Batch** provides suite of **bash** commands for interacting with neuroimaging processing software. The purpose of this suite is to provide an automated processing pipeline elements to take BOLD (T2*) data from participant space to MNI space. The tool utilizes various of freely available neuroimaging software.
+**spm12Batch** provides suite of **bash** commands for interacting with neuroimaging processing software. The purpose of this suite is to provide automated processing pipeline elements to take BOLD (T2*) data from participant space to MNI space. The tool utilize various neuroimaging software packages which are freely available.
 
 #### My apologies in advance for some scripts that have been deprecated but not removed as yet.
 
 The suite of commands are written in bash, and will work in a MAC OS X (Intel based) and LINUX/UNIX operating environment.
 
-This system runs on _bare metal_ and not in _docker_.
+This system runs on _bare metal_ and not in _docker_. This system uses a simplified data organization scheme.
 
 To correctly use, you will need to have installed the following software on your system:
 
