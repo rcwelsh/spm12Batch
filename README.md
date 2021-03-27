@@ -43,7 +43,7 @@ In summary,
 
 To see an example of how these calls can be further automated look in the **BatchExamples/** sub-folder.
 
-**If you use this software, please place an acknowledgment in your manuscript to me and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh).**
+**If you use this software, please place an acknowledgment in your manuscript to _Robert C. Welsh_, _spm12Batch_, and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh).**
 
 _Enjoy!_
 
