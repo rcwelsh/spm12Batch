@@ -32,11 +32,11 @@ In summary,
 
 * distortion correction (**_distortionCorrect_**) uses the Anima software to correct EPI using a pseudo field-map, the results can be sent to a new directory tree to keep processing output separate from input.
 * to move other necessary data from the input area to the derivatives (processed area), such as anatomy images, you use the **_prepDerivatives_**.
-* you can then remove spikes in you data using the AFNI 3dDespike command by invokig )_despikeAFNI_.
+* you can then remove spikes in you data using the AFNI 3dDespike command by invoking **_despikeAFNI_**.
 * Slice-time correction is then executed for non-SMS data (**_sliceTime12_**) or for SMS/Multi-band data (**_sliceTimeMB_**). Both commands use SPM.
-* Motion correction is done with SPM using **_realignfMRI12_.
-* To get the data into normalized space, the high-resolution image (such as a MPRAGE, SPGR, etc) is co-registered to the resulting motion corrected data with **_coregOverlay_.
-* Normalization is invovoked with **_antsHiRes_** and uses the ANts suite of commands. You can also opt to use SPM for normalization using **_newSeg_.
+* Motion correction is done with SPM using **_realignfMRI12_**.
+* To get the data into normalized space, the high-resolution image (such as a MPRAGE, SPGR, etc) is co-registered to the resulting motion corrected data with **_coregOverlay_**.
+* Normalization is invovoked with **_antsHiRes_** and uses the ANts suite of commands. You can also opt to use SPM for normalization using **_newSeg_**.
 * BOLD data is the taking to normalized space with **_antsfMRI_. If you use **_newSeg_, then instead of **_antsfMRI_** you would invoke **_warpSeg_** to take BOLD to MNI.
 * Resulting BOLD data can be smoothed using SPM by invoking **_smoothfMRI_.
 * If you need tissue segementation, such as to use with COMPCOR and want WM and CSF segments, I have found that SPM does a better job on segmentation, so then you'd invoke **_newSeg_** but have the N4 bias corrected data from the **_antsHiRes_** as the input. After that you would then invoke **_antsfMRI_** in a manner for it to pick up the SPM derived tissue segments.
