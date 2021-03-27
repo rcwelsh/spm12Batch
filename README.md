@@ -18,7 +18,7 @@ To correctly use, you will need to have installed the following software on your
 
 A typical pipeline is shown here:
 
-![overview1](Documentation/spm12Batch-Pipeline/spm12Batch-pipeline.010.png)
+![overview1](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.010.png)
 
 The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system.
 
