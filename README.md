@@ -37,7 +37,7 @@ In summary,
 * You can then remove spikes in you data using the AFNI 3dDespike command by invoking **_despikeAFNI_**.
 * Slice-time correction is then executed for non-SMS data (**_sliceTime12_**) or for SMS/Multi-band data (**_sliceTimeMB_**). Both commands use SPM.
 * Motion correction is done with SPM using **_realignfMRI12_**.
-* To get the data into normalized space, the high-resolution image (such as a MPRAGE, SPGR, etc) is co-registered to the resulting motion corrected data with **_coregOverlay_**.
+* To get the data into normalized space, the high-resolution image (such as a MPRAGE, SPGR, etc) is co-registered (using SPM) to the resulting motion corrected data with **_coregOverlay_**.
 * Normalization is invovoked with **_antsHiRes_** and uses the ANts suite of commands. You can also opt to use SPM for normalization using **_newSeg_**.
 * BOLD data is the taking to normalized space with **_antsfMRI_**. If you use **_newSeg_**, then instead of **_antsfMRI_** you would invoke **_warpSeg_** to take BOLD to MNI.
 * Resulting BOLD data can be smoothed using SPM by invoking **_smoothfMRI_**.
@@ -51,4 +51,5 @@ _Enjoy!_
 
 Robert Welsh
 
-robert.c.welsh (at) utah (dot) edu
+Copyright 2021 Robert Cary Welsh, All rights reserved. See LICENSE file for more details.
+
