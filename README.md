@@ -49,6 +49,8 @@ To see an example of how these calls can be further automated look in the **Batc
 
 **If you use this software, please place an acknowledgment in your manuscript to _Robert C. Welsh_, _spm12Batch_, and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh).**
 
+Finally, the system is easily extendable. If a new pre-processing step is needed to be added, the ecosystem can be modified to accept a new command. Please contact Robert if you feel a new command, within the context of spm12Batch, is needed.
+
 _Enjoy!_
 
 Robert Welsh
