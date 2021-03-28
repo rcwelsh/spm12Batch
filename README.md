@@ -8,9 +8,9 @@
 
 The suite of commands are written in bash, and will work in a MAC OS X (Intel based) and LINUX/UNIX operating environment.
 
-This system runs on _bare metal_ and not in _docker_. This system uses a simplified data organization scheme.
+This system runs on _bare metal_ and not in _docker_. This system uses a simplified data organization scheme. See the documentation for the scheme. It relies on generic names for your folders and files. The only thing that is unique is the name of the session (participant) folder. This allows the pipeline to interact with SPM in a straight-forward manner.
 
-To correctly use, you will need to have installed the following software on your system:
+To correctly use, in addtion to [MATLAB](https://www.mathworks.com), you will need to have installed the following software on your system:
 
 1. [SPM](https://www.fil.ion.ucl.ac.uk/spm/)
 2. [ANTs](http://stnava.github.io/ANTs/)
@@ -18,11 +18,11 @@ To correctly use, you will need to have installed the following software on your
 4. [AFNI](https://afni.nimh.nih.gov)
 5. [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
 
-Each step is single command. Each command takes various parameters to override default assumptions. The command can also accept a list of sessions to run. The processes default to running in the background, but can be configured to run in the foreground. By running in the foreground, you can also daisy chain the steps together.
+Each step is single command. Each command takes various parameters to override default assumptions. The command can also accept a list of sessions to run. The processes default to running in the background, but can be configured to run in the foreground. By running in the foreground, you can also daisy chain the steps together. If you computer system allows for email, look at the **spm12Batch_Global** variable **MAILRECPT** to ensure it is correct. You can configure the system such that emails can be generated at job completion. The system, if configured correctly, can also send text messages at job completion. To attempt that configuration you will need some system administration experience. 
 
 ![overview0](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.004.png)
 
-The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system.
+The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system. An additional philosophy is that once a script is run once, it should not be run again as it becomes part of the documentation on how you have processed your data.
 
 The purpose of the suite is to provide rapid processing with **_extensive documentation and logging of processes_**, and more control of pre-processing to the investigator. A given step of the pre-processing is run prior to the next step. Typically one would run a bunch of sessions for a single step. That is, 10 sessions could be processed in the **_distortionCorrect_** step.
 

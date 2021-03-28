@@ -38,6 +38,11 @@
 #                     it points to the correct. It will point to the actual binary
 #                     image and not just the ".app" folder.
 #
+#      LOGSPM12BATCHUSAGE --
+#                     Set to something other than 1 for logging of usage. The usage
+#                     goes into spm12Batch/Usage. All users must have write access
+#                     to that sub-folder.
+#
 # ** End of Job Email
 #
 #     If you system has postfix enabled for sending out email, you can configure the system
@@ -80,6 +85,11 @@ then
     echo
     echo Initializing spm12 Batch
     echo
+
+# Are we logging usage? Set to something other than 1 to not log.
+# The logs do into the spm12Batch/Usage directory
+
+LOGSPM12BATCHUSAGE=1
 
 # Bring in out function to determine whether something
 # is a number or not.

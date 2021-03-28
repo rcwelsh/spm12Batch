@@ -1,11 +1,17 @@
 cd $UMBatchMaster
 cd $MATLABDIR
 
-
 # Make a log of what is being used.
 
-mkdir -p ${thisDir}/Usage/${SANDBOXHOST}/${theYearMonth}
-echo "${FULLSCRIPTNAME}.sh" > ${thisDir}/Usage/${SANDBOXHOST}/${theYearMonth}/${SCRIPTNAME}
+if [ ${LOGSPM12BATCHUSAGE} == 1 ]
+then
+   mkdir -p ${thisDir}/Usage/${SANDBOXHOST}/${theYearMonth}
+
+   if [ $? == 0 ]
+   then
+     echo "${FULLSCRIPTNAME}.sh" > ${thisDir}/Usage/${SANDBOXHOST}/${theYearMonth}/${SCRIPTNAME}
+   fi
+fi
 
 # Now launch.
 
