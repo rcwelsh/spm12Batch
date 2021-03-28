@@ -18,15 +18,17 @@ To correctly use, you will need to have installed the following software on your
 4. [AFNI](https://afni.nimh.nih.gov)
 5. [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
 
-A typical pipeline is shown here:
+Each step is single command. Each command takes various parameters to override default assumptions. The command can also accept a list of sessions to run. The processes default to running in the background, but can be configured to run in the foreground. By running in the foreground, you can also daisy chain the steps together.
 
-![overview1](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.010.png)
+![overview0](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.004.png)
 
 The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system.
 
-The purpose of the suite is to provide rapid processing with **_extensive documentation and logging of processes_**, and more control of pre-processing to the investigator.
+The purpose of the suite is to provide rapid processing with **_extensive documentation and logging of processes_**, and more control of pre-processing to the investigator. A given step of the pre-processing is run prior to the next step. Typically one would run a bunch of sessions for a single step. That is, 10 sessions could be processed in the **_distortionCorrect_** step.
 
-Each step is single command. Each command takes various parameters to override default assumptions. The command can also accept a list of sessions to run. The processes default to running in the background, but can be configured to run in the foreground. By running in the foreground, you can also daisy chain the steps together.
+A typical pipeline is shown here:
+
+![overview1](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.010.png)
 
 Full documentation is found in the **Documentation/** sub-folder.
 
@@ -43,7 +45,7 @@ In summary,
 * Resulting BOLD data can be smoothed using SPM by invoking **_smoothfMRI_**.
 * If you need tissue segementation, such as to use with [COMPCOR](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2214855/) and want WM and CSF segments, I have found that SPM does a better job on segmentation, so then you'd invoke **_newSeg_** but have the N4 bias corrected data from the **_antsHiRes_** as the input. After that you would then invoke **_antsfMRI_** in a manner for it to pick up the SPM derived tissue segments.
 
-To see an example of how these calls can be further automated look in the **BatchExamples/** sub-folder.
+To see an example of how these calls can be further automated look in the **BatchExamples/** sub-folder. The examples are extra scripts for building jobs more automatically for a given step. The **_launch\_..._** scripts are written with flexibility to process a group of sessions sequentially or in parallel based on your computational resources.
 
 **If you use this software, please place an acknowledgment in your manuscript to _Robert C. Welsh_, _spm12Batch_, and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh).**
 

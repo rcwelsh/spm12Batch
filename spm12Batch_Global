@@ -1,6 +1,6 @@
 #
 # Copyright Robert C. Welsh, Ann Arbor MI 2005-2016
-# 	    	      	     Salt Lake City, UT, 2017
+# 	    	      	     Salt Lake City, UT, 2016-2021
 #
 # No warranty or guarantee made. USE AT OWN RISK.
 #
@@ -8,7 +8,7 @@
 # definition of "topDIR" below. Point to the parent directory
 # of the spm12 and spm12Batch directories. In our local installation
 # the directories "spm12" and "spm12Batch" and "spm12_patch"
-# live side-by-side under the same parent. If you wish something differnt 
+# live side-by-side under the same parent. If you wish something different 
 # than that then you will need "bash" knowledge greater than novice.
 #
 #
@@ -21,8 +21,39 @@
 #  MAILRECPT
 #
 #
-# YOU NEED TO MAKE SURE TO HAVE ANTs and ANIMA installed and in your path
+# ** INSTALLATION VARIABLE TO CHECK
 #
+#      SPM12B1     -- points to your local SPM12 installation directory
+#      SPM12B2     -- automatically defined
+#      SPM12B3     -- automatically defined
+#
+#      SANDBOXTOP  -- top directory of the sandbox directory
+#
+#      SANDBOXUSE  -- string that is passed to a grep command to determine
+#                     if a sandbox should be used. See the Documentation/
+#                     about why a sandbox is used.
+#
+#      MATLAB      -- where MATLAB is found. If in your path it will be okay, but for
+#                     Mac OS X it is looking in the Applications/ folder, so make sure
+#                     it points to the correct. It will point to the actual binary
+#                     image and not just the ".app" folder.
+#
+# ** End of Job Email
+#
+#     If you system has postfix enabled for sending out email, you can configure the system
+#     to send emails to the user when the job has finished. In the past I have been
+#     successful with also sending text messages to phones.
+#
+# ** Other software needed
+#
+#    YOU NEED TO MAKE SURE TO HAVE FSL, ANTs, ANIMA, AFNI installed and in your path
+#
+# ** Installation check
+#
+#    Run the command spm12Batch_CheckInstall which will look for executables.
+#
+# ** Daisy Chain -- experts
+# 
 # Using standard error exit codes as shown in
 # https://www.freebsd.org/cgi/man.cgi?query=sysexits&apropos=0&sektion=0&manpath=FreeBSD%204.3-RELEASE&format=html
 #
@@ -33,6 +64,8 @@
 # 66  = input file does not exist
 # 65  = input data was incorrect
 # 64  = command issued incorrectly
+#
+# -----------------------------------------------------------------------------
 
 # Added some proper error returns when failing due to error.
 
@@ -57,7 +90,10 @@ then
 # SOME GLOBAL THINGS TO CHANGE ACCORDING TO SITE
 #    
 
-
+    # Since the path is set to this command, then
+    # the code will use the following to define
+    # some internal variables needed.
+     
     curdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     topDIR="$( cd $curdir/.. && pwd )"
 
@@ -65,7 +101,8 @@ then
 
 # You must point to SPM12 !!!
     
-    SPM12B1=/Users/rcwelsh/Software/spm12_r7219
+    SPM12B1=/Users/rcwelsh/Software/SPM12/spm12_r7771
+
     # Are we running on mnemosyne?
     if [ -d /erato ]
     then
@@ -89,7 +126,15 @@ then
 #
 
     SANDBOXHOST=`echo $HOSTNAME | awk -F. '{print $1}' | awk -F- '{print $1}'`
-    SANDBOX=/home/sandbox/${SANDBOXHOST}/sandbox/
+    HOSTTYPE=`uname`
+    if [ "${HOSTTYPE}" == "Darwin" ]
+    then
+	SANDBOXTOP=${USER}/sandbox
+    else
+	SANDBOXTOP=/home/sandbox
+    fi
+     
+    SANDBOX=${SANDBOXTOP}/${SANDBOXHOST}/sandbox/
 
 # list the devices that require the use of the sandbox
 

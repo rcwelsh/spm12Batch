@@ -1,8 +1,8 @@
 # # # # # # # # # # # # # # # # # #
 #
-# This is a modified version of the spm12Batch processing system written by Robert C. Welsh, Ann Arbor MI
+# This is a modified version of the spm12Batch processing system written by Robert C. Welsh.
 #
-# Copyright 2002-2012
+# Copyright 2002-2021, All rights reserved.
 #
 # No warranties or guarantees are made. 
 #
@@ -16,13 +16,13 @@
 #
 # If need be you may get these from:
 #
-#     spm : http://www.fil.ion.ucl.ac.uk/spm/
+# 1. SPM	https://www.fil.ion.ucl.ac.uk/spm/
+# 2. ANTs	http://stnava.github.io/ANTs/
+# 3. Anima	https://anima.readthedocs.io/en/latest/
+# 4. AFNI	https://afni.nimh.nih.gov
+# 5. FSL	https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
 #
-#     fsl : http://www.fmrib.ox.ac.uk/fsl/ 
-#
-#
-#
-#
+# You will need to have packages 2-5 installed and accessible via your PATH environmental variable.
 #
 # -----------------------------------------------------------------
 # -----------------------------------------------------------------
@@ -44,21 +44,15 @@
 #     http://tldp.org/LDP/abs/html/
 #
 # You will need to have spm12 distribution (Included in this distribution)
-# 
-# You will need to have fsl, at least 4.1.7, it's known to work with 4.1.7 and 4.1.8
+#
 #
 # FILE FORMATS
 # 
-# The code can only use NIFTI images (.nii), and not NIFTI_GZ.
-#
-# If you are still using analyze img/hdr it's time to enter the 21st century!
+# The code can only use NIFTI images (.nii), and not NIFTI_GZ (an SPM limitation)
 #
 # HELP
 # 
-# Look at SPM12BATCH.pdf for a keynote description of the processing.
-#
-#
-#
+# Look in Documentation/
 #
 #
 #
