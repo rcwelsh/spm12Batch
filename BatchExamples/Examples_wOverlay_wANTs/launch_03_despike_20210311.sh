@@ -75,7 +75,7 @@ rm -r ${THELOG} 2> /dev/null
 
 SPMCMD=despikeAFNI
 
-CMD="${SPMCMD} -f ${FUNC} -l -M ${MASTERSUBJ} -MO ${MASTERDERIV} -on ${OUTNAME} -v ${INPUTVOL}"
+CMD="${SPMCMD} -f ${FUNC} -M ${MASTERSUBJ} -MO ${MASTERDERIV} -on ${OUTNAME} -v ${INPUTVOL}"
 
 if [ "${RUNAS}" == "parallel" ]
 then

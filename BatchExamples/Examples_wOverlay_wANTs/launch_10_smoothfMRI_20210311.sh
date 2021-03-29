@@ -73,7 +73,7 @@ rm -r ${THELOG} 2> /dev/null
 
 SPMCMD=smoothfMRI
 
-CMD="${SPMCMD} -l -f ${FUNC} -M ${MASTERSUBJ} -on ${OUTNAME} -v ${INPUTVOL}"
+CMD="${SPMCMD} -f ${FUNC} -M ${MASTERSUBJ} -on ${OUTNAME} -v ${INPUTVOL}"
 
 if [ "${RUNAS}" == "parallel" ]
 then

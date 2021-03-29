@@ -73,7 +73,7 @@ rm -r ${THELOG} 2> /dev/null
 
 SPMCMD=realignfMRI12
 
-CMD="${SPMCMD} -l -M ${MASTERSUBJ} -on ${OUTNAME} -v ${INPUTVOL}"
+CMD="${SPMCMD} -M ${MASTERSUBJ} -on ${OUTNAME} -v ${INPUTVOL}"
 
 if [ "${RUNAS}" == "parallel" ]
 then

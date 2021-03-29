@@ -76,7 +76,7 @@ rm -r ${THELOG} 2> /dev/null
 
 SPMCMD=sliceTime12
 
-CMD="${SPMCMD} -F 2.0 -f ${FUNC} -l -M ${MASTERSUBJ} -on ${OUTNAME} -v ${INPUTVOL}"
+CMD="${SPMCMD} -F 2.0 -f ${FUNC} -M ${MASTERSUBJ} -on ${OUTNAME} -v ${INPUTVOL}"
 
 if [ "${RUNAS}" == "parallel" ]
 then
