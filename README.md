@@ -1,8 +1,8 @@
 # spm12Batch
 
-#### An ecosystem for doing pre-processing of fMRI data in a flexible, and reproducible manner.
+#### An ecosystem for doing pre-processing of fMRI data in a flexible and reproducible manner.
 
-**spm12Batch** provides suite of **bash** commands for interacting with neuroimaging processing software. The purpose of this suite is to provide automated processing pipeline elements to take BOLD (T2*) data from participant space to MNI space. The tool utilize various neuroimaging software packages which are freely available.
+**spm12Batch** provides suite of **bash** commands for interacting with neuroimaging processing software. The purpose of this suite is to provide automated processing pipeline elements to take BOLD (T2*) data from participant space to MNI space. The tool utilizes various neuroimaging software packages which are freely available.
 
 #### My apologies in advance for some scripts that have been deprecated but not removed as yet.
 
@@ -22,7 +22,7 @@ Each step is single command. Each command takes various parameters to override d
 
 ![overview0](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.004.png)
 
-The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system. An additional philosophy is that once a script is run once, it should not be run again as it becomes part of the documentation on how you have processed your data.
+The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system. An additional philosophy is that once a script is run, it should not be run again as it becomes part of the documentation on how you have processed your data.
 
 The purpose of the suite is to provide rapid processing with **_extensive documentation and logging of processes_**, and more control of pre-processing to the investigator. A given step of the pre-processing is run prior to the next step. Typically one would run a bunch of sessions for a single step. That is, 10 sessions could be processed in the **_distortionCorrect_** step.
 
@@ -47,9 +47,9 @@ In summary,
 
 To see an example of how these calls can be further automated look in the **BatchExamples/** sub-folder. The examples are extra scripts for building jobs more automatically for a given step. The **_launch\_..._** scripts are written with flexibility to process a group of sessions sequentially or in parallel based on your computational resources.
 
-**If you use this software, please place an acknowledgment in your manuscript to _Robert C. Welsh_, _spm12Batch_, and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh).**
+**If you use this software, please place an acknowledgment in your manuscript to _Robert C. Welsh_, _spm12Batch_, and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh). Please drop me a note if you find it useful.**
 
-Finally, the system is easily extendable. If a new pre-processing step is needed to be added, the ecosystem can be modified to accept a new command. Please contact Robert if you feel a new command, within the context of spm12Batch, is needed.
+Finally, the system is easily extendable. If a new pre-processing step is needed to be added, the ecosystem can be modified to accept a new command. Please contact me if you feel a new command, within the context of spm12Batch, is needed. It usually takes only 4-6 hours to build a new command.
 
 _Enjoy!_
 

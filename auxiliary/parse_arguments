@@ -4,7 +4,7 @@
 
 # permitted arguments
 # 
-# A a b D d E e F f g h i M m n O o p P R r S s T t U u V v w Z#
+# A a b bi D d E e F fi fm f g h i inc  k M m in on O o p P R r S s T t U u V v w Z#
 #
 #
 
@@ -260,6 +260,14 @@ do
 		    . ${thisDir}/auxiliary/setIncludeList
 		    ;;
 
+              # case_set_kernel
+	      # 
+	      # smoothing kernel
+	      #
+		"k")
+		    . ${thisDir}/auxiliary/setGaussianKernel
+		    ;;
+		
 	      # case_do_erosion_last
               #
               # a flag to tell vbm8HiRes/newSeg to do erosion as last step

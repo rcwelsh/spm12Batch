@@ -126,6 +126,9 @@
 	    "inc") 
 	        . ${thisDir}/auxiliary/help/help_case_copy_list
 	        ;;
+	    "k") 
+	        . ${thisDir}/auxiliary/help/help_case_set_gaussian_kernel
+	        ;;
             "L") 
                 . ${thisDir}/auxiliary/help/help_case_erosion_flag
                 ;;

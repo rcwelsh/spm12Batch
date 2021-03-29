@@ -32,7 +32,7 @@ thisDir=`dirname $theCommand`
 
 thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
-allowedOptions=" B D d e f l M on t U v "
+allowedOptions=" B D d e f k l M on t U v "
 
 # This piece of code all of the spm12Batch scripts will use
 . ${thisDir}/auxiliary/commonCode_AllScriptsStart
@@ -53,27 +53,27 @@ allowedOptions=" B D d e f l M on t U v "
 
 . ${thisDir}/auxiliary/superDebugStatus
 
-# Figure out the gaussian kernal parameters.
-
-if (( $nParam != 0 ))
-    then
-    if (( $nParam == 1 )) 
-	then
-	Gx=${params[1]}
-	Gy=${params[1]}
-	Gz=${params[1]}
-    else
-	if (( $nParam == 3 ))
-	    then
-	    Gx=${params[1]}
-	    Gy=${params[2]}
-	    Gz=${params[3]}
-	else
-	    echo "Number of numeric parameters needs to be either 1 or 3"
-	    exit 0
-	fi
-    fi
-fi
+## Figure out the gaussian kernal parameters.
+#
+#if (( $nParam != 0 ))
+#    then
+#    if (( $nParam == 1 )) 
+#	then
+#	Gx=${params[1]}
+#	Gy=${params[1]}
+#	Gz=${params[1]}
+#    else
+#	if (( $nParam == 3 ))
+#	    then
+#	    Gx=${params[1]}
+#	    Gy=${params[2]}
+#	    Gz=${params[3]}
+#	else
+#	    echo "Number of numeric parameters needs to be either 1 or 3"
+#	    exit 0
+#	fi
+#    fi
+#fi
 
 # Make the sandbox if possible.
 

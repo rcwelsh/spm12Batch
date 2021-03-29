@@ -1,0 +1,3 @@
+    echo "    -k value             set the Gaussian Smoothing Kernel, "
+    echo "                         default is ${gaussianKernel}."
+    echo 

@@ -12,11 +12,7 @@ testFLAG=0
 debugFLAG=0
 SuperDebugFLAG=0
 
-# Default smoothing criteria
-Gx=5
-Gy=5
-Gz=5
-nParam=0
+# Default file type
 FINDVOLEXT=nii
 
 # User email to send mail to at job completion.

@@ -5,6 +5,9 @@
 # The ability to modify the name as needed on output.
 outputName=s
 
+# Default gaussian smoothing kernel
+gaussianKernel=5
+
 #
 # all done
 #

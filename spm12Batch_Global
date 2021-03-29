@@ -139,7 +139,7 @@ LOGSPM12BATCHUSAGE=1
     HOSTTYPE=`uname`
     if [ "${HOSTTYPE}" == "Darwin" ]
     then
-	SANDBOXTOP=${USER}/sandbox
+	SANDBOXTOP=${HOME}/sandbox
     else
 	SANDBOXTOP=/home/sandbox
     fi
