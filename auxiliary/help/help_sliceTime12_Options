@@ -2,6 +2,7 @@
     echo "${helpComment} Volume Wildcard           : ${volumeWILD}"
     echo "${helpComment} fMRI TR                   : ${TR}"
     echo "${helpComment} fMRI Reference Slice      : ${referenceSlice}"
-    echo "${helpComment} fMRI  Slice Order         : ${sliceOrder}" 
+    echo "${helpComment} fMRI Slice Order          : ${sliceOrder}" 
+    echo "${helpComment} prepending name           : ${outputName}"
 
     . ${thisDir}/auxiliary/help/help_options_end

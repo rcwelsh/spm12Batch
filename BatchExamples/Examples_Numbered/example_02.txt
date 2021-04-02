@@ -1,0 +1,17 @@
+distortionCorrect -M ImagingData/Subjects -MO ImagingData/SubjectsDerived -bi FM_AP.nii -fi FM_PA.nii -fm fieldMap -f func/Rest -on dc_ -v run TestSubject
+
+prepDerivatives -M ImagingData/Subjects -MO ImagingData/SubjectsDerived/ -inc anatomy/mprage_noFace.nii TestSubject
+
+despikeAFNI -M ImagingData/SubjectsDerived -f func/Rest -on ds_ -v dc_run TestSubject
+
+sliceTimeMB -M ImagingData/SubjectsDerived -f func/Rest -on aMB_ -v ds_dc_run TestSubject
+
+realignfMRI12 -M ImagingData/SubjectsDerived -f func/Rest -on r12_ -v aMB_ds_dc_run TestSubject
+
+coregOverlay -M ImagingData/SubjectsDerived -f func/Rest -o mprage_noFace -v r12_aMB_ds_dc_run TestSubject
+
+antsHiRes -M ImagingData/SubjectsDerived -a func/Rest/coReg -h mprage_noFace -w func/Rest/coReg/ANTs TestSubject
+
+antsfMRI -M ImagingData/SubjectsDerived -f func/Rest -h mprage_noFace.nii -on ants_ -v r12_aMB_ds_dc_run -w coReg/ANTs TestSubject
+
+smoothfMRI -M ImagingData/SubjectsDerived -f func/Rest -v ants_r12_aMB testSubject

@@ -4,7 +4,7 @@
 
 # permitted arguments
 # 
-# A a b bi D d E e F fi fm f g h i inc  k M m in on O o p P R r S s T t U u V v w Z#
+# A a b bi D d E e F fi fm f g h i inc k M m in on O o p P R r S s T t U u V v w Z#
 #
 #
 
@@ -69,6 +69,8 @@ do
 	    debugout "Parsing command : ${curParam}" $SuperDebugFLAG
 	    
             # allow multi-character switches now -- RCWelsh 2017-09-15
+
+	    echo "       processing parameter : ${curParam:1:${#curParam}}"
 
 	    case "${curParam:1:${#curParam}}" in
 		
@@ -570,27 +572,12 @@ do
 		    . ${thisDir}/auxiliary/exit_w_removal
 	    esac
 	else
-            if [ "${thisCommand}" == "smoothfMRI" ]
-            then
-		isnumber $1
-		validNumber=$?
-		if [ "${validNumber}" == "$SUCCESS" ]
-		then
-                    let nParam++
-                    params[${nParam}]=$1
-		else
-		    echo -e "\a"
-		    echo "Parameter number ${nParam} with a value of $1 is not a valid number"
-		    echo "Buggering out"
-	            . ${thisDir}/auxiliary/exit_w_removal
-		fi
-	    else
 	  #
 	  # It is not a directory and not an option, so it will be an error.
 	  #
 		. ${thisDir}/auxiliary/unrecognizedArgument
 	        . ${thisDir}/auxiliary/exit_w_removal
-	    fi
+	    
 	fi
     fi
   #
