@@ -15,20 +15,20 @@
 # 2021-03-11
 #
 
-EXPDIR=/thalia/data/MEND2/RUME19
+EXPDIR=/Users/macalab/Desktop/Pipeline/Experiment/TestSuite
 
 MASTERSUBJ=ImagingData/SubjectsDerived
 
 # put the subject list here, put in side quotes separated by space
-SESSIONLIST="3516_01 3542_01"
+SESSIONLIST="TestSubject"
 
 # Where are the data?
-FUNC=func/Rumination
+FUNC=func/Rest
 
 # ---------------- Probably don't need to edit below ----------------------
 
 # Overlay file
-HIRES=mprage.nii
+HIRES=mprage_noFace
 
 # Where to put results
 ANTSDIR=coReg/ANTs
@@ -46,7 +46,7 @@ BAD=0
 # Check for WM
 for SESSION in ${SESSIONLIST}
 do
-    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${FUNCDIR}/${ANTSDIR}/newSeg/c2N4_${HIRES} 2> /dev/null | wc -l`
+    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${FUNC}/${ANTSDIR}/newSeg/c2N4_${HIRES}.nii 2> /dev/null | wc -l`
     if [ ${NRUNS} -eq 0 ]
     then
 	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with c2N4_${HIRES}"
@@ -57,7 +57,7 @@ done
 # Check for CSF
 for SESSION in ${SESSIONLIST}
 do
-    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${FUNCDIR}/${ANTSDIR}/newSeg/c3N4_${HIRES} 2> /dev/null | wc -l`
+    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${FUNC}/${ANTSDIR}/newSeg/c3N4_${HIRES}.nii 2> /dev/null | wc -l`
     if [ ${NRUNS} -eq 0 ]
     then
 	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with c3N4_${HIRES}"
@@ -86,10 +86,10 @@ rm -r ${THELOG} 2> /dev/null
 SPMCMD=antsfMRI
 
 # Command to warp the WM
-CMD1="${SPMCMD} -f ${FUNCDIR} -h ${HIRES} -M ${MASTERSUBJ} -w ${ANTSDIR} -v c2N4_${HIRES} -in ants -on WM_ants_"
+CMD1="${SPMCMD} -f ${FUNC} -h ${HIRES} -M ${MASTERSUBJ} -w ${ANTSDIR} -v c2N4_${HIRES} -in ants -on WM_ants_"
 
 # Command to warp the CSF
-CMD2="${SPMCMD} -f ${FUNCDIR} -h ${HIRES} -M ${MASTERSUBJ} -w ${ANTSDIR} -v c3N4_${HIRES} -in ants -on CSF_ants_"
+CMD2="${SPMCMD} -f ${FUNC} -h ${HIRES} -M ${MASTERSUBJ} -w ${ANTSDIR} -v c3N4_${HIRES} -in ants -on CSF_ants_"
 
 if [ "${RUNAS}" == "parallel" ]
 then

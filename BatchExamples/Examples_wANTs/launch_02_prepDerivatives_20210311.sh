@@ -16,21 +16,21 @@
 # 2021-03-11
 #
 
-EXPDIR=/thalia/data/MEND2/RUME19
+EXPDIR=/Users/macalab/Desktop/Pipeline/Experiment/TestSuite
 
 MASTERSUBJ=ImagingData/Subjects
 MASTERDERIV=ImagingData/SubjectsDerived
 
 # put the subject list here, put in side quotes separated by space
-SESSIONLIST="3516_01 3542_01"
+SESSIONLIST="TestSubject"
 
 # Where are the data?
-FUNC=func/Rumination
+FUNC=func/Rest
 
 # ---------------- Probably don't need to edit below ----------------------
 
 # Overlay file
-HIRES=mprage.nii
+HIRES=mprage_noFace.nii
 
 # Anatomy directory
 ANATDIR=anatomy
