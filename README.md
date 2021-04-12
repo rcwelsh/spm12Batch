@@ -20,7 +20,7 @@ To correctly use, in addtion to [MATLAB](https://www.mathworks.com), you will ne
 
 Each step is single command. Each command takes various parameters to override default assumptions. The command can also accept a list of sessions to run. The processes default to running in the background, but can be configured to run in the foreground. By running in the foreground, you can also daisy chain the steps together. If you computer system allows for email, look at the **spm12Batch_Global** variable **MAILRECPT** to ensure it is correct. You can configure the system such that emails can be generated at job completion. The system, if configured correctly, can also send text messages at job completion. To attempt that configuration you will need some system administration experience. 
 
-![overview0](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.004.png)
+![overview0](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.005.png)
 
 The philosophy of this suite is to provide automated functionality with flexibility. Flexibility is found with respect to ordering of steps, naming of files, and folder organization, and does not require a rigid system. An additional philosophy is that once a script is run, it should not be run again as it becomes part of the documentation on how you have processed your data.
 
@@ -28,7 +28,7 @@ The purpose of the suite is to provide rapid processing with **_extensive docume
 
 A typical pipeline is shown here:
 
-![overview1](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.010.png)
+![overview1](https://github.com/rcwelsh/spm12Batch/blob/main/Documentation/spm12Batch-Pipeline/spm12Batch-Pipeline.012.png)
 
 Full documentation is found in the **Documentation/** sub-folder.
 
