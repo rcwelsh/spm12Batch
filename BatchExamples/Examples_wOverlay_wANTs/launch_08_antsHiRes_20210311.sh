@@ -20,7 +20,7 @@ EXPDIR=/thalia/data/NERDLab/joedata/Eureka/RestingState_Striatal_ConnTool
 MASTERSUBJ=ImagingData/Subjects20201104_Derived
 
 # put the subject list here, put in side quotes separated by space
-SESSIONLIST="PTest PTest2 Ptest3 Ptest4"
+SESSIONLIST="PTest PTest2 Ptest3"
 
 # Where are the data?
 FUNC=func/connect

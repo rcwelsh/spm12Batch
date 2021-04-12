@@ -17,8 +17,8 @@ echo "${DATE} : ${USER} : distortionCorrect -B -M ImagingData/Subjects -MO Imagi
 distortionCorrect -B -M ImagingData/Subjects -MO ImagingData/SubjectsDerived -bi FM_AP -fi FM_PA -fm fieldMap -f func/Rest -on dc_ -v run TestSubject
 
 DATE=`date`
-echo "${DATE} : ${USER} : prepDerivatives -B -M ImagingData/Subjects -MO ImagingData/SubjectsDerived/ -inc anatomy/mprage_noFace TestSubject"
-prepDerivatives -B -M ImagingData/Subjects -MO ImagingData/SubjectsDerived/ -inc anatomy/mprage_noFace TestSubject
+echo "${DATE} : ${USER} : prepDerivatives -B -M ImagingData/Subjects -MO ImagingData/SubjectsDerived/ -inc anatomy TestSubject"
+prepDerivatives -B -M ImagingData/Subjects -MO ImagingData/SubjectsDerived/ -inc anatomy TestSubject
 
 DATE=`date`
 echo "${DATE} : ${USER} : despikeAFNI -B -M ImagingData/SubjectsDerived -f func/Rest -on ds_ -v dc_run TestSubject"
