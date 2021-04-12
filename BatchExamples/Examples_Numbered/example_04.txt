@@ -10,7 +10,7 @@ realignfMRI12 -M ImagingData/SubjectsDerived -f func/Rest -on r12_ -v aMB_ds_dc_
 
 coregOverlay -M ImagingData/SubjectsDerived -f func/Rest -o loRes -v r12_aMB_ds_dc_run TestSubject
 
-coregHiRes -M ImagingData/SubjectsDerived -f func/Rest h mprage_noFace Å\o loRes TestSubject
+coregHiRes -M ImagingData/SubjectsDerived -f func/Rest h mprage_noFace -o loRes TestSubject
 
 antsHiRes -M ImagingData/SubjectsDerived -a func/Rest/coReg -h mprage_noFace -w func/Rest/coReg/ANTs TestSubject
 

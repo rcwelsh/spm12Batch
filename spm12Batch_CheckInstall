@@ -2,19 +2,18 @@
 
 # # # # # # # # # # # # # # # # # # 
 #
-# A command to make it easier on the user to warp the 
-# fmri time-series to the standard template.
+# Run this command to check if the install is okay
 #
-# This command will build a script to run and will also 
-# run the script in background.
+# This is a brief check, best is to run the
+# preprocessing example for TestSubject.
 #
-#   e.g.   spm23Batch
+#   e.g.   spm12Batch_CheckInstall
 #
 #
 #                         Robert C. Welsh
-#                         Copyright 2005-2012
+#                         Copyright 2005-2021
 #
-# spm12Batch
+# spm12Batch_CheckInstall
 #
 # # # # # # # # # # # # # # # # # #
 
@@ -22,8 +21,8 @@
 # Main spm23Batch function.
 #
 
-VERSION="3.0"
-VERSIONDATE="2017-02-13"
+VERSION="1.0"
+VERSIONDATE="2021-04-12"
 
 # Find out where the current command lives and execute some common code.
 
@@ -46,13 +45,16 @@ thisCommand=`echo $theCommand | awk -F/ '{print $NF}'`
 
 # Check for directories.
 
-SPM12BATCHOK="spm12Batch and necessary elements appear all okay"
+PROB=0
+
+SPM12BATCHOK="spm12Batch and necessary elements appear all okay."
 for ITEM in ${SPM12B1} ${SPM12B3}
 do
     if [ ! -d ${ITEM} ]
     then       
 	echo "Element missing : ${ITEM}"
-	SPM12BATCHOK="spm12Batch and necessary elements appear to have a problem"
+	SPM12BATCHOK="spm12Batch and necessary elements appear to have a problem."
+	PROB=1
     fi
 done
 
@@ -64,10 +66,32 @@ do
     if [ -z "${THERE}" ]
     then
 	echo "Element missing : ${ITEM}"
-	SPM12BATCHOK="spm12Batch and necessary elements appear to have a problem"
+	SPM12BATCHOK="spm12Batch and necessary elements appear to have a problem."
+	PROB=$(( ${PROB} + 1 ))
     fi
 done
 	    
+# Check the the MICCAI is there
+
+ANTSdir=`which antsRegistration`
+if [ ! -z "${ANTSdir}" ]
+then
+    ANTSdir=`dirname ${ANTSdir}`
+    if [ ! -d ${ANTSdir}/../Templates/MICCAI2012-Multi-Atlas-Challenge-Data ]
+    then
+	echo
+	echo "Missing MICCAI templates for ANTs, see Installation instructions for the Administrator."
+	if [ ${PROB} -eq 0 ]
+	   then
+	       SPM12BATCHOK="spm12Batch and binaries are okay, but see the issue above."
+	fi
+    fi
+else
+    echo
+    echo "Missing ANTs"  
+fi
+
+
 echo
 echo ${SPM12BATCHOK}
 echo

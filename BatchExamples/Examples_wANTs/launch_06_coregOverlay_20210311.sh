@@ -28,7 +28,7 @@ FUNC=func/Rest
 # ---------------- Probably don't need to edit below ----------------------
 
 # Overlay file
-OVERLAY=mprage_noFace.nii
+OVERLAY=mprage_noFace
 
 # Anatomy directory
 ANATDIR=anatomy
@@ -58,10 +58,10 @@ done
 
 for SESSION in ${SESSIONLIST}
 do
-    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${ANATDIR}/${OVERLAY} 2> /dev/null | wc -l`
+    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${ANATDIR}/${OVERLAY}.nii 2> /dev/null | wc -l`
     if [ ${NRUNS} -eq 0 ]
     then
-	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with ${OVERLAY}"
+	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with ${OVERLAY}.nii"
 	BAD=1
     fi
 done

@@ -28,7 +28,7 @@ FUNC=func/Rest
 # ---------------- Probably don't need to edit below ----------------------
 
 # Overlay file
-HIRES=N4_mprage_noFace.nii
+HIRES=N4_mprage_noFace
 
 # Anatomy directory
 ANATDIR=${FUNC}/coReg/ANTs
@@ -48,10 +48,10 @@ BAD=0
 
 for SESSION in ${SESSIONLIST}
 do
-    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${ANATDIR}/${HIRES} 2> /dev/null | wc -l`
+    NRUNS=`ls ${EXPDIR}/${MASTERSUBJ}/${SESSION}/${ANATDIR}/${HIRES}.nii 2> /dev/null | wc -l`
     if [ ${NRUNS} -eq 0 ]
     then
-	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with ${HIRES}"
+	echo "${DATE} : ${USER} : Something amiss with ${SESSION} with ${HIRES}.nii"
 	BAD=1
     fi
 done
