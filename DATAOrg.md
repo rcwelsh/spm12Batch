@@ -1,6 +1,6 @@
 # Data Organization
 
-The **spm12Batch** system allows for some flexibility in data organization. In general though the suggested orgaznization is:
+The **spm12Batch** system allows for some flexibility in data organization. In general, though, the suggested orgaznization is:
 
 ```
 [experiment directory]
