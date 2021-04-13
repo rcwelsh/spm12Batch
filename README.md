@@ -39,7 +39,8 @@ You will also need to install the [MICCAI](http://www.neuromorphometrics.com/201
 | | | |____priors5.nii.gz
 | | |____T_template0_glm_6labelsJointFusion.nii.gz
 | | |____T_template0_BrainCerebellumRegistrationMask.nii.gz
-| | |____T_template0_glm_4labelsJointFusion.nii.gz```
+| | |____T_template0_glm_4labelsJointFusion.nii.gz
+```
 
 
 Each step is single command. Each command takes various parameters to override default assumptions. The command can also accept a list of sessions to run. The processes default to running in the background, but can be configured to run in the foreground. By running in the foreground, you can also daisy chain the steps together. If you computer system allows for email, look at the **spm12Batch_Global** variable **MAILRECPT** to ensure it is correct. You can configure the system such that emails can be generated at job completion. The system, if configured correctly, can also send text messages at job completion. To attempt that configuration you will need some system administration experience. 
