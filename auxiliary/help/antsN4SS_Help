@@ -1,5 +1,5 @@
     echo
-    echo " A command line command to drive batch processing to antsHiRes the 'HIRES' image."
+    echo " A command line command to drive batch processing for N4 and skull stripping the 'HIRES' image."
     echo
     . ${thisDir}/auxiliary/help/help_options_start
 
