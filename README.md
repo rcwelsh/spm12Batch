@@ -18,7 +18,7 @@ To correctly use, in addtion to [MATLAB](https://www.mathworks.com), you will ne
 4. [AFNI](https://afni.nimh.nih.gov)
 5. [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
 
-You will also need to install the [MICCAI](http://www.neuromorphometrics.com/2012_MICCAI_Challenge_Data.html) brain templates into the ANTs folder. They should reside in a folder **Templates/MICCAI2012-Multi-Atlas-Challenge-Data/** directly in the **ANTs** distribution such that **Templates/** is next to the **bin/** directory.
+You will also need to install the [MICCAI](http://www.neuromorphometrics.com/2012_MICCAI_Challenge_Data.html) brain templates into the **ANTs** folder. They should reside in a folder **Templates/MICCAI2012-Multi-Atlas-Challenge-Data/** directly in the **ANTs** distribution such that **Templates/** is next to the **bin/** directory.
 
 
 ```
