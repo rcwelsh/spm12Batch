@@ -62,6 +62,7 @@ MIND2014
 			    run_01.nii
 			run_02/
 			    run_02.nii
+        SubjectsDerived/
 ```
 
-In general, the default structure can be overriden with option flags to the commands. The one caveat is that when the code is searching for BOLD data and you specifify the **-v** flag, it will always do a _grep_ command searching for files that **start** with what you have specified. This is in compliance with how SPM processes and creates new data files.
+In general, the default structure can be overriden with option flags to the commands. The one caveat is that when the code is searching for BOLD data and you specifify the **-v** flag, it will always do a _grep_ command searching for files that **start** with what you have specified. This is in compliance with how SPM processes and creates new data files. See the main documentation regarding the **SubjectsDerived/** folder.
