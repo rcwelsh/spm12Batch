@@ -21,7 +21,8 @@ To correctly use, in addtion to [MATLAB](https://www.mathworks.com), you will ne
 You will also need to install the [MICCAI](http://www.neuromorphometrics.com/2012_MICCAI_Challenge_Data.html) brain templates into the ANTs folder. They should reside in a folder **Templates/MICCAI2012-Multi-Atlas-Challenge-Data/** directly in the **ANTs** distribution such that **Templates/** is next to the **bin/** directory.
 
 
-```|____Templates
+```
+|____Templates
 | |____MICCAI2012-Multi-Atlas-Challenge-Data
 | | |____T_template0_BrainCerebellumMask.nii.gz
 | | |____T_template0_BrainCerebellumProbabilityMask.nii.gz
