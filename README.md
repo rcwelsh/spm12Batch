@@ -72,6 +72,8 @@ In summary,
 
 To see an example of how these calls can be further automated look in the **BatchExamples/** sub-folder. The examples are extra scripts for building jobs more automatically for a given step. The **_launch\_..._** scripts are written with flexibility to process a group of sessions sequentially or in parallel based on your computational resources.
 
+You can download a test subject [here](https://drive.google.com/drive/folders/1RAJ1AgBk-un1ovx-Zya4LYVNPaKhwBl3?usp=sharing).
+
 **If you use this software, please place an acknowledgment in your manuscript to _Robert C. Welsh_, _spm12Batch_, and this page, and also indicate that this software was developed with partial support from NIH R01NS052514 (Welsh) and R01NS082304 (Welsh). Please drop me a note if you find it useful.**
 
 Finally, the system is easily extendable. If a new pre-processing step is needed to be added, the ecosystem can be modified to accept a new command. Please contact me if you feel a new command, within the context of spm12Batch, is needed. It usually takes only 4-6 hours to build a new command.
