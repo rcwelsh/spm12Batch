@@ -8,7 +8,7 @@
 
 The suite of commands are written in bash, and will work in a MAC OS X (Intel based) and LINUX/UNIX operating environment.
 
-This system runs on _bare metal_ and not in _docker_. This system uses a simplified data organization scheme. See the documentation for the scheme. It relies on generic names for your folders and files. The only thing that is unique is the name of the session (participant) folder. This allows the pipeline to interact with SPM in a straight-forward manner.
+This system runs on _bare metal_ and not in _docker_. This system uses a simplified data organization scheme. See the documentation for the scheme. It relies on generic names for your folders and files. The only thing that is unique is the name of the session (participant) folder. This allows the pipeline to interact with SPM in a straight-forward manner. See the [DATAOrg.md](https://github.com/rcwelsh/spm12Batch/blob/main/DATAOrg.md) documentation in this folder.
 
 To correctly use, in addtion to [MATLAB](https://www.mathworks.com), you will need to have installed the following software on your system:
 
